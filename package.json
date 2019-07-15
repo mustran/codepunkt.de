@@ -1,0 +1,48 @@
+{
+  "name": "codepunkt.de",
+  "private": true,
+  "version": "1.0.0",
+  "author": "Christoph Werner <christoph@codepunkt.de>",
+  "dependencies": {
+    "@emotion/core": "^10.0.14",
+    "@emotion/styled": "^10.0.14",
+    "@mdx-js/mdx": "1.0.24",
+    "@mdx-js/react": "^1.0.23",
+    "gatsby": "^2.13.15",
+    "gatsby-image": "^2.2.5",
+    "gatsby-plugin-emotion": "^4.1.2",
+    "gatsby-plugin-manifest": "^2.2.2",
+    "gatsby-plugin-mdx": "^1.0.11",
+    "gatsby-plugin-offline": "^2.2.2",
+    "gatsby-plugin-react-helmet": "^3.1.1",
+    "gatsby-plugin-sharp": "^2.2.4",
+    "gatsby-source-filesystem": "^2.1.4",
+    "gatsby-transformer-sharp": "^2.2.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1"
+  },
+  "devDependencies": {
+    "eslint-config-react-app": "^4.0.1",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "prettier": "^1.18.2"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  }
+}
