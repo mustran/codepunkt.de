@@ -1,15 +1,7 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
+import { css, Global } from '@emotion/core'
 import { graphql, useStaticQuery } from 'gatsby'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Header from './header'
-import './layout.css'
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -24,6 +16,30 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Global
+        styles={css`
+          html {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            box-sizing: border-box;
+          }
+          body {
+            margin: 0;
+            font-kerning: normal;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+            -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+            -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+            font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+          }
+          *,
+          *::before,
+          *::after {
+            box-sizing: inherit;
+          }
+        `}
+      />
       <Header siteTitle={data.site.siteMetadata.title} />
       <main>{children}</main>
       <footer>
@@ -35,10 +51,6 @@ const Layout = ({ children }) => {
       </footer>
     </>
   )
-}
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 }
 
 export default Layout

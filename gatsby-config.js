@@ -31,14 +31,21 @@ module.exports = {
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-catch-links',
-    'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     'gatsby-plugin-emotion',
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/style/typography',
+        omitGoogleFont: true,
+      },
+    },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
+        name: 'Codepunkt',
+        short_name: 'Codepunkt',
         start_url: '/',
         background_color: '#663399',
         theme_color: '#663399',
