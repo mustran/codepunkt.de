@@ -6,6 +6,15 @@ import Layout from '../components/layout'
 const Article = styled.article`
   padding: 0 100px;
 
+  a[target='_blank'] span {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
   h1:hover,
   h2:hover,
   h3:hover,
