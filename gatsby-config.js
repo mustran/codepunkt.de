@@ -27,6 +27,30 @@ module.exports = {
         defaultLayouts: {
           default: require.resolve('./src/templates/blog-post.js'),
         },
+        gatsbyRemarkPlugins: [
+          // {
+          //   resolve: '@weknow/gatsby-remark-twitter',
+          // },
+          // {
+          //   resolve: `@raae/gatsby-remark-oembed`,
+          //   options: {
+          //     usePrefix: true,
+          //     providers: {
+          //       include: ['Twitter', 'Instagram'],
+          //       settings: {
+          //         Twitter: { theme: 'dark' },
+          //         Instagram: { hidecaption: true },
+          //       },
+          //     },
+          //   },
+          // },
+        ],
+        // remarkPlugins: [require('remark-slug')],
+        rehypePlugins: [
+          require('rehype-slug'),
+          require('rehype-autolink-headings'),
+          // rehype-shiki
+        ],
       },
     },
     'gatsby-plugin-react-helmet',
