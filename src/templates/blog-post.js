@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import Layout from '../components/layout'
 
 const Article = styled.article`
-  padding: 0 100px;
+  padding: 0 50px;
 
   a[target='_blank'] span {
     position: absolute;

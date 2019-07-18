@@ -21,40 +21,69 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200,
+              linkImagesToOriginal: false,
+              withWebp: true,
+              tracedSVG: true,
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.mdx'],
         defaultLayouts: {
           default: require.resolve('./src/templates/blog-post.js'),
         },
-        remarkPlugins: [
-          // adds target _blank to external links and defines an appropriate
-          // link type of 'nofollow,noopener,noreferrer'
-          [
-            require('remark-external-links'),
-            { content: { type: 'text', value: '(opens in a new window)' } },
-          ],
-        ],
-        rehypePlugins: [
-          // adds id attributes to headings
-          require('rehype-slug'),
-          // adds links pointing to the headings
-          [
-            require('rehype-autolink-headings'),
-            { properties: { ariaHidden: true }, content: [] },
-          ],
-        ],
+        // remarkPlugins: [
+        //   // adds target _blank to external links and defines an appropriate
+        //   // link type of 'nofollow,noopener,noreferrer'
+        //   [
+        //     require('remark-external-links'),
+        //     { content: { type: 'text', value: '(opens in a new window)' } },
+        //   ],
+        // ],
+        // rehypePlugins: [
+        //   // adds id attributes to headings
+        //   require('rehype-slug'),
+        //   // adds links pointing to the headings
+        //   [
+        //     require('rehype-autolink-headings'),
+        //     { properties: { ariaHidden: true }, content: [] },
+        //   ],
+        // ],
         gatsbyRemarkPlugins: [
-          // copies relative referenced files to the public folder
-          // and adjusts the references accordingly
-          { resolve: 'gatsby-remark-copy-linked-files' },
-          // converts single and double straight quotes to curly
-          // ones, converts three dots to ellipses and double dashes
-          // to an em-dash
+          // handles jpg and png files
           {
-            resolve: 'gatsby-remark-smartypants',
-            options: { backticks: false },
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 1200,
+              linkImagesToOriginal: false,
+              withWebp: true,
+              tracedSVG: true,
+            },
           },
+          // // copies relative referenced files other than jpg and png to
+          // // the public folder and adjusts the references accordingly
+          // {
+          //   resolve: 'gatsby-remark-copy-linked-files',
+          //   options: { ignoreFileExtensions: [`png`, `jpg`, `jpeg`] },
+          // },
+          // // converts single and double straight quotes to curly
+          // // ones, converts three dots to ellipses and double dashes
+          // // to an em-dash
+          // {
+          //   resolve: 'gatsby-remark-smartypants',
+          //   options: { backticks: false },
+          // },
         ],
       },
     },
