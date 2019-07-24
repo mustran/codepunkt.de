@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import Helmet from 'react-helmet'
 import Layout from '../components/layout'
+import Meta from '../components/meta'
 
 const Article = styled.article`
   padding: 0 100px;
@@ -44,9 +44,7 @@ const BlogPost = ({ children, pageContext }) => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
+      <Meta title={title} />
       <Article>
         <header>
           <h1>{title}</h1>

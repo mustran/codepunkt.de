@@ -21,7 +21,8 @@
       "args": ["build"],
       "stopOnEntry": false,
       "runtimeArgs": ["--nolazy"],
-      "sourceMaps": false
+      "sourceMaps": false,
+      "console": "integratedTerminal"
     }
   ]
 }

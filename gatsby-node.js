@@ -37,7 +37,7 @@ exports.createPages = ({ graphql, actions }) => {
     if (errors) return Promise.reject(errors)
 
     const posts = result.data.allMdx.edges
-    const postsPerPage = 2
+    const postsPerPage = 10
     const numPages = Math.ceil(posts.length / postsPerPage)
 
     Array.from({ length: numPages }).forEach((_, i) => {

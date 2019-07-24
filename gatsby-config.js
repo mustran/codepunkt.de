@@ -4,6 +4,7 @@ module.exports = {
     description:
       'Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.',
     author: '@code_punkt',
+    lang: 'en',
   },
   plugins: [
     {
@@ -48,6 +49,22 @@ module.exports = {
           // copies relative referenced files to the public folder
           // and adjusts the references accordingly
           { resolve: 'gatsby-remark-copy-linked-files' },
+          // converts single and double straight quotes to curly
+          // ones, converts three dots to ellipses and double dashes
+          // to an em-dash
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 1200,
+              linkImagesToOriginal: false,
+            },
+          },
+          // copies relative referenced files other than jpg and png to
+          // the public folder and adjusts the references accordingly
+          {
+            resolve: 'gatsby-remark-copy-linked-files',
+            options: { ignoreFileExtensions: [`png`, `jpg`, `jpeg`] },
+          },
           // converts single and double straight quotes to curly
           // ones, converts three dots to ellipses and double dashes
           // to an em-dash

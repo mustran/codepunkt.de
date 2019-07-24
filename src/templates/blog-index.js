@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import React from 'react'
 import Layout from '../components/layout'
+import Meta from '../components/meta'
 
 const PaginationList = styled.ol`
   list-style-type: none;
@@ -22,6 +23,8 @@ const BlogIndex = ({ pageContext }) => {
 
   return (
     <Layout>
+      <Meta title="Blog" />
+
       {nodes.map(
         ({ frontmatter: { title, author }, id, excerpt, fields: { slug } }) => {
           return (
