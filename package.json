@@ -3,6 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "author": "Christoph Werner <christoph@codepunkt.de>",
+  "license": "MIT",
+  "scripts": {
+    "start": "GATSBY_TELEMETRY_DISABLED=1 gatsby develop --host=0.0.0.0",
+    "build": "GATSBY_TELEMETRY_DISABLED=1 gatsby clean && gatsby build",
+    "clean": "GATSBY_TELEMETRY_DISABLED=1 gatsby clean",
+    "serve": "gatsby serve --host=0.0.0.0",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+  },
   "dependencies": {
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
@@ -22,7 +30,9 @@
     "gatsby-plugin-typography": "^2.3.2",
     "gatsby-remark-copy-linked-files": "^2.1.3",
     "gatsby-remark-external-links": "^0.0.4",
+    "gatsby-remark-images": "^3.1.7",
     "gatsby-remark-smartypants": "^2.1.2",
+    "gatsby-remark-vscode": "^1.0.6",
     "gatsby-source-filesystem": "^2.1.4",
     "gatsby-transformer-sharp": "^2.2.2",
     "prop-types": "^15.7.2",
@@ -33,6 +43,7 @@
     "rehype-autolink-headings": "^2.0.5",
     "rehype-slug": "^2.0.3",
     "remark-external-links": "^5.0.0",
+    "typeface-fira-mono": "^0.0.72",
     "typeface-lato": "^0.0.54",
     "typeface-merriweather": "^0.0.72",
     "typography": "^0.16.19"
@@ -42,21 +53,20 @@
     "eslint-plugin-react-hooks": "^1.6.1",
     "prettier": "^1.18.2"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "scripts": {
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/codepunkt/codepunkt.de"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
-  }
+    "url": "https://github.com/codepunkt/codepunkt.de/issues"
+  },
+  "keywords": [
+    "blog",
+    "articles",
+    "web",
+    "development",
+    "javascript",
+    "react",
+    "cloud"
+  ]
 }

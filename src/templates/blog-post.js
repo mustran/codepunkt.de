@@ -6,6 +6,28 @@ import Meta from '../components/meta'
 const Article = styled.article`
   padding: 0 100px;
 
+  /* source code highlighting styles */
+  .vscode-highlight {
+    border-radius: 4px;
+
+    .vscode-highlight-code {
+      font-size: 1rem;
+    }
+
+    .vscode-highlight-line {
+      border-left: 4px solid transparent;
+    }
+
+    .vscode-highlight-line-highlighted {
+      border-left: 4px solid #5e7592;
+      background-color: #2d3846;
+    }
+
+    @media (prefers-color-scheme: dark) {
+    }
+  }
+
+  /* offscreen external link annotations for screenreaders */
   a[target='_blank'] span {
     position: absolute;
     left: -10000px;
@@ -15,6 +37,7 @@ const Article = styled.article`
     overflow: hidden;
   }
 
+  /* heading link styles */
   h1:hover,
   h2:hover,
   h3:hover,

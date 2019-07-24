@@ -72,6 +72,18 @@ module.exports = {
             resolve: 'gatsby-remark-smartypants',
             options: { backticks: false },
           },
+          // syntax highlighting
+          {
+            resolve: 'gatsby-remark-vscode',
+            options: {
+              colorTheme: {
+                defaultTheme: 'Ayu Mirage',
+                prefersDarkTheme: 'Ayu Dark',
+              },
+              injectStyles: true,
+              extensions: [{ identifier: 'teabyii.ayu', version: '0.18.0' }],
+            },
+          },
         ],
       },
     },

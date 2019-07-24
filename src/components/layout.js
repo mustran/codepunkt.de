@@ -32,6 +32,7 @@ const Layout = ({ children }) => {
             -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
             -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
             font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+            background: #fbfbfb;
           }
           *,
           *::before,
