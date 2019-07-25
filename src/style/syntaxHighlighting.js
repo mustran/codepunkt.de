@@ -7,6 +7,7 @@ import { css } from '@emotion/core'
 const syntaxHighlighting = css`
   .vscode-highlight {
     border-radius: 4px;
+    counter-reset: line;
 
     .vscode-highlight-code {
       font-size: 1rem;
@@ -14,6 +15,22 @@ const syntaxHighlighting = css`
 
     .vscode-highlight-line {
       border-left: 4px solid transparent;
+
+      /**
+       * Show line numbers on larger screens
+       */
+      @media only screen and (min-width: 668px) {
+        &::before {
+          counter-increment: line;
+          content: counter(line);
+          margin: 0 16px 0 -8px;
+          user-select: none;
+          color: #4d535a;
+          text-align: right;
+          width: 20px;
+          display: inline-block;
+        }
+      }
     }
 
     .vscode-highlight-line-highlighted {
