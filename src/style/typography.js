@@ -14,6 +14,11 @@ const typography = new Typography({
   bodyWeight: 400,
   boldWeight: 700,
   includeNormalize: false,
+  overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
+    '@media only screen and (max-width: 667px)': {
+      html: { fontSize: '100%' },
+    },
+  }),
 })
 
 // Hot reload typography in development.

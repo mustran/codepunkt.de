@@ -1,7 +1,15 @@
-import { css, Global } from '@emotion/core'
+import { Global } from '@emotion/core'
+import styled from '@emotion/styled'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
+import globalStyles from '../style/global'
 import Header from './header'
+
+const Main = styled.main`
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -16,33 +24,9 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Global
-        styles={css`
-          html {
-            -ms-text-size-adjust: 100%;
-            -webkit-text-size-adjust: 100%;
-            box-sizing: border-box;
-          }
-          body {
-            margin: 0;
-            font-kerning: normal;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-            -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-            -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-            font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-            background: #fbfbfb;
-          }
-          *,
-          *::before,
-          *::after {
-            box-sizing: inherit;
-          }
-        `}
-      />
+      <Global styles={globalStyles} />
       <Header siteTitle={data.site.siteMetadata.title} />
-      <main>{children}</main>
+      <Main>{children}</Main>
       <footer>
         built with{' '}
         <span role="img" aria-label="love">
