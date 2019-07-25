@@ -6,7 +6,7 @@ import globalStyles from '../style/global'
 import Header from './header'
 
 const Main = styled.main`
-  max-width: 1000px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 0 20px;
 `

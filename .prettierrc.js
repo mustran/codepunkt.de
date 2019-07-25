@@ -6,4 +6,12 @@ module.exports = {
   trailingComma: 'es5',
   arrowParens: 'always',
   printWidth: 80,
+  overrides: [
+    {
+      files: '*.mdx',
+      options: {
+        printWidth: 50,
+      },
+    },
+  ],
 }

@@ -162,7 +162,9 @@ React will look at the `reactElement.type` (in our example, `'button'`) and ask 
 ```jsx{3,4}
 // Somewhere in the ReactDOM renderer (simplified)
 function createHostInstance(reactElement) {
-  let domNode = document.createElement(reactElement.type)
+  let domNode = document.createElement(
+    reactElement.type
+  )
   domNode.className = reactElement.props.className
   return domNode
 }
@@ -204,7 +206,9 @@ Again, React’s job is to _make the host tree match the provided React element 
 There are two ways to go about it. A simplified version of React could blow away the existing tree and re-create it from scratch:
 
 ```jsx
-let domContainer = document.getElementById('container')
+let domContainer = document.getElementById(
+  'container'
+)
 // Clear the tree
 domContainer.innerHTML = ''
 // Create the new host instance tree
@@ -254,11 +258,17 @@ ReactDOM.render(
 // domNode = document.createElement('p');
 // domNode.textContent = 'Hello';
 // domContainer.appendChild(domNode);
-ReactDOM.render(<p>Hello</p>, document.getElementById('container'))
+ReactDOM.render(
+  <p>Hello</p>,
+  document.getElementById('container')
+)
 
 // Can reuse host instance? Yes! (p → p)
 // domNode.textContent = 'Goodbye';
-ReactDOM.render(<p>Goodbye</p>, document.getElementById('container'))
+ReactDOM.render(
+  <p>Goodbye</p>,
+  document.getElementById('container')
+)
 ```
 
 The same heuristic is used for child trees. For example, when we update a `<dialog>` with two `<button>`s inside, React first decides whether to re-use the `<dialog>`, and then repeats this decision procedure for each child.
@@ -337,13 +347,18 @@ function Form({ showMessage }) {
   if (showMessage) {
     message = {
       type: 'p',
-      props: { children: 'I was just added here!' },
+      props: {
+        children: 'I was just added here!',
+      },
     }
   }
   return {
     type: 'dialog',
     props: {
-      children: [message, { type: 'input', props: {} }],
+      children: [
+        message,
+        { type: 'input', props: {} },
+      ],
     },
   }
 }
@@ -400,7 +415,8 @@ The code executed by React to re-order 10 items would be something like:
 for (let i = 0; i < 10; i++) {
   let pNode = formNode.childNodes[i]
   let textNode = pNode.firstChild
-  textNode.textContent = 'You bought ' + items[i].name
+  textNode.textContent =
+    'You bought ' + items[i].name
 }
 ```
 
@@ -475,7 +491,9 @@ function FriendList({ friends }) {
   let items = []
   for (let i = 0; i < friends.length; i++) {
     let friend = friends[i]
-    items.push(<Friend key={friend.id} friend={friend} />)
+    items.push(
+      <Friend key={friend.id} friend={friend} />
+    )
   }
   return <section>{items}</section>
 }
@@ -573,7 +591,10 @@ You might be wondering: why don’t we just call components directly? Why write 
 ```jsx
 // 🔴 React has no idea Layout and Article exist.
 // You're calling them.
-ReactDOM.render(Layout({ children: Article() }), domContainer)
+ReactDOM.render(
+  Layout({ children: Article() }),
+  domContainer
+)
 
 // ✅ React knows Layout and Article exist.
 // React calls them.
@@ -699,7 +720,9 @@ function Example() {
   return (
     <div>
       <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
     </div>
   )
 }
@@ -845,13 +868,16 @@ React would put the updater functions in a queue, and later run them in sequence
 When state logic gets more complex than a few `setState` calls, I recommend expressing it as a local state reducer with the [`useReducer` Hook](https://reactjs.org/docs/hooks-reference.html#usereducer). It’s like an evolution of this “updater” pattern where each update is given a name:
 
 ```jsx
-const [counter, dispatch] = useReducer((state, action) => {
-  if (action === 'increment') {
-    return state + 1
-  } else {
-    return state
-  }
-}, 0)
+const [counter, dispatch] = useReducer(
+  (state, action) => {
+    if (action === 'increment') {
+      return state + 1
+    } else {
+      return state
+    }
+  },
+  0
+)
 
 function handleClick() {
   dispatch('increment')
@@ -925,7 +951,9 @@ function Example() {
   return (
     <div>
       <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
     </div>
   )
 }
@@ -940,7 +968,8 @@ Effects may require cleanup, such as in case of subscriptions. To clean up after
 ```jsx
 useEffect(() => {
   DataSource.addSubscription(handleChange)
-  return () => DataSource.removeSubscription(handleChange)
+  return () =>
+    DataSource.removeSubscription(handleChange)
 })
 ```
 
@@ -961,7 +990,8 @@ For example, this code is buggy:
 ```jsx
 useEffect(() => {
   DataSource.addSubscription(handleChange)
-  return () => DataSource.removeSubscription(handleChange)
+  return () =>
+    DataSource.removeSubscription(handleChange)
 }, [])
 ```
 
@@ -980,7 +1010,8 @@ To solve this, make sure that if you specify the dependency array, it includes *
 ```jsx{4}
 useEffect(() => {
   DataSource.addSubscription(handleChange)
-  return () => DataSource.removeSubscription(handleChange)
+  return () =>
+    DataSource.removeSubscription(handleChange)
 }, [handleChange])
 ```
 
@@ -999,12 +1030,21 @@ function MyResponsiveComponent() {
 }
 
 function useWindowWidth() {
-  const [width, setWidth] = useState(window.innerWidth)
+  const [width, setWidth] = useState(
+    window.innerWidth
+  )
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth)
-    window.addEventListener('resize', handleResize)
+    const handleResize = () =>
+      setWidth(window.innerWidth)
+    window.addEventListener(
+      'resize',
+      handleResize
+    )
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener(
+        'resize',
+        handleResize
+      )
     }
   })
   return width
