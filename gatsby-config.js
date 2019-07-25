@@ -81,7 +81,13 @@ module.exports = {
                 prefersDarkTheme: 'Ayu Dark',
               },
               injectStyles: true,
-              extensions: [{ identifier: 'teabyii.ayu', version: '0.18.0' }],
+              extensions: [
+                { identifier: 'teabyii.ayu', version: '0.18.0' },
+                {
+                  identifier: 'jpoissonnier.vscode-styled-components',
+                  version: '0.0.26',
+                },
+              ],
             },
           },
         ],
