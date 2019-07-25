@@ -11,6 +11,10 @@
     "eslint.alwaysShowStatus": true,
     "eslint.packageManager": "yarn",
     "eslint.enable": true,
+    "[mdx]": {
+      "editor.wordWrap": "wordWrapColumn",
+      "editor.wordWrapColumn": 80
+    },
     "eslint.options": {
       "configFile": ".eslintrc.js"
     }
