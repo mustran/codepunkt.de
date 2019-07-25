@@ -17,6 +17,10 @@ const typography = new Typography({
   overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
     '@media only screen and (max-width: 667px)': {
       html: { fontSize: '100%' },
+      code: { fontSize: '16px' },
+    },
+    code: {
+      fontSize: '18px',
     },
   }),
 })

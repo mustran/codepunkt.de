@@ -5,6 +5,12 @@ import { css } from '@emotion/core'
  * blocks defined by gatsby-remark-vscode
  */
 const syntaxHighlighting = css`
+  code:not(.vscode-highlight-code) {
+    background: #f1f1f1;
+    padding: 3px 5px;
+    border-radius: 3px;
+  }
+
   .vscode-highlight {
     border-radius: 4px;
     counter-reset: line;
@@ -41,7 +47,7 @@ const syntaxHighlighting = css`
     @media (prefers-color-scheme: dark) {
     }
 
-    @media only screen and (max-width: 667px) {
+    @media only screen and (max-width: 768px) {
       margin-left: -20px;
       margin-right: -20px;
       border-radius: 0;
