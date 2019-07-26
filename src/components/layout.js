@@ -1,5 +1,6 @@
 import { Global } from '@emotion/core'
 import styled from '@emotion/styled'
+import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import globalStyles from '../style/global'
@@ -10,6 +11,10 @@ const Main = styled.main`
   margin: 0 auto;
   padding: 0 20px;
 `
+
+function Foo() {
+  return <span>Foo!</span>
+}
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -22,8 +27,10 @@ const Layout = ({ children }) => {
     }
   `)
 
+  // MDXProvider provides components that are usable in mdx files
+  // without importing them
   return (
-    <>
+    <MDXProvider components={{ Foo }}>
       <Global styles={globalStyles} />
       <Header siteTitle={data.site.siteMetadata.title} />
       <Main>{children}</Main>
@@ -34,7 +41,7 @@ const Layout = ({ children }) => {
         </span>{' '}
         in Paderborn
       </footer>
-    </>
+    </MDXProvider>
   )
 }
 
