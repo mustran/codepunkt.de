@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
 import React from 'react'
 import Layout from '../components/layout'
 import Meta from '../components/meta'
@@ -12,8 +13,10 @@ const Article = styled.article`
   ${headingLinks}
 `
 
-const BlogPost = ({ children, pageContext }) => {
-  const { title, author, date } = pageContext.frontmatter
+const BlogPost = (props) => {
+  console.log(props)
+  const { children, pageContext } = props
+  const { title, author, created, edited } = pageContext.frontmatter
 
   return (
     <Layout>
@@ -22,9 +25,11 @@ const BlogPost = ({ children, pageContext }) => {
         <header>
           <h1>{title}</h1>
           <span>Author: {author}</span>
-          <time>Date: {date}</time>
+          <time>Created: {created}</time>
+          <time>Edited: {edited}</time>
+          <time>Time to read: {pageContext.timeToRead} minutes</time>
         </header>
-        {children}
+        <MDXRenderer>{pageContext.body}</MDXRenderer>
       </Article>
     </Layout>
   )

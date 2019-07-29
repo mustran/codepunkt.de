@@ -26,7 +26,7 @@ const BlogIndex = ({ pageContext }) => {
       <Meta title="Blog" />
 
       {nodes.map(
-        ({ frontmatter: { title, author }, id, excerpt, fields: { slug } }) => {
+        ({ frontmatter: { title, author }, id, excerpt, fields: { path } }) => {
           return (
             <div key={id}>
               <header>
@@ -34,7 +34,7 @@ const BlogIndex = ({ pageContext }) => {
                 <div>Posting By {author}</div>
               </header>
               <p>{excerpt}</p>
-              <Link to={slug}>View Article</Link>
+              <Link to={path}>View Article</Link>
               <hr />
             </div>
           )

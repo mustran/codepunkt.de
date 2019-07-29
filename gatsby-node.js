@@ -7,7 +7,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === 'Mdx') {
     const value = createFilePath({ node, getNode })
-    createNodeField({ node, name: 'slug', value: `/blog${value}` })
+    createNodeField({ node, name: 'path', value: `/blog${value}` })
   }
 }
 
@@ -17,17 +17,21 @@ exports.createPages = ({ graphql, actions }) => {
 
   return graphql(`
     query {
-      allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
+      allMdx(sort: { order: DESC, fields: [frontmatter___created] }) {
         edges {
           node {
             id
+            body
+            timeToRead
             excerpt(pruneLength: 250)
             fields {
-              slug
+              path
             }
             frontmatter {
               title
               author
+              created
+              edited
             }
           }
         }
@@ -40,6 +44,20 @@ exports.createPages = ({ graphql, actions }) => {
     const postsPerPage = 10
     const numPages = Math.ceil(posts.length / postsPerPage)
 
+    // create blog post pages
+    posts.forEach(({ node }) => {
+      createPage({
+        path: node.fields.path,
+        component: path.resolve('./src/templates/blog-post.js'),
+        context: {
+          timeToRead: node.timeToRead,
+          frontmatter: node.frontmatter,
+          body: node.body,
+        },
+      })
+    })
+
+    // create blog index pages
     Array.from({ length: numPages }).forEach((_, i) => {
       const currentPage = i + 1
 
