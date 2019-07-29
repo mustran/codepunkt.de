@@ -1,9 +1,7 @@
 import { css } from '@emotion/core'
 
-/**
- * Styling that enables showing the links to headings on hover.
- */
-const headingLinks = css`
+export const headingStyles = css`
+  /* Show heading links on hover */
   h1:hover,
   h2:hover,
   h3:hover,
@@ -27,5 +25,3 @@ const headingLinks = css`
     }
   }
 `
-
-export default headingLinks

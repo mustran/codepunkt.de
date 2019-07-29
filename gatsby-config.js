@@ -49,9 +49,7 @@ module.exports = {
           // copies relative referenced files to the public folder
           // and adjusts the references accordingly
           { resolve: 'gatsby-remark-copy-linked-files' },
-          // converts single and double straight quotes to curly
-          // ones, converts three dots to ellipses and double dashes
-          // to an em-dash
+          // creates various image sizes
           {
             resolve: 'gatsby-remark-images',
             options: {
@@ -90,9 +88,12 @@ module.exports = {
               ],
             },
           },
+          // embed third party content
+          { resolve: 'gatsby-remark-embedder' },
         ],
       },
     },
+    'gatsby-plugin-twitter',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sharp',

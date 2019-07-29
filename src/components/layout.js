@@ -3,13 +3,15 @@ import styled from '@emotion/styled'
 import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import globalStyles from '../style/global'
+import { globalStyles } from '../style'
 import Header from './header'
 
 const Main = styled.main`
   max-width: 768px;
   margin: 0 auto;
   padding: 0 20px;
+  /* ie9-11 hack */
+  display: block;
 `
 
 function Foo() {

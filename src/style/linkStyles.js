@@ -1,10 +1,7 @@
 import { css } from '@emotion/core'
 
-/**
- * Styles that hide annotations for screenreaders on external links
- * off screen.
- */
-const externalLinks = css`
+export const linkStyles = css`
+  /* Hide annotations for screenreaders on external link off screen. */
   a[target='_blank'] span {
     position: absolute;
     left: -10000px;
@@ -14,5 +11,3 @@ const externalLinks = css`
     overflow: hidden;
   }
 `
-
-export default externalLinks

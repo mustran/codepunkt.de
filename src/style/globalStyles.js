@@ -1,10 +1,11 @@
 import { css } from '@emotion/core'
 
-export default css`
+export const globalStyles = css`
   html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
   }
+
   body {
     margin: 0;
     font-kerning: normal;
@@ -16,6 +17,7 @@ export default css`
     font-feature-settings: 'kern', 'liga', 'clig', 'calt';
     background: #fbfbfb;
   }
+
   *,
   *::before,
   *::after {

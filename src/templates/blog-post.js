@@ -3,20 +3,30 @@ import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
 import React from 'react'
 import Layout from '../components/layout'
 import Meta from '../components/meta'
-import externalLinks from '../style/externalLinks'
-import headingLinks from '../style/headingLinks'
-import syntaxHighlighting from '../style/syntaxHighlighting'
+import {
+  codeStyles,
+  headingStyles,
+  linkStyles,
+  quoteStyles,
+  twitterStyles,
+} from '../style'
 
 const Article = styled.article`
-  ${syntaxHighlighting}
-  ${externalLinks}
-  ${headingLinks}
+  ${codeStyles}
+  ${headingStyles}
+  ${linkStyles}
+  ${quoteStyles}
+  ${twitterStyles}
 `
 
 const BlogPost = (props) => {
-  console.log(props)
-  const { children, pageContext } = props
-  const { title, author, created, edited } = pageContext.frontmatter
+  const {
+    pageContext: {
+      body,
+      frontmatter: { title, author, created, edited },
+      timeToRead,
+    },
+  } = props
 
   return (
     <Layout>
@@ -27,9 +37,9 @@ const BlogPost = (props) => {
           <span>Author: {author}</span>
           <time>Created: {created}</time>
           <time>Edited: {edited}</time>
-          <time>Time to read: {pageContext.timeToRead} minutes</time>
+          <time>Time to read: {timeToRead} minutes</time>
         </header>
-        <MDXRenderer>{pageContext.body}</MDXRenderer>
+        <MDXRenderer>{body}</MDXRenderer>
       </Article>
     </Layout>
   )

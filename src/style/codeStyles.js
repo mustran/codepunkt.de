@@ -1,10 +1,6 @@
 import { css } from '@emotion/core'
 
-/**
- * Styling used to override styles for syntax highlighted code
- * blocks defined by gatsby-remark-vscode
- */
-const syntaxHighlighting = css`
+export const codeStyles = css`
   code:not(.vscode-highlight-code) {
     background: #f1f1f1;
     padding: 3px 5px;
@@ -22,19 +18,22 @@ const syntaxHighlighting = css`
     .vscode-highlight-line {
       border-left: 4px solid transparent;
 
-      /**
-       * Show line numbers on larger screens
-       */
+      &::before {
+        counter-increment: line;
+        content: counter(line);
+        margin: 0 12px 0 -8px;
+        user-select: none;
+        color: #4d535a;
+        text-align: right;
+        width: 20px;
+        display: inline-block;
+      }
+
       @media only screen and (min-width: 668px) {
+        padding-left: 1em;
+        padding-right: 1em;
         &::before {
-          counter-increment: line;
-          content: counter(line);
           margin: 0 16px 0 -8px;
-          user-select: none;
-          color: #4d535a;
-          text-align: right;
-          width: 20px;
-          display: inline-block;
         }
       }
     }
@@ -54,5 +53,3 @@ const syntaxHighlighting = css`
     }
   }
 `
-
-export default syntaxHighlighting

@@ -50,9 +50,9 @@ exports.createPages = ({ graphql, actions }) => {
         path: node.fields.path,
         component: path.resolve('./src/templates/blog-post.js'),
         context: {
-          timeToRead: node.timeToRead,
-          frontmatter: node.frontmatter,
           body: node.body,
+          frontmatter: node.frontmatter,
+          timeToRead: node.timeToRead,
         },
       })
     })
@@ -62,7 +62,7 @@ exports.createPages = ({ graphql, actions }) => {
       const currentPage = i + 1
 
       createPage({
-        path: currentPage === 1 ? `/blog` : `/blog/${currentPage}`,
+        path: currentPage === 1 ? `/blog/` : `/blog/${currentPage}/`,
         component: path.resolve('./src/templates/blog-index.js'),
         context: {
           pageInfo: {
