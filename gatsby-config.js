@@ -88,7 +88,7 @@ module.exports = {
               ],
             },
           },
-          // embed third party content
+          // embed third party content from twitter and youtube
           { resolve: 'gatsby-remark-embedder' },
         ],
       },
