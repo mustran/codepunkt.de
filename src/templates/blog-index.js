@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import React from 'react'
-import Layout from '../components/layout'
+import SiteLayout from '../components/site-layout'
 import Meta from '../components/meta'
 
 const PaginationList = styled.ol`
@@ -22,7 +22,7 @@ const BlogIndex = ({ pageContext }) => {
   } = pageContext
 
   return (
-    <Layout>
+    <SiteLayout>
       <Meta title="Blog" />
 
       {nodes.map(
@@ -58,7 +58,7 @@ const BlogIndex = ({ pageContext }) => {
           )}
         </PaginationList>
       </nav>
-    </Layout>
+    </SiteLayout>
   )
 }
 

@@ -1,10 +1,12 @@
 import { Global } from '@emotion/core'
 import styled from '@emotion/styled'
 import { MDXProvider } from '@mdx-js/react'
+import { ThemeProvider } from 'emotion-theming'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import { globalStyles } from '../style'
-import Header from './header'
+import { globalStyle } from '../style'
+import SiteFooter from './site-footer'
+import SiteHeader from './site-header'
 
 const Main = styled.main`
   max-width: 768px;
@@ -14,11 +16,19 @@ const Main = styled.main`
   display: block;
 `
 
+const theme = {
+  colors: {
+    logo: '#4483ea',
+    // contrast ratio: 4.67 AA
+    link: '#1669f3',
+  },
+}
+
 function Foo() {
   return <span>Foo!</span>
 }
 
-const Layout = ({ children }) => {
+const SiteLayout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -32,19 +42,15 @@ const Layout = ({ children }) => {
   // MDXProvider provides components that are usable in mdx files
   // without importing them
   return (
-    <MDXProvider components={{ Foo }}>
-      <Global styles={globalStyles} />
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <Main>{children}</Main>
-      <footer>
-        built with{' '}
-        <span role="img" aria-label="love">
-          💖
-        </span>{' '}
-        in Paderborn
-      </footer>
-    </MDXProvider>
+    <ThemeProvider theme={theme}>
+      <MDXProvider components={{ Foo }}>
+        <Global styles={globalStyle} />
+        <SiteHeader siteTitle={data.site.siteMetadata.title} />
+        <Main>{children}</Main>
+        <SiteFooter />
+      </MDXProvider>
+    </ThemeProvider>
   )
 }
 
-export default Layout
+export default SiteLayout

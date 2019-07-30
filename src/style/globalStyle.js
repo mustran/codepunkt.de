@@ -1,6 +1,6 @@
 import { css } from '@emotion/core'
 
-export const globalStyles = css`
+export const globalStyle = css`
   html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;

@@ -34,7 +34,7 @@ const Meta = (options = {}) => {
       <meta name="twitter:description" content={meta.description} />
       <meta name="twitter:dnt" content="on"></meta>
       <meta name="twitter:title" content={meta.title} />
-      <meta name="twitter:widgets:link-color" content="#bada55"></meta>
+      <meta name="twitter:widgets:link-color" content="#2b7bb9"></meta>
       <link rel="me" href="https://twitter.com/code_punkt"></link>
       <title>{meta.title}</title>
     </Helmet>

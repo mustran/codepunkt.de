@@ -1,6 +1,6 @@
 import { css } from '@emotion/core'
 
-export const codeStyles = css`
+export const codeStyle = css`
   code:not(.vscode-highlight-code) {
     background: #f1f1f1;
     padding: 3px 5px;

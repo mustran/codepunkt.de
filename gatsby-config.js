@@ -21,6 +21,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    { resolve: 'gatsby-plugin-react-svg' },
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
@@ -30,10 +31,13 @@ module.exports = {
         },
         remarkPlugins: [
           // adds target _blank to external links and defines an appropriate
-          // link type of 'nofollow,noopener,noreferrer'
+          // link type
           [
             require('remark-external-links'),
-            { content: { type: 'text', value: '(opens in a new window)' } },
+            {
+              rel: 'noopener noreferrer',
+              content: { type: 'text', value: '(opens in a new window)' },
+            },
           ],
         ],
         rehypePlugins: [
@@ -42,7 +46,11 @@ module.exports = {
           // adds links pointing to the headings
           [
             require('rehype-autolink-headings'),
-            { properties: { ariaHidden: true }, content: [] },
+            {
+              behavior: 'append',
+              properties: { ariaHidden: true },
+              content: [],
+            },
           ],
         ],
         gatsbyRemarkPlugins: [

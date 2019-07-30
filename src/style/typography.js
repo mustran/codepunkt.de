@@ -4,7 +4,7 @@ const typography = new Typography({
   title: 'Codepunkt',
   baseFontSize: '18px',
   baseLineHeight: 1.72,
-  scaleRatio: 2.7,
+  scaleRatio: 2.4,
   headerLineHeight: 1.42,
   headerFontFamily: ['Lato', 'sans-serif'],
   bodyFontFamily: ['Merriweather', 'serif'],
