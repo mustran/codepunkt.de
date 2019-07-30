@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: 'Codepunkt',
     description:
-      'Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.',
+      'Personal blog by Christoph Werner. I write about web development topics.',
     author: '@code_punkt',
     lang: 'en',
   },
@@ -120,14 +120,15 @@ module.exports = {
         name: 'Codepunkt',
         short_name: 'Codepunkt',
         start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: '#4483ea',
+        theme_color: '#4483ea',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png',
+        icon: 'src/images/codepunkt-icon.png',
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
+    // TODO: evaluate plugins:
     // 'gatsby-plugin-offline',
+    // 'gatsby-plugin-feed',
+    // 'gatsby-plugin-i18n',
   ],
 }
