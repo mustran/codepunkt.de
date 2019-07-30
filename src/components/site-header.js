@@ -4,39 +4,23 @@ import { Link } from 'gatsby'
 import React from 'react'
 import SiteLogo from './site-logo.svg'
 
-const storageKey = 'site-header-animation-run'
 const animationCharacterOffsetMsec = 60
-const animationDelayMsec = 500
+const animationDelayMsec = 100
 const animationDurationMsec = 1000
 
-const charAnimation = (index, pathLength) => ({
-  runAnimation,
-  theme: {
-    colors: { logo },
-  },
-}) => {
-  if (!runAnimation) {
-    return css`
-      path {
-        animation: none;
-        stroke: none;
-        fill: ${logo};
-      }
-    `
-  }
-
-  sessionStorage.setItem(storageKey, 'true')
-
+const charAnimation = (index, pathLength) => ({ theme: { colors } }) => {
   const animationDelay =
     animationDelayMsec + animationCharacterOffsetMsec * index
   const animation = keyframes`
     0% { stroke-dashoffset: ${pathLength}; }
     50% { stroke-dashoffset: 0; fill: transparent; }
-    100% { stroke-dashoffset: 0; stroke-width: 0; fill: ${logo}; }
+    100% { stroke-dashoffset: 0; stroke-width: 0; fill: ${colors.logo}; }
   `
 
+  // because we can't remove the "anim" class from the html element when
+  // javascript is disabled, we don't animate without javascript.
   return css`
-    path:nth-of-type(${index}) {
+    html.anim:not(.no-js) & path:nth-of-type(${index}) {
       stroke-dasharray: ${pathLength};
       stroke-dashoffset: ${pathLength};
       animation: ${animation} ${animationDurationMsec}ms linear
@@ -44,7 +28,7 @@ const charAnimation = (index, pathLength) => ({
       @media (prefers-reduced-motion: reduce) {
         animation: none;
         stroke: none;
-        fill: ${logo};
+        fill: ${colors.logo};
       }
     }
   `
@@ -65,20 +49,17 @@ const Logo = styled(SiteLogo)`
   width: 140px;
   font-size: 18px;
 
-  @media only screen and (min-width: 370px) {
-    width: 160px;
-  }
-  @media only screen and (min-width: 668px) {
-    width: 200px;
-  }
-  @media only screen and (min-width: 880px) {
-    width: 230px;
-  }
+  @media only screen and (min-width: 370px) { width: 160px; }
+  @media only screen and (min-width: 668px) { width: 200px; }
+  @media only screen and (min-width: 880px) { width: 230px; }
 
   path {
+    fill: ${(props) => props.theme.colors.logo};
+    stroke: none;
+  }
+
+  html.anim:not(.no-js) & path {
     fill: none;
-    stroke: ${(props) => props.theme.colors.logo};
-    stroke-width: 1;
   }
 
   ${charAnimation(1, 180)}
@@ -92,13 +73,21 @@ const Logo = styled(SiteLogo)`
   ${charAnimation(9, 113)}
 `
 
+// @todo: use https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API to play animation when visible
 const SiteHeader = ({ siteTitle }) => {
-  const runAnimation = sessionStorage.getItem(storageKey) === null
-
   return (
     <Header>
       <LogoLink to="/">
-        <Logo role="img" runAnimation={runAnimation} />
+        <Logo
+          role="img"
+          onAnimationEnd={(e) => {
+            // animation is done when animation of last character is done
+            if (e.nativeEvent.target.classList.contains('t')) {
+              document.documentElement.classList.remove('anim')
+              sessionStorage.setItem('didAnimationRun', true)
+            }
+          }}
+        />
       </LogoLink>
     </Header>
   )
