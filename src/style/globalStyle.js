@@ -23,4 +23,15 @@ export const globalStyle = css`
   *::after {
     box-sizing: border-box;
   }
+
+  noscript {
+    background: #ffff83;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: block;
+    margin-top: 1rem;
+    border-radius: 4px;
+    color: #963e08;
+  }
 `
