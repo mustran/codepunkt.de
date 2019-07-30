@@ -12,12 +12,7 @@ export default function HTML(props) {
         />
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              document.documentElement.classList.remove('no-js')
-              if (sessionStorage.getItem('didAnimationRun') !== null) {
-                document.documentElement.classList.remove('anim')
-              }
-            `,
+            __html: `function onVisibilityChange(){document.documentElement.classList[document.visibilityState==='visible'?'add':'remove']('visible')};document.documentElement.classList.remove('no-js');onVisibilityChange();document.addEventListener('visibilitychange',onVisibilityChange,false);if(sessionStorage.getItem('didAnimationRun')!==null)document.documentElement.classList.remove('anim');`,
           }}
         />
         {props.headComponents}

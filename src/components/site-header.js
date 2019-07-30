@@ -1,7 +1,7 @@
 import { css, keyframes } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import SiteLogo from './site-logo.svg'
 
 const animationCharacterOffsetMsec = 60
@@ -20,7 +20,7 @@ const charAnimation = (index, pathLength) => ({ theme: { colors } }) => {
   // because we can't remove the "anim" class from the html element when
   // javascript is disabled, we don't animate without javascript.
   return css`
-    html.anim:not(.no-js) & path:nth-of-type(${index}) {
+    html.anim.visible:not(.no-js) & path:nth-of-type(${index}) {
       stroke-dasharray: ${pathLength};
       stroke-dashoffset: ${pathLength};
       animation: ${animation} ${animationDurationMsec}ms linear
@@ -58,8 +58,9 @@ const Logo = styled(SiteLogo)`
     stroke: none;
   }
 
-  html.anim:not(.no-js) & path {
+  html.anim.visible:not(.no-js) & path {
     fill: none;
+    stroke: ${(props) => props.theme.colors.logo};
   }
 
   ${charAnimation(1, 180)}
@@ -73,7 +74,27 @@ const Logo = styled(SiteLogo)`
   ${charAnimation(9, 113)}
 `
 
-// @todo: use https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API to play animation when visible
+const useVisibility = (initialVisibility = 'visible') => {
+  const [visibility, setVisibility] = useState(initialVisibility)
+
+  useEffect(() => {
+    if (
+      typeof document.visibilityState === 'undefined' ||
+      typeof document.addEventListener === 'undefined'
+    ) {
+      return
+    }
+
+    const handleChange = () => setVisibility(document.visibilityState)
+    document.addEventListener('visibilitychange', handleChange, false)
+    return () => {
+      document.removeEventListener('visibilitychange', handleChange, false)
+    }
+  }, [])
+
+  return { visibility }
+}
+
 const SiteHeader = ({ siteTitle }) => {
   return (
     <Header>
