@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
 import React from 'react'
 import Meta from '../components/meta'
@@ -41,11 +42,12 @@ const formatPostDate = (date, lang = 'en') =>
 const BlogPost = (props) => {
   const {
     pageContext: {
-      body,
       frontmatter: { author, created, edited, title },
-      timeToRead,
     },
     path,
+    data: {
+      mdx: { body, timeToRead },
+    },
   } = props
 
   const editLink = `https://github.com/codepunkt/codepunkt.de/edit/master/src/content${path}index.mdx`
@@ -81,3 +83,12 @@ const BlogPost = (props) => {
 }
 
 export default BlogPost
+
+export const query = graphql`
+  query mdxPostDetails($id: String) {
+    mdx(id: { eq: $id }) {
+      body
+      timeToRead
+    }
+  }
+`
