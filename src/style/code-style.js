@@ -16,8 +16,6 @@ export const codeStyle = css`
     }
 
     .vscode-highlight-line {
-      border-left: 4px solid transparent;
-
       &::before {
         counter-increment: line;
         content: counter(line);
@@ -38,8 +36,22 @@ export const codeStyle = css`
       }
     }
 
+    *:not(.vscode-highlight-line-highlighted)
+      + .vscode-highlight-line-highlighted,
+    .vscode-highlight-line-highlighted:first-child {
+      border-top: 1px solid #5e7592;
+    }
+
+    .vscode-highlight-line-highlighted
+      + *:not(.vscode-highlight-line-highlighted) {
+      border-top: 1px solid #5e7592;
+    }
+
+    .vscode-highlight-line-highlighted:last-child {
+      border-bottom: 1px solid #5e7592;
+    }
+
     .vscode-highlight-line-highlighted {
-      border-left: 4px solid #5e7592;
       background-color: #2d3846;
     }
 
