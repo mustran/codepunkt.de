@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   siteMetadata: {
     title: 'Codepunkt',
@@ -87,6 +89,9 @@ module.exports = {
                 prefersDarkTheme: 'Ayu Dark',
               },
               injectStyles: true,
+              extensionDataDirectory: path.resolve(
+                'vendor/gatsby-remark-vscode-extensions'
+              ),
               extensions: [
                 { identifier: 'teabyii.ayu', version: '0.18.0' },
                 {
