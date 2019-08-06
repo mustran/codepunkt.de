@@ -56,9 +56,6 @@ module.exports = {
           ],
         ],
         gatsbyRemarkPlugins: [
-          // copies relative referenced files to the public folder
-          // and adjusts the references accordingly
-          { resolve: 'gatsby-remark-copy-linked-files' },
           // creates various image sizes
           {
             resolve: 'gatsby-remark-images',
