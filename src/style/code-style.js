@@ -38,7 +38,7 @@ export const codeStyle = css`
 
     *:not(.vscode-highlight-line-highlighted)
       + .vscode-highlight-line-highlighted,
-    .vscode-highlight-line-highlighted:first-child {
+    .vscode-highlight-line-highlighted:first-of-type {
       border-top: 1px solid #5e7592;
     }
 
@@ -47,7 +47,7 @@ export const codeStyle = css`
       border-top: 1px solid #5e7592;
     }
 
-    .vscode-highlight-line-highlighted:last-child {
+    .vscode-highlight-line-highlighted:last-of-type {
       border-bottom: 1px solid #5e7592;
     }
 
