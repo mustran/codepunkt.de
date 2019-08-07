@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
-import { Link } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import React from 'react'
-import SiteLayout from '../components/site-layout'
 import Meta from '../components/meta'
+import SiteLayout from '../components/site-layout'
 
 const PaginationList = styled.ol`
   list-style-type: none;
@@ -15,11 +15,17 @@ const PaginationListItem = styled.li`
   padding: 0;
 `
 
-const BlogIndex = ({ pageContext }) => {
+const BlogIndex = (props) => {
   const {
-    nodes,
-    pageInfo: { hasPreviousPage, hasNextPage, currentPage },
-  } = pageContext
+    data: {
+      allMdx: { nodes },
+    },
+    pageContext: {
+      pageInfo: { hasPreviousPage, hasNextPage, currentPage },
+    },
+  } = props
+
+  console.log(props)
 
   return (
     <SiteLayout>
@@ -63,3 +69,25 @@ const BlogIndex = ({ pageContext }) => {
 }
 
 export default BlogIndex
+
+export const query = graphql`
+  query mdxPostList($ids: [String]) {
+    allMdx(filter: { id: { in: $ids } }) {
+      nodes {
+        body
+        excerpt
+        fields {
+          path
+        }
+        frontmatter {
+          author
+          created
+          title
+          updated
+        }
+        id
+        timeToRead
+      }
+    }
+  }
+`

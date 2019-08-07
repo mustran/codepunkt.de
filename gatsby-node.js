@@ -60,9 +60,9 @@ exports.createPages = ({ graphql, actions }) => {
             hasPreviousPage: currentPage !== 1,
             hasNextPage: currentPage !== numPages,
           },
-          nodes: posts
+          ids: posts
             .slice(i * postsPerPage, i * postsPerPage + postsPerPage)
-            .map(({ node }) => node),
+            .map(({ node }) => node.id),
         },
       })
     })
