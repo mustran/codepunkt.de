@@ -21,15 +21,8 @@ exports.createPages = ({ graphql, actions }) => {
         edges {
           node {
             id
-            excerpt(pruneLength: 250)
             fields {
               path
-            }
-            frontmatter {
-              title
-              author
-              created
-              edited
             }
           }
         }
@@ -49,8 +42,6 @@ exports.createPages = ({ graphql, actions }) => {
         component: path.resolve('./src/templates/blog-post.js'),
         context: {
           id: node.id,
-          frontmatter: node.frontmatter,
-          timeToRead: node.timeToRead,
         },
       })
     })

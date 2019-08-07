@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   siteMetadata: {
     title: 'Codepunkt',
@@ -54,14 +56,11 @@ module.exports = {
           ],
         ],
         gatsbyRemarkPlugins: [
-          // copies relative referenced files to the public folder
-          // and adjusts the references accordingly
-          { resolve: 'gatsby-remark-copy-linked-files' },
           // creates various image sizes
           {
             resolve: 'gatsby-remark-images',
             options: {
-              maxWidth: 1200,
+              maxWidth: 728,
               linkImagesToOriginal: false,
             },
           },
@@ -87,6 +86,9 @@ module.exports = {
                 prefersDarkTheme: 'Ayu Dark',
               },
               injectStyles: true,
+              extensionDataDirectory: path.resolve(
+                'vendor/gatsby-remark-vscode-extensions'
+              ),
               extensions: [
                 { identifier: 'teabyii.ayu', version: '0.18.0' },
                 {

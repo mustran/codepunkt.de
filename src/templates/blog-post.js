@@ -41,12 +41,13 @@ const formatPostDate = (date, lang = 'en') =>
 
 const BlogPost = (props) => {
   const {
-    pageContext: {
-      frontmatter: { author, created, edited, title },
-    },
     path,
     data: {
-      mdx: { body, timeToRead },
+      mdx: {
+        body,
+        frontmatter: { author, created, updated, title },
+        timeToRead,
+      },
     },
   } = props
 
@@ -62,7 +63,7 @@ const BlogPost = (props) => {
         <header>
           <h1>{title}</h1>
           <PostMeta>
-            {formatPostDate(created)} • {timeToRead} min read
+            {formatPostDate(updated)} • {timeToRead} min read
           </PostMeta>
         </header>
         <MDXRenderer>{body}</MDXRenderer>
@@ -88,6 +89,12 @@ export const query = graphql`
   query mdxPostDetails($id: String) {
     mdx(id: { eq: $id }) {
       body
+      frontmatter {
+        title
+        author
+        created
+        updated
+      }
       timeToRead
     }
   }
