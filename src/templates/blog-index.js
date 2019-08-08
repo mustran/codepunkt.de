@@ -2,7 +2,9 @@ import styled from '@emotion/styled'
 import { graphql, Link } from 'gatsby'
 import React from 'react'
 import Meta from '../components/meta'
+import PostMeta from '../components/post-meta'
 import SiteLayout from '../components/site-layout'
+import { formatPostDate } from '../utils'
 
 const PaginationList = styled.ol`
   list-style-type: none;
@@ -15,6 +17,14 @@ const PaginationListItem = styled.li`
   padding: 0;
 `
 
+const Article = styled.article`
+  margin-bottom: calc(1.72rem * 2);
+`
+
+const PM = styled(PostMeta)`
+  margin-bottom: calc(1.72rem / 2);
+`
+
 const BlogIndex = (props) => {
   const {
     data: {
@@ -25,24 +35,31 @@ const BlogIndex = (props) => {
     },
   } = props
 
-  console.log(props)
-
   return (
     <SiteLayout>
-      <Meta title="Blog" />
+      {currentPage !== 1 && <Meta title="Blog" />}
 
       {nodes.map(
-        ({ frontmatter: { title, author }, id, excerpt, fields: { path } }) => {
+        ({
+          frontmatter: { title, created, updated },
+          id,
+          timeToRead,
+          excerpt,
+          fields: { path },
+        }) => {
           return (
-            <div key={id}>
+            <Article key={id}>
               <header>
-                <div>{title}</div>
-                <div>Posting By {author}</div>
+                <Link to={path}>
+                  <h2>{title}</h2>
+                </Link>
+                <PM>
+                  {formatPostDate(updated)} • {timeToRead} min read
+                </PM>
               </header>
               <p>{excerpt}</p>
               <Link to={path}>View Article</Link>
-              <hr />
-            </div>
+            </Article>
           )
         }
       )}

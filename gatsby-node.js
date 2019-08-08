@@ -31,8 +31,8 @@ exports.createPages = ({ graphql, actions }) => {
   `).then((result, errors) => {
     if (errors) return Promise.reject(errors)
 
-    const posts = result.data.allMdx.edges
-    const postsPerPage = 10
+    const posts = [...result.data.allMdx.edges]
+    const postsPerPage = 4
     const numPages = Math.ceil(posts.length / postsPerPage)
 
     // create blog post pages
@@ -51,7 +51,7 @@ exports.createPages = ({ graphql, actions }) => {
       const currentPage = i + 1
 
       createPage({
-        path: currentPage === 1 ? `/blog/` : `/blog/${currentPage}/`,
+        path: currentPage === 1 ? `/` : `/blog/${currentPage}/`,
         component: path.resolve('./src/templates/blog-index.js'),
         context: {
           pageInfo: {

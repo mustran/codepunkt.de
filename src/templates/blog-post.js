@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
 import React from 'react'
 import Meta from '../components/meta'
+import PostMeta from '../components/post-meta'
 import SiteLayout from '../components/site-layout'
 import {
   codeStyle,
@@ -11,6 +12,7 @@ import {
   quoteStyle,
   twitterStyle,
 } from '../style'
+import { formatPostDate } from '../utils'
 
 const Article = styled.article`
   ${codeStyle}
@@ -19,25 +21,6 @@ const Article = styled.article`
   ${quoteStyle}
   ${twitterStyle}
 `
-
-const PostMeta = styled.p`
-  color: #888;
-  margin-top: -1.4rem;
-  font-size: 16px;
-
-  @media only screen and (max-width: 667px) {
-    font-size: 14px;
-  }
-`
-
-const formatPostDate = (date, lang = 'en') =>
-  typeof Date.prototype.toLocaleDateString === 'function'
-    ? new Date(date).toLocaleDateString(lang, {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      })
-    : date
 
 const BlogPost = (props) => {
   const {
