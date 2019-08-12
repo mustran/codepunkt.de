@@ -38,20 +38,73 @@ const Header = styled.header`
   max-width: 768px;
   margin: 50px auto;
   padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 const LogoLink = styled(Link)`
   display: inline-block;
   box-shadow: none !important;
+  height: 45px;
+`
+
+const Menu = styled.nav`
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 16px;
+`
+
+const MenuItem = styled.li`
+  counter-increment: menu;
+  margin: 0;
+  text-transform: lowercase;
+`
+
+const MenuItemList = styled.ol`
+  counter-reset: menu;
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  height: 100%;
+  align-items: center;
+`
+
+const MenuLink = styled(Link)`
+  &,
+  &:link,
+  &:visited,
+  &:focus,
+  &:hover,
+  &:active {
+    box-shadow: none;
+    color: #333;
+    position: relative;
+    padding: 12px 20px;
+
+    &.active::before {
+      content: '';
+        position: absolute;
+        height: 5px;
+        background: #bada55;
+        bottom: -5px;
+        left: 20px;
+        right: 20px;
+      }
+    }
+  }
+`
+
+const MenuNumber = styled.span`
+  font-weight: 700;
+  margin-right: 8px;
 `
 
 const Logo = styled(SiteLogo)`
-  width: 140px;
+  width: 160px;
+  height: 45px;
   font-size: 18px;
-
-  @media only screen and (min-width: 370px) { width: 160px; }
-  @media only screen and (min-width: 668px) { width: 200px; }
-  @media only screen and (min-width: 880px) { width: 230px; }
 
   path {
     fill: ${(props) => props.theme.colors.logo};
@@ -110,6 +163,29 @@ const SiteHeader = ({ siteTitle }) => {
           }}
         />
       </LogoLink>
+      <Menu>
+        <MenuItemList>
+          <MenuItem>
+            <MenuLink to="/" activeClassName="active">
+              <MenuNumber aria-hidden={true}>01</MenuNumber>Home
+            </MenuLink>
+          </MenuItem>
+          <MenuItem>
+            <MenuLink
+              to="/blog"
+              activeClassName="active"
+              partiallyActive={true}
+            >
+              <MenuNumber aria-hidden={true}>02</MenuNumber>Articles
+            </MenuLink>
+          </MenuItem>
+          <MenuItem>
+            <MenuLink to="/about" activeClassName="active">
+              <MenuNumber aria-hidden={true}>03</MenuNumber>About
+            </MenuLink>
+          </MenuItem>
+        </MenuItemList>
+      </Menu>
     </Header>
   )
 }

@@ -4,7 +4,6 @@ import { linkStyle } from '../style'
 
 const Footer = styled.footer`
   ${linkStyle}
-  background: #ddd;
   padding: 2em 0;
   font-size: 16px;
   color: #888;
@@ -19,13 +18,7 @@ const Container = styled.div`
 const SiteFooter = () => {
   return (
     <Footer>
-      <Container>
-        made with{' '}
-        <span role="img" aria-label="love">
-          💗
-        </span>{' '}
-        in Paderborn
-      </Container>
+      <Container></Container>
     </Footer>
   )
 }

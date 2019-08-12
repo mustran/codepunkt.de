@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/core'
-import React from 'react'
 import { withTheme } from 'emotion-theming'
+import React from 'react'
 
 export const GlobalStyle = withTheme(({ theme: { colors } }) => {
   const styles = css`
@@ -19,6 +19,7 @@ export const GlobalStyle = withTheme(({ theme: { colors } }) => {
       -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       background: #fbfbfb;
+      border-top: 5px solid #333;
     }
 
     *,
