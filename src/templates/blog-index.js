@@ -36,51 +36,53 @@ const BlogIndex = (props) => {
   } = props
 
   return (
-    <SiteLayout>
+    <SiteLayout small>
       {currentPage !== 1 && <Meta title="Blog" />}
-
-      {nodes.map(
-        ({
-          frontmatter: { title, created, updated },
-          id,
-          timeToRead,
-          excerpt,
-          fields: { path },
-        }) => {
-          return (
-            <Article key={id}>
-              <header>
-                <Link to={path}>
-                  <h2>{title}</h2>
+      <div>
+        <h1>Articles</h1>
+        {nodes.map(
+          ({
+            frontmatter: { title, created, updated },
+            id,
+            timeToRead,
+            excerpt,
+            fields: { path },
+          }) => {
+            return (
+              <Article key={id}>
+                <header>
+                  <Link to={path}>
+                    <h2>{title}</h2>
+                  </Link>
+                  <PM>
+                    {formatPostDate(updated)} • {timeToRead} min read
+                  </PM>
+                </header>
+                <p>{excerpt}</p>
+                <Link to={path}>View Article</Link>
+              </Article>
+            )
+          }
+        )}
+        <nav aria-label="pagination">
+          <PaginationList>
+            {hasPreviousPage && (
+              <PaginationListItem>
+                <Link
+                  to={currentPage === 2 ? '/blog' : `/blog/${currentPage - 1}`}
+                >
+                  Newer Posts
                 </Link>
-                <PM>
-                  {formatPostDate(updated)} • {timeToRead} min read
-                </PM>
-              </header>
-              <p>{excerpt}</p>
-              <Link to={path}>View Article</Link>
-            </Article>
-          )
-        }
-      )}
-      <nav aria-label="pagination">
-        <PaginationList>
-          {hasPreviousPage && (
-            <PaginationListItem>
-              <Link
-                to={currentPage === 2 ? '/blog' : `/blog/${currentPage - 1}`}
-              >
-                Newer Posts
-              </Link>
-            </PaginationListItem>
-          )}
-          {hasNextPage && (
-            <PaginationListItem>
-              <Link to={`/blog/${currentPage + 1}`}>Older Posts</Link>
-            </PaginationListItem>
-          )}
-        </PaginationList>
-      </nav>
+              </PaginationListItem>
+            )}
+            {hasNextPage && (
+              <PaginationListItem>
+                <Link to={`/blog/${currentPage + 1}`}>Older Posts</Link>
+              </PaginationListItem>
+            )}
+          </PaginationList>
+        </nav>
+      </div>
     </SiteLayout>
   )
 }

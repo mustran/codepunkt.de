@@ -35,23 +35,96 @@ const charAnimation = (index, pathLength) => ({ theme: { colors } }) => {
 }
 
 const Header = styled.header`
-  max-width: 768px;
-  margin: 50px auto;
-  padding: 0 20px;
+  border-top: 5px solid #4b4237;
+`
+
+const Container = styled.div`
+  max-width: ${(props) => (props.small ? 768 : 1200)}px;
+  margin: 50px auto 70px auto;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 const LogoLink = styled(Link)`
   display: inline-block;
   box-shadow: none !important;
+  height: 57px;
+`
+
+const Menu = styled.nav`
+  font-family: Lato, sans-serif;
+  font-size: 17px;
+`
+
+const MenuItem = styled.li`
+  counter-increment: menu;
+  margin: 0;
+  text-transform: lowercase;
+`
+
+const MenuItemList = styled.ol`
+  counter-reset: menu;
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  height: 100%;
+  align-items: center;
+`
+
+const MenuLink = styled(Link)`
+  &,
+  &:link,
+  &:visited,
+  &:focus,
+  &:hover,
+  &:active {
+    box-shadow: none;
+    color: #333;
+    position: relative;
+    padding: 12px 20px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: 4px;
+      background: #ede7d9;
+      bottom: 0;
+      left: 16px;
+      right: 16px;
+      transform: scale3d(0, 3, 1);
+      transform-origin: 0% 50%;
+      transition: transform 0.3s;
+      transition-timing-function: cubic-bezier(1, 0.68, 0.16, 0.9);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &::before {
+        transition: unset;
+      }
+    }
+
+    &:hover::before,
+    &.active::before {
+      transform: scale3d(1, 1, 1);
+    }
+
+    &.active::before {
+      background: #eaa944;
+    }
+  }
+`
+
+const MenuNumber = styled.span`
+  font-weight: 700;
+  margin-right: 8px;
 `
 
 const Logo = styled(SiteLogo)`
-  width: 140px;
+  width: 200px;
+  height: 57px;
   font-size: 18px;
-
-  @media only screen and (min-width: 370px) { width: 160px; }
-  @media only screen and (min-width: 668px) { width: 200px; }
-  @media only screen and (min-width: 880px) { width: 230px; }
 
   path {
     fill: ${(props) => props.theme.colors.logo};
@@ -95,21 +168,46 @@ const useVisibility = (initialVisibility = 'visible') => {
   return { visibility }
 }
 
-const SiteHeader = ({ siteTitle }) => {
+const SiteHeader = ({ small }) => {
   return (
     <Header>
-      <LogoLink to="/">
-        <Logo
-          role="img"
-          onAnimationEnd={(e) => {
-            // animation is done when animation of last character is done
-            if (e.nativeEvent.target.classList.contains('t')) {
-              document.documentElement.classList.remove('anim')
-              sessionStorage.setItem('didAnimationRun', true)
-            }
-          }}
-        />
-      </LogoLink>
+      <Container small={small}>
+        <LogoLink to="/">
+          <Logo
+            role="img"
+            onAnimationEnd={(e) => {
+              // animation is done when animation of last character is done
+              if (e.nativeEvent.target.classList.contains('t')) {
+                document.documentElement.classList.remove('anim')
+                sessionStorage.setItem('didAnimationRun', true)
+              }
+            }}
+          />
+        </LogoLink>
+        <Menu>
+          <MenuItemList>
+            <MenuItem>
+              <MenuLink to="/" activeClassName="active">
+                <MenuNumber aria-hidden={true}>01</MenuNumber>Home
+              </MenuLink>
+            </MenuItem>
+            <MenuItem>
+              <MenuLink
+                to="/blog"
+                activeClassName="active"
+                partiallyActive={true}
+              >
+                <MenuNumber aria-hidden={true}>02</MenuNumber>Articles
+              </MenuLink>
+            </MenuItem>
+            <MenuItem>
+              <MenuLink to="/about" activeClassName="active">
+                <MenuNumber aria-hidden={true}>03</MenuNumber>About
+              </MenuLink>
+            </MenuItem>
+          </MenuItemList>
+        </Menu>
+      </Container>
     </Header>
   )
 }

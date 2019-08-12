@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/core'
-import React from 'react'
 import { withTheme } from 'emotion-theming'
+import React from 'react'
 
 export const GlobalStyle = withTheme(({ theme: { colors } }) => {
   const styles = css`

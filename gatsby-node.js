@@ -51,7 +51,7 @@ exports.createPages = ({ graphql, actions }) => {
       const currentPage = i + 1
 
       createPage({
-        path: currentPage === 1 ? `/` : `/blog/${currentPage}/`,
+        path: currentPage === 1 ? `/blog` : `/blog/${currentPage}/`,
         component: path.resolve('./src/templates/blog-index.js'),
         context: {
           pageInfo: {
