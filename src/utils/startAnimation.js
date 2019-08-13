@@ -1,251 +1,191 @@
-const startAnimation = (canvas) => {
-  let width = canvas.clientWidth
-  let height = canvas.clientHeight
-  const context = canvas.getContext('2d')
+import { useEffect } from 'react'
 
-  const ball = {
-    x: 0,
-    y: 0,
-    vx: 0,
-    vy: 0,
-    r: 0,
-    alpha: 1,
-    phase: 0,
-  }
-  const ball_color = {
-    r: 225,
-    g: 225,
-    b: 225,
-  }
-  const R = 2
-  let balls = []
-  const alpha_f = 0.03
-  // Line
-  const link_line_width = 0.8
-  const dis_limit = 260
-  const mouse_ball = {
-    x: 0,
-    y: 0,
-    vx: 0,
-    vy: 0,
-    r: 0,
-    type: 'mouse',
-  }
+const radius = 1
+const outOfCanvasOffset = radius + 50
 
-  // Random speed
-  const getRandomSpeed = (pos) => {
-    const min = -1
-    const max = 1
-    switch (pos) {
-      case 'top':
-        return [randomNumFrom(min, max), randomNumFrom(0.1, max)]
-      case 'right':
-        return [randomNumFrom(min, -0.1), randomNumFrom(min, max)]
-      case 'bottom':
-        return [randomNumFrom(min, max), randomNumFrom(min, -0.1)]
-      case 'left':
-        return [randomNumFrom(0.1, max), randomNumFrom(min, max)]
-      default:
-        return
-    }
-  }
-  const randomArrayItem = (arr) => arr[Math.floor(Math.random() * arr.length)]
-  const randomNumFrom = (min, max) => Math.random() * (max - min) + min
+const color = {
+  r: 255,
+  g: 0,
+  b: 0,
+}
+const alpha_f = 0.03
+const link_line_width = 0.8
+const distanceLimit = 250
+const mouseDistanceLimit = 350
 
-  // Random Ball
-  function getRandomBall() {
-    var pos = randomArrayItem(['top', 'right', 'bottom', 'left'])
-    switch (pos) {
-      default:
-        return {}
-      case 'top':
-        return {
-          x: randomSidePos(width),
-          y: -R,
-          vx: getRandomSpeed('top')[0],
-          vy: getRandomSpeed('top')[1],
-          r: R,
-          alpha: 1,
-          phase: randomNumFrom(0, 10),
-        }
-      case 'right':
-        return {
-          x: width + R,
-          y: randomSidePos(height),
-          vx: getRandomSpeed('right')[0],
-          vy: getRandomSpeed('right')[1],
-          r: R,
-          alpha: 1,
-          phase: randomNumFrom(0, 10),
-        }
-      case 'bottom':
-        return {
-          x: randomSidePos(width),
-          y: height + R,
-          vx: getRandomSpeed('bottom')[0],
-          vy: getRandomSpeed('bottom')[1],
-          r: R,
-          alpha: 1,
-          phase: randomNumFrom(0, 10),
-        }
-      case 'left':
-        return {
-          x: -R,
-          y: randomSidePos(height),
-          vx: getRandomSpeed('left')[0],
-          vy: getRandomSpeed('left')[1],
-          r: R,
-          alpha: 1,
-          phase: randomNumFrom(0, 10),
-        }
-    }
+const randomElementFromArray = (arr) =>
+  arr[Math.floor(Math.random() * arr.length)]
+const randomBetween = (min, max) => Math.random() * (max - min) + min
+const randomMax = (max) => randomBetween(0, max)
+const getVelocity = (pos) => {
+  const min = -1
+  const max = 1
+
+  switch (pos) {
+    case 'top':
+      return [randomBetween(min, max), randomBetween(0.1, max)]
+    case 'right':
+      return [randomBetween(min, -0.1), randomBetween(min, max)]
+    case 'bottom':
+      return [randomBetween(min, max), randomBetween(min, -0.1)]
+    case 'left':
+      return [randomBetween(0.1, max), randomBetween(min, max)]
+    default:
+      return
   }
-  function randomSidePos(length) {
+}
+
+const useAnimation = (canvasRef) => {
+  const randomSidePos = (length) => {
     return Math.ceil(Math.random() * length)
   }
 
-  // Draw Ball
-  function renderBalls() {
-    Array.prototype.forEach.call(balls, function(b) {
-      if (!b.hasOwnProperty('type')) {
-        context.fillStyle =
-          'rgba(' +
-          ball_color.r +
-          ',' +
-          ball_color.g +
-          ',' +
-          ball_color.b +
-          ',' +
-          b.alpha +
-          ')'
-        context.beginPath()
-        context.arc(b.x, b.y, R, 0, Math.PI * 2, true)
-        context.closePath()
-        context.fill()
-      }
-    })
+  const getDistanceBetweenPoints = (p1, p2) => {
+    const deltaX = Math.abs(p1.x - p2.x)
+    const deltaY = Math.abs(p1.y - p2.y)
+    return Math.sqrt(deltaX * deltaX + deltaY * deltaY)
   }
 
-  // Update balls
-  function updateBalls() {
-    var new_balls = []
-    Array.prototype.forEach.call(balls, function(b) {
-      b.x += b.vx
-      b.y += b.vy
+  useEffect(() => {
+    if (canvasRef.current) {
+      let isAnimating = true
+      let width = canvasRef.current.clientWidth
+      let height = canvasRef.current.clientHeight
+      let pointCount = Math.ceil(width / 150) * Math.ceil(height / 150)
+      const context = canvasRef.current.getContext('2d')
 
-      if (b.x > -50 && b.x < width + 50 && b.y > -50 && b.y < height + 50) {
-        new_balls.push(b)
-      }
+      const generateRandomPoint = (spawnAnywhere = false) => {
+        const side = randomElementFromArray(['top', 'right', 'bottom', 'left'])
+        const [vx, vy] = getVelocity(side)
+        const base = {
+          alpha: 1,
+          r: radius,
+          phase: randomBetween(0, 10),
+          vx,
+          vy,
+        }
+        const type = spawnAnywhere ? null : side
 
-      // alpha change
-      b.phase += alpha_f
-      b.alpha = Math.abs(Math.cos(b.phase))
-      // console.log(b.alpha);
-    })
-
-    balls = new_balls.slice(0)
-  }
-
-  // Draw lines
-  function renderLines() {
-    var fraction, alpha
-    for (var i = 0; i < balls.length; i++) {
-      for (var j = i + 1; j < balls.length; j++) {
-        fraction = getDisOf(balls[i], balls[j]) / dis_limit
-
-        if (fraction < 1) {
-          alpha = (1 - fraction).toString()
-
-          context.strokeStyle = 'rgba(225,225,225,' + alpha + ')'
-          context.lineWidth = link_line_width
-
-          context.beginPath()
-          context.moveTo(balls[i].x, balls[i].y)
-          context.lineTo(balls[j].x, balls[j].y)
-          context.stroke()
-          context.closePath()
+        switch (type) {
+          default:
+            return { x: randomMax(width), y: randomMax(height), ...base }
+          case 'top':
+            return { x: randomSidePos(width), y: -radius, ...base }
+          case 'right':
+            return { x: width + radius, y: randomSidePos(height), ...base }
+          case 'bottom':
+            return { x: randomSidePos(width), y: height + radius, ...base }
+          case 'left':
+            return { x: -radius, y: randomSidePos(height), ...base }
         }
       }
+
+      const mousePoint = { ...generateRandomPoint(), type: 'mouse' }
+      let points = [
+        // mousePoint,
+        ...Array.from({ length: pointCount }).map((_) =>
+          generateRandomPoint(true)
+        ),
+      ]
+
+      const drawPoints = () => {
+        points.forEach((point) => {
+          if (point.type !== 'mouse') {
+            context.fillStyle = `rgba(${color.r},${color.g},${color.g},${point.alpha})`
+            context.beginPath()
+            context.arc(point.x, point.y, radius, 0, Math.PI * 2, true)
+            context.closePath()
+            context.fill()
+          }
+        })
+      }
+
+      const updatePoints = () => {
+        points = points.reduce((arr, point) => {
+          const phase = point.phase + alpha_f
+          const alpha = Math.abs(Math.cos(phase))
+          const x = point.x + point.vx
+          const y = point.y + point.vy
+          return point.type === 'mouse'
+            ? arr.concat([mousePoint])
+            : x > -outOfCanvasOffset &&
+              x < width + outOfCanvasOffset &&
+              y > -outOfCanvasOffset &&
+              y < height + outOfCanvasOffset
+            ? arr.concat([{ ...point, x, y, alpha, phase }])
+            : arr.concat([])
+        }, [])
+
+        if (points.length < pointCount) {
+          for (let i = 0; i < pointCount - points.length; i++) {
+            points.push(generateRandomPoint())
+          }
+        }
+      }
+
+      const drawLines = () => {
+        points.forEach((op) => {
+          points.forEach((ip) => {
+            const fraction =
+              getDistanceBetweenPoints(op, ip) /
+              ([op.type, ip.type].includes('mouse')
+                ? mouseDistanceLimit
+                : distanceLimit)
+            if (fraction < 1) {
+              const alpha = (1 - fraction).toString()
+              context.strokeStyle = `rgba(${color.r},${color.g},${color.b},${alpha})`
+              context.lineWidth = link_line_width
+              context.beginPath()
+              context.moveTo(op.x, op.y)
+              context.lineTo(ip.x, ip.y)
+              context.stroke()
+              context.closePath()
+            }
+          })
+        })
+      }
+      const adjustCanvasWidth = () => {
+        canvasRef.current.setAttribute('width', window.innerWidth)
+        canvasRef.current.setAttribute('height', window.innerHeight)
+        width = parseInt(canvasRef.current.getAttribute('width'))
+        height = parseInt(canvasRef.current.getAttribute('height'))
+        pointCount = Math.ceil(width / 150) * Math.ceil(height / 150)
+      }
+      const handleMouseMove = (e) => {
+        mousePoint.x = e.pageX
+        mousePoint.y = e.pageY
+      }
+      const frame = () => {
+        context.clearRect(0, 0, width, height)
+        drawPoints()
+        drawLines()
+        updatePoints()
+        if (isAnimating) {
+          window.requestAnimationFrame(frame)
+        }
+      }
+      const start = () => {
+        adjustCanvasWidth()
+        window.requestAnimationFrame(frame)
+      }
+
+      // add mouse move and window resize handlers, start animation
+      document.documentElement.addEventListener('mousemove', handleMouseMove)
+      window.addEventListener('resize', adjustCanvasWidth)
+      start()
+
+      // stop animation, remove mouse move and window resize handlers
+      return () => {
+        isAnimating = false
+        document.documentElement.removeEventListener(
+          'mousemove',
+          handleMouseMove
+        )
+        window.removeEventListener('resize', adjustCanvasWidth)
+        window.cancelAnimationFrame(frame)
+      }
     }
-  }
-
-  // calculate distance between two points
-  function getDisOf(b1, b2) {
-    var delta_x = Math.abs(b1.x - b2.x),
-      delta_y = Math.abs(b1.y - b2.y)
-
-    return Math.sqrt(delta_x * delta_x + delta_y * delta_y)
-  }
-
-  // add balls if there a little balls
-  function addBallIfy() {
-    if (balls.length < 25) {
-      balls.push(getRandomBall())
-    }
-  }
-
-  // Render
-  function render() {
-    context.clearRect(0, 0, width, height)
-    renderBalls()
-    renderLines()
-    updateBalls()
-    addBallIfy()
-    window.requestAnimationFrame(render)
-  }
-
-  // Init Balls
-  function initBalls(num) {
-    for (var i = 1; i <= num; i++) {
-      balls.push({
-        x: randomSidePos(width),
-        y: randomSidePos(height),
-        vx: getRandomSpeed('top')[0],
-        vy: getRandomSpeed('top')[1],
-        r: R,
-        alpha: 1,
-        phase: randomNumFrom(0, 10),
-      })
-    }
-  }
-  // Init Canvas
-  const initCanvas = () => {
-    canvas.setAttribute('width', window.innerWidth)
-    canvas.setAttribute('height', window.innerHeight)
-
-    width = parseInt(canvas.getAttribute('width'))
-    height = parseInt(canvas.getAttribute('height'))
-  }
-  window.addEventListener('resize', function(e) {
-    console.log('Window Resize...')
-    initCanvas()
-  })
-
-  function goMovie() {
-    initCanvas()
-    initBalls(25)
-    window.requestAnimationFrame(render)
-  }
-  goMovie()
-
-  // Mouse effect
-  document.documentElement.addEventListener('mouseenter', function() {
-    console.log('mouseenter')
-    balls.push(mouse_ball)
-  })
-  document.documentElement.addEventListener('mouseleave', function() {
-    console.log('mouseleave')
-    balls = balls.reduce(
-      (arr, b) => arr.concat(b.hasOwnProperty('type') ? [] : [b]),
-      []
-    )
-  })
-  document.documentElement.addEventListener('mousemove', function(e) {
-    var e = e || window.event
-    mouse_ball.x = e.pageX
-    mouse_ball.y = e.pageY
-    // console.log(mouse_ball);
-  })
+  }, [canvasRef])
 }
 
-export default startAnimation
+export default useAnimation

@@ -1,13 +1,12 @@
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import React from 'react'
+import BookmarkIcon from '../images/bookmark.svg'
 import EditIcon from '../images/edit.svg'
-import RssSvg from '../images/rss.svg'
 
 const Footer = styled.footer`
   padding: 1rem 0;
   margin-top: calc(1.72rem * 2);
-  font-size: 0.8rem;
   font-family: Lato, sans-serif;
 
   a {
@@ -45,6 +44,12 @@ const Social = styled.div`
 
 const IconText = styled.span`
   margin-left: 4px;
+
+  @media only screen and (max-width: 450px) {
+    span {
+      display: none;
+    }
+  }
 `
 
 const ExternalLink = styled.a`
@@ -64,28 +69,32 @@ const Icon = styled.svg`
   }
 `
 
-const SiteFooter = ({ small }) => {
+const baseUrl = 'https://github.com/codepunkt/codepunkt.de/edit/master'
+
+const SiteFooter = ({ small, filePath }) => {
   return (
     <Footer>
       <Container small={small}>
         <Copyright>
-          <Link to="">Legal Notice</Link>
+          <Link to="/legal">Legal Notice</Link>
         </Copyright>
         <Social>
           <ExternalLink
-            href="https://github.com/codepunkt"
+            href={`${baseUrl}/${filePath}`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <Icon as={EditIcon} />
-            <IconText>Edit on GitHub</IconText>
+            <IconText>
+              Edit <span>on GitHub</span>
+            </IconText>
           </ExternalLink>
           <ExternalLink
             href="https://github.com/codepunkt"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon as={RssSvg} />
+            <Icon as={BookmarkIcon} />
             <IconText>RSS</IconText>
           </ExternalLink>
         </Social>

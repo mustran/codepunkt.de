@@ -33,7 +33,7 @@ function Foo() {
   return <span>Foo!</span>
 }
 
-const SiteLayout = ({ children, small }) => {
+const SiteLayout = ({ children, small, filePath }) => {
   // MDXProvider provides components that are usable in mdx files
   // without importing them
   return (
@@ -43,7 +43,7 @@ const SiteLayout = ({ children, small }) => {
         <Container>
           <SiteHeader small={small} />
           <Main small={small}>{children}</Main>
-          <SiteFooter small={small} />
+          <SiteFooter small={small} filePath={filePath} />
         </Container>
       </MDXProvider>
     </ThemeProvider>

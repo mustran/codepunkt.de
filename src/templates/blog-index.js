@@ -36,7 +36,7 @@ const BlogIndex = (props) => {
   } = props
 
   return (
-    <SiteLayout small>
+    <SiteLayout small filePath="src/templates/blog-index.js">
       {currentPage !== 1 && <Meta title="Blog" />}
       <div>
         <h1>Articles</h1>

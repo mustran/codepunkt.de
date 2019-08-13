@@ -4,7 +4,7 @@ import SiteLayout from '../components/site-layout'
 
 const AboutPage = ({ small }) => {
   return (
-    <SiteLayout small>
+    <SiteLayout small filePath="src/pages/about.js">
       <Meta title="About Me" />
       <div>
         <h1>Hey there.</h1>
