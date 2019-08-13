@@ -19,7 +19,6 @@ export const GlobalStyle = withTheme(({ theme: { colors } }) => {
       -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       background: #fbfbfb;
-      border-top: 5px solid #333;
     }
 
     *,

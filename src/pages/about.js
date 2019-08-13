@@ -56,6 +56,15 @@ const AboutPage = ({ small }) => {
         <ul>
           <li>
             <a
+              href="mailto:christoph@codepunkt.de"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Email
+            </a>
+          </li>
+          <li>
+            <a
               href="https://twitter.com/code_punkt"
               target="_blank"
               rel="noopener noreferrer"

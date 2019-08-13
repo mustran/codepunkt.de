@@ -58,7 +58,7 @@ export const codeStyle = css`
     @media (prefers-color-scheme: dark) {
     }
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 667px) {
       margin-left: -20px;
       margin-right: -20px;
       border-radius: 0;

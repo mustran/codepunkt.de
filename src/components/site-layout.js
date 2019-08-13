@@ -9,7 +9,7 @@ import SiteHeader from './site-header'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 5px);
+  min-height: 100vh;
 `
 
 const Main = styled.main`

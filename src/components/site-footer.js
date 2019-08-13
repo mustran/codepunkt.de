@@ -1,65 +1,94 @@
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import React from 'react'
-import { linkStyle } from '../style'
+import EditIcon from '../images/edit.svg'
+import RssSvg from '../images/rss.svg'
 
 const Footer = styled.footer`
-  ${linkStyle}
-  padding: 2em 0;
-  font-size: 16px;
-  color: #888;
+  padding: 1rem 0;
+  margin-top: calc(1.72rem * 2);
+  font-size: 0.8rem;
   font-family: Lato, sans-serif;
-  border-top: 1px solid #eaeaea;
+
+  a {
+    color: #777 !important;
+    box-shadow: none !important;
+
+    &:hover {
+      color: #4b4237;
+    }
+  }
+
+  @media only screen and (max-width: 450px) {
+    margin-top: calc(1.72rem * 1.5);
+  }
 `
 
 const Container = styled.div`
   max-width: ${(props) => (props.small ? 768 : 1200)}px;
   margin: 0 auto;
   width: 90%;
+  display: flex;
+  justify-content: space-between;
+`
+
+const Copyright = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const Social = styled.div`
+  display: flex;
+  margin-right: -8px;
+  align-items: center;
+`
+
+const IconText = styled.span`
+  margin-left: 4px;
+`
+
+const ExternalLink = styled.a`
+  display: flex;
+  align-items: center;
+  box-shadow: none;
+  margin: 0 8px;
+`
+
+const Icon = styled.svg`
+  width: 20px;
+  stroke: #777;
+  stroke-width: 1;
+
+  ${ExternalLink}:hover & {
+    stroke: #eaa944;
+  }
 `
 
 const SiteFooter = ({ small }) => {
   return (
     <Footer>
       <Container small={small}>
-        <div>
-          <b>© 2019</b>
-        </div>
-        <div>
-          <Link to="/">Christoph Werner</Link>
-        </div>
-        <div>
-          <b>Contact</b>
-        </div>
-        <div>
-          <a
-            href="mailto:christoph@codepunkt.de"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            christoph@codepunkt.de
-          </a>
-        </div>
-        <div>
-          <b>Social</b>
-        </div>
-        <div>
-          <a
-            href="https://twitter.com/code_punkt"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Twitter
-          </a>{' '}
-          /{' '}
-          <a
+        <Copyright>
+          <Link to="">Legal Notice</Link>
+        </Copyright>
+        <Social>
+          <ExternalLink
             href="https://github.com/codepunkt"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Github
-          </a>
-        </div>
+            <Icon as={EditIcon} />
+            <IconText>Edit on GitHub</IconText>
+          </ExternalLink>
+          <ExternalLink
+            href="https://github.com/codepunkt"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon as={RssSvg} />
+            <IconText>RSS</IconText>
+          </ExternalLink>
+        </Social>
       </Container>
     </Footer>
   )

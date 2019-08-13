@@ -1,8 +1,8 @@
-import { css, keyframes } from '@emotion/core';
-import styled from '@emotion/styled';
-import { Link } from 'gatsby';
-import React, { useEffect, useState } from 'react';
-import SiteLogo from './site-logo.svg';
+import { css, keyframes } from '@emotion/core'
+import styled from '@emotion/styled'
+import { Link } from 'gatsby'
+import React, { useEffect, useState } from 'react'
+import SiteLogo from './site-logo.svg'
 
 const animationCharacterOffsetMsec = 60
 const animationDelayMsec = 100
@@ -45,17 +45,29 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media only screen and (max-width: 450px) {
+    margin: calc(1.72rem * 1.5) auto;
+  }
 `
 
 const LogoLink = styled(Link)`
   display: inline-block;
   box-shadow: none !important;
   height: 57px;
+
+  @media only screen and (max-width: 667px) {
+    height: 45px;
+  }
 `
 
 const Menu = styled.nav`
   font-family: Lato, sans-serif;
   font-size: 17px;
+
+  @media only screen and (max-width: 667px) {
+    display: none;
+  }
 `
 
 const MenuItem = styled.li`
@@ -125,6 +137,11 @@ const Logo = styled(SiteLogo)`
   width: 200px;
   height: 57px;
   font-size: 18px;
+
+  @media only screen and (max-width: 450px) {
+    width: 160px;
+    height: 45px;
+  }
 
   path {
     fill: ${(props) => props.theme.colors.logo};
