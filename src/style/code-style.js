@@ -2,7 +2,7 @@ import { css } from '@emotion/core'
 
 export const codeStyle = css`
   code:not(.vscode-highlight-code) {
-    background: #f1f1f1;
+    background: #f0ede7;
     padding: 3px 5px;
     border-radius: 3px;
   }

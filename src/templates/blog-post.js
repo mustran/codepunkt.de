@@ -40,7 +40,7 @@ const BlogPost = (props) => {
   )}`
 
   return (
-    <SiteLayout>
+    <SiteLayout small>
       <Meta title={title} />
       <Article>
         <header>
