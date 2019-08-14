@@ -6,15 +6,17 @@ import EditIcon from '../images/edit.svg'
 
 const Footer = styled.footer`
   padding: 1rem 0;
-  margin-top: calc(1.72rem * 2);
+  margin-top: 2.5rem;
   font-family: Lato, sans-serif;
+  border-top: 1px solid #ddd;
+  background: #f8f8f8;
 
   a {
-    color: #777 !important;
+    color: #999 !important;
     box-shadow: none !important;
 
     &:hover {
-      color: #4b4237;
+      color: #4b4237 !important;
     }
   }
 
@@ -61,11 +63,11 @@ const ExternalLink = styled.a`
 
 const Icon = styled.svg`
   width: 20px;
-  stroke: #777;
+  stroke: #eaa944;
   stroke-width: 1;
 
   ${ExternalLink}:hover & {
-    stroke: #eaa944;
+    stroke: #ff8009;
   }
 `
 

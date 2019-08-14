@@ -20,6 +20,7 @@ const Article = styled.article`
   ${linkStyle}
   ${quoteStyle}
   ${twitterStyle}
+  width: 100%;
 `
 
 const BlogPost = (props) => {

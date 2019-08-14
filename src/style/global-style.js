@@ -10,7 +10,8 @@ export const GlobalStyle = withTheme(({ theme: { colors } }) => {
     }
 
     body {
-      margin: 0;
+      margin: calc(70px + 2.5rem) 0 0 0;
+      overflow-x: hidden;
       font-kerning: normal;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -38,12 +39,7 @@ export const GlobalStyle = withTheme(({ theme: { colors } }) => {
       color: #963e08;
     }
 
-    a,
-    a:link,
-    a:visited,
-    a:focus,
-    a:hover,
-    a:active {
+    a {
       color: ${colors.link};
       text-decoration: none;
       box-shadow: 0 1px 0 0 #ccc;

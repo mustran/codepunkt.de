@@ -1,20 +1,10 @@
 import { keyframes } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import React from 'react'
+import React, { useRef } from 'react'
 import SiteLayout from '../components/site-layout'
-
-const animation = keyframes`
-  0% {
-    opacity: 0;
-    -webkit-transform: translateY(20px);
-    transform: translateY(20px)
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-    transform: translateY(0)
-  }`
+import useAnimation from '../utils/startAnimation'
+import fadeUpIn from '../style/animations/fade-up-in'
 
 const Hero = styled.article`
   display: flex;
@@ -22,16 +12,15 @@ const Hero = styled.article`
   justify-content: center;
   flex: 1 0 auto;
   width: 100%;
-  animation: ${animation} 0.3s ease-out;
+  animation: ${fadeUpIn} 0.3s ease-out;
 `
 
 const HeroTitle = styled.h1`
   margin-bottom: 1rem;
   font-size: 3.5rem;
-  color: #eaa944;
 
   span {
-    background: rgba(0, 0, 0, 0.03);
+    background: #efe0fb;
   }
 
   @media only screen and (max-width: 450px) {
@@ -42,10 +31,7 @@ const HeroTitle = styled.h1`
 const HeroGreeting = styled.p`
   order: -1;
   margin-bottom: 1rem;
-  text-transform: uppercase;
-  font-size: 1.3rem;
-  font-weight: 700;
-  font-family: Lato, sans-serif;
+  font-size: 1.2rem;
 
   @media only screen and (max-width: 450px) {
     font-size: 1rem;
@@ -71,16 +57,20 @@ const BackgroundAnimation = styled.canvas`
 `
 
 const HomePage = () => {
+  const canvasRef = useRef(null)
+  useAnimation(canvasRef)
+
   return (
     <SiteLayout small filePath="src/pages/index.js">
       <Hero>
+        <BackgroundAnimation ref={canvasRef} />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <HeroTitle>
-            <span style={{ position: 'relative' }}>
-              I build & explain web things.
-            </span>
+            <span>I build & explain web things.</span>
           </HeroTitle>
-          <HeroGreeting>Hello, my name is Christoph</HeroGreeting>
+          <HeroGreeting>
+            <span>Hello, my name is Christoph</span>
+          </HeroGreeting>
           <HeroBody>
             I'm a software architect and team lead at{' '}
             <a
@@ -90,8 +80,8 @@ const HomePage = () => {
             >
               dSPACE
             </a>
-            , where i coach and mentor product teams to build web sites,
-            applications and APIs. I also write about the web on my{' '}
+            , where i coach and mentor product teams to build web applications.
+            I also write about web development on my{' '}
             <Link to="/blog">Blog</Link> and on{' '}
             <a
               href="https://twitter.com/code_punkt"

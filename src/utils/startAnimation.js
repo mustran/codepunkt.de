@@ -4,9 +4,9 @@ const radius = 1
 const outOfCanvasOffset = radius + 50
 
 const color = {
-  r: 255,
-  g: 0,
-  b: 0,
+  r: 235,
+  g: 235,
+  b: 235,
 }
 const alpha_f = 0.03
 const link_line_width = 0.8
@@ -82,7 +82,7 @@ const useAnimation = (canvasRef) => {
 
       const mousePoint = { ...generateRandomPoint(), type: 'mouse' }
       let points = [
-        // mousePoint,
+        mousePoint,
         ...Array.from({ length: pointCount }).map((_) =>
           generateRandomPoint(true)
         ),

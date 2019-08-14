@@ -9,7 +9,7 @@ import SiteHeader from './site-header'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - 70px - 2.5rem);
 `
 
 const Main = styled.main`
@@ -23,8 +23,7 @@ const Main = styled.main`
 
 const theme = {
   colors: {
-    logo: '#4b4237',
-    // contrast ratio on current background: 4.67 AA
+    logo: '#eaa944',
     link: '#1669f3',
   },
 }

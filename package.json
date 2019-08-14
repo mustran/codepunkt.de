@@ -42,6 +42,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
+    "react-media": "^1.9.2",
     "react-typography": "^0.16.19",
     "rehype-autolink-headings": "^2.0.5",
     "rehype-slug": "^2.0.3",

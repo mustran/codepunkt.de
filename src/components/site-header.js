@@ -1,79 +1,44 @@
-import { css, keyframes } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import React, { useEffect, useState } from 'react'
-import SiteLogo from './site-logo.svg'
-
-const animationCharacterOffsetMsec = 60
-const animationDelayMsec = 100
-const animationDurationMsec = 1000
-
-const charAnimation = (index, pathLength) => ({ theme: { colors } }) => {
-  const animationDelay =
-    animationDelayMsec + animationCharacterOffsetMsec * index
-  const animation = keyframes`
-    0% { stroke-dashoffset: ${pathLength}; }
-    50% { stroke-dashoffset: 0; fill: transparent; }
-    100% { stroke-dashoffset: 0; stroke-width: 0; fill: ${colors.logo}; }
-  `
-
-  // because we can't remove the "anim" class from the html element when
-  // javascript is disabled, we don't animate without javascript.
-  return css`
-    html.anim.visible:not(.no-js) & path:nth-of-type(${index}) {
-      stroke-dasharray: ${pathLength};
-      stroke-dashoffset: ${pathLength};
-      animation: ${animation} ${animationDurationMsec}ms linear
-        ${animationDelay}ms forwards;
-      @media (prefers-reduced-motion: reduce) {
-        animation: none;
-        stroke: none;
-        fill: ${colors.logo};
-      }
-    }
-  `
-}
+import React, { useState } from 'react'
+import Media from 'react-media'
+import fadeUpIn from '../style/animations/fade-up-in'
+import SiteLogo from './site-logo'
 
 const Header = styled.header`
-  border-top: 5px solid #4b4237;
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  height: 70px;
+  z-index: 3;
+  top: 0;
+  display: flex;
+  align-items: center;
 `
 
 const Container = styled.div`
   max-width: ${(props) => (props.small ? 768 : 1200)}px;
-  margin: 50px auto 70px auto;
+  margin: 1em auto 1rem auto;
   width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media only screen and (max-width: 450px) {
-    margin: calc(1.72rem * 1.5) auto;
-  }
-`
-
-const LogoLink = styled(Link)`
-  display: inline-block;
-  box-shadow: none !important;
-  height: 57px;
-
-  @media only screen and (max-width: 667px) {
-    height: 45px;
-  }
 `
 
 const Menu = styled.nav`
   font-family: Lato, sans-serif;
   font-size: 17px;
-
-  @media only screen and (max-width: 667px) {
-    display: none;
-  }
 `
 
 const MenuItem = styled.li`
   counter-increment: menu;
   margin: 0;
-  text-transform: lowercase;
+
+  ${Menu}.open & {
+    display: block;
+    width: 100%;
+  }
 `
 
 const MenuItemList = styled.ol`
@@ -83,146 +48,281 @@ const MenuItemList = styled.ol`
   margin: 0;
   height: 100%;
   align-items: center;
+
+  @media only screen and (max-width: 667px) {
+    ${Menu}.open & {
+      flex: 1 0 auto;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
 `
 
-const MenuLink = styled(Link)`
-  &,
-  &:link,
-  &:visited,
-  &:focus,
-  &:hover,
-  &:active {
-    box-shadow: none;
-    color: #333;
-    position: relative;
-    padding: 12px 20px;
+const MenuItemLink = styled(Link)`
+  box-shadow: none;
+  color: #333;
+  position: relative;
+  padding: 12px 20px;
+  text-transform: lowercase;
+  box-shadow: 0 none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 4px;
+    background: #ede7d9;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    transform: scale3d(0, 3, 1);
+    transform-origin: 0% 50%;
+    transition: transform 0.3s;
+    transition-timing-function: cubic-bezier(1, 0.68, 0.16, 0.9);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before {
+      transition: unset;
+    }
+  }
+
+  &:hover::before,
+  &.active::before {
+    transform: scale3d(1, 1, 1);
+  }
+
+  &.active::before {
+    background: #eaa944;
+  }
+
+  @media only screen and (max-width: 667px) {
+    opacity: 0;
+    display: flex;
+    color: white;
+    align-items: center;
+    padding: 1rem 20%;
+    font-size: 2rem;
+    font-family: Merriweather, serif;
 
     &::before {
-      content: '';
-      position: absolute;
-      height: 4px;
-      background: #ede7d9;
-      bottom: 0;
-      left: 16px;
-      right: 16px;
-      transform: scale3d(0, 3, 1);
-      transform-origin: 0% 50%;
-      transition: transform 0.3s;
-      transition-timing-function: cubic-bezier(1, 0.68, 0.16, 0.9);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      &::before {
-        transition: unset;
-      }
-    }
-
-    &:hover::before,
-    &.active::before {
-      transform: scale3d(1, 1, 1);
+      display: none;
     }
 
     &.active::before {
-      background: #eaa944;
+      display: block;
+      left: 0;
+      right: auto;
+      width: calc(20% - 12px);
+      height: 12px;
+      bottom: calc(50% - 6px);
     }
+  }
+
+  ${Menu}.open & {
+    transition: none;
+    animation: ${fadeUpIn} 0.2s ease-out 0.25s forwards;
+  }
+
+  ${Menu}.open li:nth-child(1) & {
+    animation-delay: 0.25s;
+  }
+  ${Menu}.open li:nth-child(2) & {
+    animation-delay: 0.27s;
+  }
+  ${Menu}.open li:nth-child(3) & {
+    animation-delay: 0.29s;
+  }
   }
 `
 
-const MenuNumber = styled.span`
+const MenuItemNumber = styled.span`
   font-weight: 700;
   margin-right: 8px;
+
+  ${Menu}.open & {
+    color: #666;
+    font-size: 1.2rem;
+  }
 `
 
-const Logo = styled(SiteLogo)`
-  width: 200px;
-  height: 57px;
-  font-size: 18px;
+const MenuIcon = styled.button`
+  border: 0 none;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  right: calc(5% - 5px);
+  top: 20px;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  z-index: 99;
 
-  @media only screen and (max-width: 450px) {
-    width: 160px;
-    height: 45px;
+  @media only screen and (min-width: 668px) {
+    display: none;
   }
 
-  path {
-    fill: ${(props) => props.theme.colors.logo};
-    stroke: none;
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    background: #4b4237;
+    width: 22px;
+    height: 3px;
+    left: 4px;
+    border-radius: 5px;
+    transition: all 150ms ease;
+    ${Menu}.open & {
+      background: #fff;
+      top: 50%;
+    }
   }
 
-  html.anim.visible:not(.no-js) & path {
-    fill: none;
-    stroke: ${(props) => props.theme.colors.logo};
+  ${Menu}.open & {
+    position: fixed;
   }
 
-  ${charAnimation(1, 180)}
-  ${charAnimation(2, 123)}
-  ${charAnimation(3, 173)}
-  ${charAnimation(4, 131)}
-  ${charAnimation(5, 194)}
-  ${charAnimation(6, 139)}
-  ${charAnimation(7, 153)}
-  ${charAnimation(8, 217)}
-  ${charAnimation(9, 113)}
+  &::before {
+    top: 7px;
+    ${Menu}.open & {
+      transform: translate3d(0, -50%, 0) rotate(45deg);
+    }
+  }
+  &::after {
+    top: 21px;
+    ${Menu}.open & {
+      transform: translate3d(0, -50%, 0) rotate(135deg);
+    }
+  }
 `
 
-const useVisibility = (initialVisibility = 'visible') => {
-  const [visibility, setVisibility] = useState(initialVisibility)
+const MenuIconBar = styled.div`
+  width: 30px;
+  height: 3px;
+  position: absolute;
+  top: 14px;
+  text-indent: -9999px;
 
-  useEffect(() => {
-    if (
-      typeof document.visibilityState === 'undefined' ||
-      typeof document.addEventListener === 'undefined'
-    ) {
-      return
+  &::before,
+  &::after {
+    transition: all 150ms ease;
+    position: absolute;
+    content: '';
+    width: 11px;
+    height: 3px;
+    background: #4b4237;
+    ${Menu}.open & {
+      background: #fff;
+      width: 0;
     }
+  }
+  &::before {
+    right: 50%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  &::after {
+    left: 50%;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+`
 
-    const handleChange = () => setVisibility(document.visibilityState)
-    document.addEventListener('visibilitychange', handleChange, false)
-    return () => {
-      document.removeEventListener('visibilitychange', handleChange, false)
+const MenuContent = styled.div`
+  display: flex;
+  margin-top: -4px;
+  margin-right: -20px;
+  font-size: 16px;
+  visibility: visible;
+
+  @media only screen and (max-width: 667px) {
+    visibility: hidden;
+    margin-top: 0;
+    margin-right: 0;
+    width: 0;
+    height: 0;
+
+    ${Menu}.open & {
+      visibility: visible;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 2;
     }
-  }, [])
+  }
+`
 
-  return { visibility }
-}
+const MenuBackground = styled.div`
+  position: fixed;
+  right: calc(10px + 5%);
+  top: calc(22px + 1.5rem);
+  background: #1f2430;
+  border-radius: 50%;
+  width: 0px;
+  height: 0px;
+  transition: none;
+  z-index: 1;
+
+  ${Menu}.open & {
+    transition: all 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    width: 400vmax;
+    height: 400vmax;
+    top: calc(26px + 2.5rem - 200vmax);
+    right: calc(15px + 5% - 200vmax);
+  }
+`
 
 const SiteHeader = ({ small }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const handleClick = () => isMenuOpen && setIsMenuOpen(false)
+
   return (
     <Header>
       <Container small={small}>
-        <LogoLink to="/">
-          <Logo
-            role="img"
-            onAnimationEnd={(e) => {
-              // animation is done when animation of last character is done
-              if (e.nativeEvent.target.classList.contains('t')) {
-                document.documentElement.classList.remove('anim')
-                sessionStorage.setItem('didAnimationRun', true)
-              }
-            }}
-          />
-        </LogoLink>
-        <Menu>
-          <MenuItemList>
-            <MenuItem>
-              <MenuLink to="/" activeClassName="active">
-                <MenuNumber aria-hidden={true}>01</MenuNumber>Home
-              </MenuLink>
-            </MenuItem>
-            <MenuItem>
-              <MenuLink
-                to="/blog"
-                activeClassName="active"
-                partiallyActive={true}
-              >
-                <MenuNumber aria-hidden={true}>02</MenuNumber>Articles
-              </MenuLink>
-            </MenuItem>
-            <MenuItem>
-              <MenuLink to="/about" activeClassName="active">
-                <MenuNumber aria-hidden={true}>03</MenuNumber>About
-              </MenuLink>
-            </MenuItem>
-          </MenuItemList>
+        <SiteLogo />
+        <Media
+          query={{ minWidth: 668 }}
+          onChange={() => setIsMenuOpen(false)}
+        />
+        <Menu className={isMenuOpen ? 'open' : ''}>
+          <MenuIcon onClick={() => setIsMenuOpen((open) => !open)}>
+            <MenuIconBar>{isMenuOpen ? 'Open menu' : 'Close menu'}</MenuIconBar>
+          </MenuIcon>
+          <MenuBackground></MenuBackground>
+          <MenuContent>
+            <MenuItemList>
+              <MenuItem>
+                <MenuItemLink
+                  to="/"
+                  activeClassName="active"
+                  onClick={handleClick}
+                >
+                  <MenuItemNumber aria-hidden={true}>01</MenuItemNumber>Home
+                </MenuItemLink>
+              </MenuItem>
+              <MenuItem>
+                <MenuItemLink
+                  to="/blog"
+                  activeClassName="active"
+                  partiallyActive={true}
+                  onClick={handleClick}
+                >
+                  <MenuItemNumber aria-hidden={true}>02</MenuItemNumber>Articles
+                </MenuItemLink>
+              </MenuItem>
+              <MenuItem>
+                <MenuItemLink
+                  to="/about"
+                  activeClassName="active"
+                  onClick={handleClick}
+                >
+                  <MenuItemNumber aria-hidden={true}>03</MenuItemNumber>About
+                </MenuItemLink>
+              </MenuItem>
+            </MenuItemList>
+          </MenuContent>
         </Menu>
       </Container>
     </Header>

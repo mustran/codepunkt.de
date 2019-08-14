@@ -25,6 +25,10 @@ const PM = styled(PostMeta)`
   margin-bottom: calc(1.72rem / 2);
 `
 
+const Content = styled.div`
+  width: 100%;
+`
+
 const BlogIndex = (props) => {
   const {
     data: {
@@ -38,7 +42,7 @@ const BlogIndex = (props) => {
   return (
     <SiteLayout small filePath="src/templates/blog-index.js">
       {currentPage !== 1 && <Meta title="Blog" />}
-      <div>
+      <Content>
         <h1>Articles</h1>
         {nodes.map(
           ({
@@ -82,7 +86,7 @@ const BlogIndex = (props) => {
             )}
           </PaginationList>
         </nav>
-      </div>
+      </Content>
     </SiteLayout>
   )
 }
