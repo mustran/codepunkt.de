@@ -15,6 +15,7 @@ const Header = styled.header`
   top: 0;
   display: flex;
   align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 3px 0px;
 `
 
 const Container = styled.div`
@@ -27,8 +28,7 @@ const Container = styled.div`
 `
 
 const Menu = styled.nav`
-  font-family: Lato, sans-serif;
-  font-size: 17px;
+  font-size: 18px;
 `
 
 const MenuItem = styled.li`
@@ -62,14 +62,14 @@ const MenuItemLink = styled(Link)`
   box-shadow: none;
   color: #333;
   position: relative;
-  padding: 12px 20px;
+  padding: 6px 20px;
   text-transform: lowercase;
   box-shadow: 0 none;
 
   &::before {
     content: '';
     position: absolute;
-    height: 4px;
+    height: 2px;
     background: #ede7d9;
     bottom: 0;
     left: 16px;
@@ -98,7 +98,6 @@ const MenuItemLink = styled(Link)`
   @media only screen and (max-width: 667px) {
     opacity: 0;
     display: flex;
-    color: white;
     align-items: center;
     padding: 1rem 20%;
     font-size: 2rem;
@@ -132,15 +131,15 @@ const MenuItemLink = styled(Link)`
   ${Menu}.open li:nth-child(3) & {
     animation-delay: 0.29s;
   }
-  }
 `
 
 const MenuItemNumber = styled.span`
-  font-weight: 700;
+  font-weight: 500;
   margin-right: 8px;
+  color: #aaa;
 
   ${Menu}.open & {
-    color: #666;
+    color: #999;
     font-size: 1.2rem;
   }
 `
@@ -173,7 +172,6 @@ const MenuIcon = styled.button`
     border-radius: 5px;
     transition: all 150ms ease;
     ${Menu}.open & {
-      background: #fff;
       top: 50%;
     }
   }
@@ -212,7 +210,6 @@ const MenuIconBar = styled.div`
     height: 3px;
     background: #4b4237;
     ${Menu}.open & {
-      background: #fff;
       width: 0;
     }
   }
@@ -232,7 +229,6 @@ const MenuContent = styled.div`
   display: flex;
   margin-top: -4px;
   margin-right: -20px;
-  font-size: 16px;
   visibility: visible;
 
   @media only screen and (max-width: 667px) {
@@ -256,17 +252,22 @@ const MenuContent = styled.div`
 
 const MenuBackground = styled.div`
   position: fixed;
-  right: calc(10px + 5%);
-  top: calc(22px + 1.5rem);
-  background: #1f2430;
+  right: calc(9px + 5%);
+  top: 33px;
   border-radius: 50%;
   width: 0px;
   height: 0px;
   transition: none;
   z-index: 1;
+  background: #eee;
+  visibility: hidden;
 
   ${Menu}.open & {
-    transition: all 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    visibility: visible;
+    transition: width 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
+      height 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
+      top 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
+      right 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06);
     width: 400vmax;
     height: 400vmax;
     top: calc(26px + 2.5rem - 200vmax);

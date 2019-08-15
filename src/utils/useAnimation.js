@@ -167,6 +167,7 @@ const useAnimation = (canvasRef) => {
       const start = () => {
         adjustCanvasWidth()
         window.requestAnimationFrame(frame)
+        window.setTimeout(() => canvasRef.current.classList.add('visible'), 500)
       }
 
       // add mouse move and window resize handlers, start animation

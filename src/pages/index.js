@@ -1,10 +1,9 @@
-import { keyframes } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import React, { useRef } from 'react'
 import SiteLayout from '../components/site-layout'
-import useAnimation from '../utils/startAnimation'
 import fadeUpIn from '../style/animations/fade-up-in'
+import useAnimation from '../utils/useAnimation'
 
 const Hero = styled.article`
   display: flex;
@@ -54,6 +53,12 @@ const BackgroundAnimation = styled.canvas`
   z-index: -1;
   top: 0;
   left: 0;
+  opacity: 0;
+  transition: opacity 1s linear;
+
+  &.visible {
+    opacity: 1;
+  }
 `
 
 const HomePage = () => {
