@@ -1,6 +1,6 @@
-import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
-import Helmet from 'react-helmet';
+import { graphql, useStaticQuery } from 'gatsby'
+import React from 'react'
+import Helmet from 'react-helmet'
 
 const Meta = (options = {}) => {
   const {
@@ -23,7 +23,7 @@ const Meta = (options = {}) => {
   const meta = Object.assign({}, siteMetadata, options)
 
   return (
-    <Helmet titleTemplate={'%s — Codepunkt'}>
+    <Helmet>
       <html lang={meta.lang} />
       <meta name="description" content={meta.description} />
       <meta name="og:description" content={meta.description} />

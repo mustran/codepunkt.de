@@ -1,3 +1,4 @@
+import { css } from '@emotion/core'
 import React from 'react'
 import Meta from '../components/meta'
 import SiteLayout from '../components/site-layout'
@@ -5,9 +6,17 @@ import SiteLayout from '../components/site-layout'
 const AboutPage = ({ small }) => {
   return (
     <SiteLayout small filePath="src/pages/about.js">
-      <Meta title="About Me" />
+      <Meta title="About Me — Codepunkt" />
       <div>
-        <h1>Hey there.</h1>
+        <h1>
+          <span
+            css={css`
+              background: #d7f0d0;
+            `}
+          >
+            Hey there.
+          </span>
+        </h1>
         <article>
           <p>
             I'm Christoph Werner, a full-stack web developer based in Paderborn,

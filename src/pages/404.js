@@ -1,3 +1,4 @@
+import { css } from '@emotion/core'
 import React from 'react'
 import Meta from '../components/meta'
 import SiteLayout from '../components/site-layout'
@@ -5,8 +6,16 @@ import SiteLayout from '../components/site-layout'
 const NotFoundPage = () => (
   <SiteLayout small filePath="src/pages/404.js">
     <div>
-      <Meta title="404: Not found" />
-      <h1>NOT FOUND</h1>
+      <Meta title="Not found — Codepunkt" />
+      <h1>
+        <span
+          css={css`
+            background: #fbd9d9;
+          `}
+        >
+          Not found
+        </span>
+      </h1>
       <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
     </div>
   </SiteLayout>

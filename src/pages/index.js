@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import React, { useRef } from 'react'
+import Meta from '../components/meta'
 import SiteLayout from '../components/site-layout'
 import fadeUpIn from '../style/animations/fade-up-in'
 import useAnimation from '../utils/useAnimation'
@@ -67,6 +68,7 @@ const HomePage = () => {
 
   return (
     <SiteLayout small filePath="src/pages/index.js">
+      <Meta title="Codepunkt" />
       <Hero>
         <BackgroundAnimation ref={canvasRef} />
         <div style={{ display: 'flex', flexDirection: 'column' }}>

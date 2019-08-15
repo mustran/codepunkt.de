@@ -1,3 +1,4 @@
+import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { graphql, Link } from 'gatsby'
 import React from 'react'
@@ -41,9 +42,8 @@ const BlogIndex = (props) => {
 
   return (
     <SiteLayout small filePath="src/templates/blog-index.js">
-      {currentPage !== 1 && <Meta title="Blog" />}
+      <Meta title="Blog — Codepunkt" />
       <Content>
-        <h1>Articles</h1>
         {nodes.map(
           ({
             frontmatter: { title, created, updated },
@@ -56,7 +56,15 @@ const BlogIndex = (props) => {
               <Article key={id}>
                 <header>
                   <Link to={path}>
-                    <h2>{title}</h2>
+                    <h2>
+                      <span
+                        css={css`
+                          background: #d9e2ff;
+                        `}
+                      >
+                        {title}
+                      </span>
+                    </h2>
                   </Link>
                   <PM>
                     {formatPostDate(updated)} • {timeToRead} min read

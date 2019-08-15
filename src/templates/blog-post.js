@@ -1,3 +1,4 @@
+import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
@@ -44,7 +45,19 @@ const BlogPost = (props) => {
       <Meta title={title} />
       <Article>
         <header>
-          <h1>{title}</h1>
+          <h1>
+            <span
+              css={css`
+                /* background: #d9e2ff; */
+                background-image: linear-gradient(
+                  transparent calc(100% - 16px),
+                  #d9e2ff 16px
+                );
+              `}
+            >
+              {title}
+            </span>
+          </h1>
           <PostMeta>
             {formatPostDate(updated)} • {timeToRead} min read
           </PostMeta>
