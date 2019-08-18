@@ -10,7 +10,10 @@ const LegalPage = () => (
       <h1>
         <span
           css={css`
-            background: #d9f8f6;
+            background-image: linear-gradient(
+              transparent calc(65%),
+              #d9f8f6 35%
+            );
           `}
         >
           Legal Notice

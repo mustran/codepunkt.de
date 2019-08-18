@@ -1,13 +1,24 @@
-import { useEffect } from 'react'
+import styled from '@emotion/styled'
+import React, { useEffect, useRef } from 'react'
+
+const Canvas = styled.canvas`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s linear;
+
+  &.visible {
+    opacity: 1;
+  }
+`
 
 const radius = 1
 const outOfCanvasOffset = radius + 50
-
-const color = {
-  r: 235,
-  g: 235,
-  b: 235,
-}
+const color = { r: 235, g: 235, b: 235 }
 const alpha_f = 0.03
 const link_line_width = 0.8
 const distanceLimit = 250
@@ -35,7 +46,9 @@ const getVelocity = (pos) => {
   }
 }
 
-const useAnimation = (canvasRef) => {
+const BackgroundAnimation = () => {
+  const canvasRef = useRef(null)
+
   const randomSidePos = (length) => {
     return Math.ceil(Math.random() * length)
   }
@@ -187,6 +200,8 @@ const useAnimation = (canvasRef) => {
       }
     }
   }, [canvasRef])
+
+  return <Canvas ref={canvasRef} />
 }
 
-export default useAnimation
+export default BackgroundAnimation

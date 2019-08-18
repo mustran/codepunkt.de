@@ -11,10 +11,13 @@ const AboutPage = ({ small }) => {
         <h1>
           <span
             css={css`
-              background: #d7f0d0;
+              background-image: linear-gradient(
+                transparent calc(65%),
+                #d7f0d0 35%
+              );
             `}
           >
-            Hey there.
+            Hey there!
           </span>
         </h1>
         <article>
@@ -55,11 +58,11 @@ const AboutPage = ({ small }) => {
           >
             Paderborn.js
           </a>{' '}
-          and like speaking at conferences and meetups whenever I have time and
-          something interesting to share.
+          and like speaking at meetups and conferences whenever I have something
+          interesting to share.
         </p>
         <p>
-          If you are interested in having me speak at an event, let me know.
+          If you are interested in having me speak at an event, let me know!
         </p>
         <h2>Online</h2>
         <ul>

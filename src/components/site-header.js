@@ -122,13 +122,13 @@ const MenuItemLink = styled(Link)`
     animation: ${fadeUpIn} 0.2s ease-out 0.25s forwards;
   }
 
-  ${Menu}.open li:nth-child(1) & {
+  ${Menu}.open li:nth-of-type(1) & {
     animation-delay: 0.25s;
   }
-  ${Menu}.open li:nth-child(2) & {
+  ${Menu}.open li:nth-of-type(2) & {
     animation-delay: 0.27s;
   }
-  ${Menu}.open li:nth-child(3) & {
+  ${Menu}.open li:nth-of-type(3) & {
     animation-delay: 0.29s;
   }
 `

@@ -22,7 +22,7 @@ const Article = styled.article`
   margin-bottom: calc(1.72rem * 2);
 `
 
-const PM = styled(PostMeta)`
+const StyledPostMeta = styled(PostMeta)`
   margin-bottom: calc(1.72rem / 2);
 `
 
@@ -54,24 +54,24 @@ const BlogIndex = (props) => {
           }) => {
             return (
               <Article key={id}>
-                <header>
-                  <Link to={path}>
-                    <h2>
-                      <span
-                        css={css`
-                          background: #d9e2ff;
-                        `}
-                      >
-                        {title}
-                      </span>
-                    </h2>
-                  </Link>
-                  <PM>
+                <Link to={path}>
+                  <h2>
+                    <span
+                      css={css`
+                        background-image: linear-gradient(
+                          transparent calc(65%),
+                          #d9e2ff 35%
+                        );
+                      `}
+                    >
+                      {title}
+                    </span>
+                  </h2>
+                  <StyledPostMeta>
                     {formatPostDate(updated)} • {timeToRead} min read
-                  </PM>
-                </header>
-                <p>{excerpt}</p>
-                <Link to={path}>View Article</Link>
+                  </StyledPostMeta>
+                  <p>{excerpt}</p>
+                </Link>
               </Article>
             )
           }

@@ -3,6 +3,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { ThemeProvider } from 'emotion-theming'
 import React from 'react'
 import { GlobalStyle } from '../style'
+import fadeUpIn from '../style/animations/fade-up-in'
 import SiteFooter from './site-footer'
 import SiteHeader from './site-header'
 
@@ -19,11 +20,16 @@ const Main = styled.main`
   /* ie9-11 hack, see https://stackoverflow.com/a/20095764 */
   display: flex;
   flex: 1 0 auto;
+  animation: ${fadeUpIn} 0.2s ease-out;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 `
 
 const theme = {
   colors: {
-    logo: '#eaa944',
+    logo: '#5185c5',
     link: '#1669f3',
   },
 }

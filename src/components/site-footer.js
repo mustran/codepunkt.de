@@ -63,7 +63,7 @@ const ExternalLink = styled.a`
 
 const Icon = styled.svg`
   width: 20px;
-  stroke: #eaa944;
+  stroke: #448fea;
   stroke-width: 1;
 
   ${ExternalLink}:hover & {

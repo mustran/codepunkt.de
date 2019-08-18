@@ -1,10 +1,12 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/core';
 
 export const codeStyle = css`
   code:not(.vscode-highlight-code) {
     background: #f0ede7;
     padding: 3px 5px;
     border-radius: 3px;
+    font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
+      monospace;
   }
 
   .vscode-highlight {
@@ -12,7 +14,10 @@ export const codeStyle = css`
     counter-reset: line;
 
     .vscode-highlight-code {
-      font-size: 1rem;
+      /* font-size: 16px; */
+      font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
+        monospace;
+      /* line-height: 1.65; */
     }
 
     .vscode-highlight-line {
