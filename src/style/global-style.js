@@ -19,7 +19,7 @@ export const GlobalStyle = withTheme(({ theme: { colors } }) => {
       -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-      background: #fbfbfb;
+      background: #fff;
     }
 
     *,

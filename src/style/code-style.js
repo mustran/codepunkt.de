@@ -1,10 +1,11 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/core'
 
 export const codeStyle = css`
   code:not(.vscode-highlight-code) {
-    background: #f0ede7;
+    background: #fefaf1;
     padding: 3px 5px;
     border-radius: 3px;
+    color: #5c5e7b;
     font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
       monospace;
   }
@@ -12,12 +13,13 @@ export const codeStyle = css`
   .vscode-highlight {
     border-radius: 4px;
     counter-reset: line;
+    background: #fefaf1;
 
     .vscode-highlight-code {
       /* font-size: 16px; */
       font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
         monospace;
-      /* line-height: 1.65; */
+      line-height: 1.65;
     }
 
     .vscode-highlight-line {
@@ -26,7 +28,7 @@ export const codeStyle = css`
         content: counter(line);
         margin: 0 12px 0 -8px;
         user-select: none;
-        color: #4d535a;
+        color: #d7c9b3;
         text-align: right;
         width: 20px;
         display: inline-block;
@@ -38,6 +40,16 @@ export const codeStyle = css`
         &::before {
           margin: 0 16px 0 -8px;
         }
+      }
+
+      .mtk7 {
+        color: #2aa198;
+      }
+      .mtk9 {
+        color: #b58900;
+      }
+      .mtk10 {
+        color: #3374ff;
       }
     }
 
@@ -61,12 +73,6 @@ export const codeStyle = css`
     }
 
     @media (prefers-color-scheme: dark) {
-    }
-
-    @media only screen and (max-width: 667px) {
-      margin-left: -20px;
-      margin-right: -20px;
-      border-radius: 0;
     }
   }
 `

@@ -7,9 +7,8 @@ import EditIcon from '../images/edit.svg'
 const Footer = styled.footer`
   padding: 1rem 0;
   margin-top: 2.5rem;
-  font-family: Lato, sans-serif;
   border-top: 1px solid #ddd;
-  background: #f8f8f8;
+  background: #fbfbfb;
 
   a {
     color: #999 !important;

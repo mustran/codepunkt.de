@@ -18,7 +18,7 @@ const Canvas = styled.canvas`
 
 const radius = 1
 const outOfCanvasOffset = radius + 50
-const color = { r: 235, g: 235, b: 235 }
+const color = { r: 240, g: 240, b: 240 }
 const alpha_f = 0.03
 const link_line_width = 0.8
 const distanceLimit = 250
@@ -177,10 +177,15 @@ const BackgroundAnimation = () => {
           window.requestAnimationFrame(frame)
         }
       }
+
+      let timeout
       const start = () => {
         adjustCanvasWidth()
         window.requestAnimationFrame(frame)
-        window.setTimeout(() => canvasRef.current.classList.add('visible'), 500)
+        timeout = window.setTimeout(
+          () => canvasRef.current.classList.add('visible'),
+          500
+        )
       }
 
       // add mouse move and window resize handlers, start animation
@@ -197,6 +202,7 @@ const BackgroundAnimation = () => {
         )
         window.removeEventListener('resize', adjustCanvasWidth)
         window.cancelAnimationFrame(frame)
+        window.clearTimeout(timeout)
       }
     }
   }, [canvasRef])

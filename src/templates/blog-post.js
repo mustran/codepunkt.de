@@ -1,4 +1,3 @@
-import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
@@ -24,6 +23,15 @@ const Article = styled.article`
   width: 100%;
 `
 
+const Header = styled.header`
+display: flex;
+flex-direction: column;
+`
+
+const Headline = styled.h1`
+  order: 2;
+`
+
 const BlogPost = (props) => {
   const {
     path,
@@ -44,24 +52,14 @@ const BlogPost = (props) => {
     <SiteLayout small filePath={`src/content${path}index.mdx`}>
       <Meta title={title} />
       <Article>
-        <header>
-          <h1>
-            <span
-              css={css`
-                /* background: #d9e2ff; */
-                background-image: linear-gradient(
-                  transparent calc(100% - 16px),
-                  #d9e2ff 16px
-                );
-              `}
-            >
-              {title}
-            </span>
-          </h1>
+        <Header>
+          <Headline>
+            {title}
+          </Headline>
           <PostMeta>
             {formatPostDate(updated)} • {timeToRead} min read
           </PostMeta>
-        </header>
+        </Header>
         <MDXRenderer>{body}</MDXRenderer>
         <footer>
           <p>

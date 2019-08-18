@@ -11,16 +11,12 @@ const AboutPage = ({ small }) => {
         <h1>
           <span
             css={css`
-              background-image: linear-gradient(
-                transparent calc(65%),
-                #d7f0d0 35%
-              );
             `}
           >
             Hey there!
           </span>
         </h1>
-        <article>
+        <article css={css`font-weight: 300;font-size:1.2rem;`}>
           <p>
             I'm Christoph Werner, a full-stack web developer based in Paderborn,
             Germany. I've been building stuff on the web for the last 20 years,

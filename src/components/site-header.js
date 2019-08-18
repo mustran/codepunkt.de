@@ -4,18 +4,19 @@ import React, { useState } from 'react'
 import Media from 'react-media'
 import fadeUpIn from '../style/animations/fade-up-in'
 import SiteLogo from './site-logo'
+import MoonIcon from '../images/moon.svg'
+import SunIcon from '../images/sun.svg'
 
 const Header = styled.header`
   position: fixed;
   width: 100%;
-  background: #fff;
-  border-bottom: 1px solid #ddd;
+  background: #fcfdff;
+  border-bottom: 1px solid #e5e8eb;
   height: 70px;
   z-index: 3;
   top: 0;
   display: flex;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 3px 0px;
 `
 
 const Container = styled.div`
@@ -29,6 +30,8 @@ const Container = styled.div`
 
 const Menu = styled.nav`
   font-size: 18px;
+  display: flex;
+  align-items: center;
 `
 
 const MenuItem = styled.li`
@@ -62,37 +65,12 @@ const MenuItemLink = styled(Link)`
   box-shadow: none;
   color: #333;
   position: relative;
-  padding: 6px 20px;
-  text-transform: lowercase;
+  padding: 6px 12px;
   box-shadow: 0 none;
 
-  &::before {
-    content: '';
-    position: absolute;
-    height: 2px;
-    background: #ede7d9;
-    bottom: 0;
-    left: 16px;
-    right: 16px;
-    transform: scale3d(0, 3, 1);
-    transform-origin: 0% 50%;
-    transition: transform 0.3s;
-    transition-timing-function: cubic-bezier(1, 0.68, 0.16, 0.9);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    &::before {
-      transition: unset;
-    }
-  }
-
-  &:hover::before,
-  &.active::before {
-    transform: scale3d(1, 1, 1);
-  }
-
-  &.active::before {
-    background: #eaa944;
+  &.active {
+    background: #fff;
+    border: 1px solid #dfe3e8;
   }
 
   @media only screen and (max-width: 667px) {
@@ -130,17 +108,6 @@ const MenuItemLink = styled(Link)`
   }
   ${Menu}.open li:nth-of-type(3) & {
     animation-delay: 0.29s;
-  }
-`
-
-const MenuItemNumber = styled.span`
-  font-weight: 500;
-  margin-right: 8px;
-  color: #aaa;
-
-  ${Menu}.open & {
-    color: #999;
-    font-size: 1.2rem;
   }
 `
 
@@ -227,9 +194,8 @@ const MenuIconBar = styled.div`
 
 const MenuContent = styled.div`
   display: flex;
-  margin-top: -4px;
-  margin-right: -20px;
   visibility: visible;
+  margin-right: 1.72rem;
 
   @media only screen and (max-width: 667px) {
     visibility: hidden;
@@ -277,7 +243,11 @@ const MenuBackground = styled.div`
 
 const SiteHeader = ({ small }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const handleClick = () => isMenuOpen && setIsMenuOpen(false)
+  const [isDarkMode, setIsDarkMode] = useState(false)
+  const handleMenuItemClick = () => isMenuOpen && setIsMenuOpen(false)
+  const handleModeToggleClick = () => setIsDarkMode(isDarkMode => !isDarkMode)
+
+  const ModeIcon = isDarkMode ? MoonIcon : SunIcon
 
   return (
     <Header>
@@ -298,9 +268,9 @@ const SiteHeader = ({ small }) => {
                 <MenuItemLink
                   to="/"
                   activeClassName="active"
-                  onClick={handleClick}
+                  onClick={handleMenuItemClick}
                 >
-                  <MenuItemNumber aria-hidden={true}>01</MenuItemNumber>Home
+                  Home
                 </MenuItemLink>
               </MenuItem>
               <MenuItem>
@@ -308,22 +278,23 @@ const SiteHeader = ({ small }) => {
                   to="/blog"
                   activeClassName="active"
                   partiallyActive={true}
-                  onClick={handleClick}
+                  onClick={handleMenuItemClick}
                 >
-                  <MenuItemNumber aria-hidden={true}>02</MenuItemNumber>Articles
+                  Articles
                 </MenuItemLink>
               </MenuItem>
               <MenuItem>
                 <MenuItemLink
                   to="/about"
                   activeClassName="active"
-                  onClick={handleClick}
+                  onClick={handleMenuItemClick}
                 >
-                  <MenuItemNumber aria-hidden={true}>03</MenuItemNumber>About
+                  About
                 </MenuItemLink>
               </MenuItem>
             </MenuItemList>
           </MenuContent>
+          <ModeIcon onClick={handleModeToggleClick} />
         </Menu>
       </Container>
     </Header>

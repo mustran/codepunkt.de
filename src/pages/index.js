@@ -14,31 +14,41 @@ const Hero = styled.article`
 `
 
 const HeroTitle = styled.h1`
-  margin-bottom: 1rem;
+  margin-bottom: 0.86rem;
   font-size: 3.5rem;
 
   span {
     background: #efe0fb;
   }
 
-  @media only screen and (max-width: 450px) {
-    font-size: 2.3rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 2.6rem;
+  }
+
+  @media only screen and (max-width: 400px) {
+    font-size: 2rem;
   }
 `
 
 const HeroGreeting = styled.p`
   order: -1;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
+  margin-bottom: 0.86rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
 
-  @media only screen and (max-width: 450px) {
+  @media only screen and (max-width: 600px) {
+    font-size: 1.3rem;
+  }
+
+  @media only screen and (max-width: 400px) {
     font-size: 1rem;
   }
 `
 
 const HeroBody = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   margin-bottom: 0;
+  font-weight: 300;
 
   a {
     position: relative;
@@ -50,24 +60,38 @@ const HeroBody = styled.p`
       position: absolute;
       top: 0;
       left: 0;
+      right: 0;
       height: 100%;
       z-index: -1;
     }
     &::before {
       width: 100%;
-      background-image: linear-gradient(transparent calc(50%), #ddd 50%);
+      background-image: linear-gradient(transparent calc(65%), #eceeef 35%);
     }
     &::after {
-      width: 0%;
-      transition: width 0.1s ease-in;
-      background-image: linear-gradient(transparent calc(50%), #d7f0d0 50%);
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      transition: transform .3s cubic-bezier(.86,0,.07,1);
+    }
+    &:nth-of-type(1)::after {
+      background-image: linear-gradient(transparent calc(65%), #ffd2d2 35%);
+    }
+    &:nth-of-type(2)::after {
+      background-image: linear-gradient(transparent calc(65%), #b4fccd 35%);
+    }
+    &:nth-of-type(3)::after {
+      background-image: linear-gradient(transparent calc(65%), #a6ddff 35%);
     }
     &:hover::after {
-      width: 100%;
+      transform: scaleX(1);
     }
   }
 
-  @media only screen and (max-width: 450px) {
+  @media only screen and (max-width: 600px) {
+    font-size: 1.2rem;
+  }
+
+  @media only screen and (max-width: 400px) {
     font-size: 1rem;
   }
 `
@@ -95,7 +119,7 @@ const HomePage = () => {
             <span>Hello, my name is Christoph</span>
           </HeroGreeting>
           <HeroBody>
-            I'm a software architect and team lead at{' '}
+            I'm a software architect at{' '}
             <a
               href="https://dspace.com/"
               target="_blank"
@@ -103,8 +127,8 @@ const HomePage = () => {
             >
               dSPACE
             </a>
-            , where i coach and mentor product teams to build web applications.
-            I also write about web development on my{' '}
+            , where i coach and mentor teams that build web
+            applications. I also write about web development on my{' '}
             <Link to="/blog">Blog</Link> and on{' '}
             <a
               href="https://twitter.com/code_punkt"

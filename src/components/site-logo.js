@@ -42,9 +42,9 @@ const LogoLink = styled(Link)`
 
 const Logo = styled(LogoSvg)`
   font-size: 18px;
-  margin-top: 5px;
-    width: 160px;
-    height: 45px;
+  margin-top: 2px;
+  width: 160px;
+  height: 45px;
 
   path {
     fill: ${(props) => props.theme.colors.logo};

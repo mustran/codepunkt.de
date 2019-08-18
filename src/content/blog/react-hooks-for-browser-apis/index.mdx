@@ -5,22 +5,14 @@ created: 2019-02-02
 updated: 2019-07-26
 ---
 
-## Ohai
-
-123
+Here comes some code.
 
 ```jsx
-// src/utils/theme.js
-
 import { useState, useEffect } from 'react'
 
-/**
- * A hook to get and update the current theme for dark mode
- * @returns [theme, toggleTheme] - [current theme, func to toggle theme]
- */
 export const useTheme = () => {
   const storedTheme =
-    typeof window !== 'undefined' &&
+    (typeof window !== 'undefined') &
     window.localStorage.getItem('theme')
   const [theme, setTheme] = useState(
     storedTheme || 'light'

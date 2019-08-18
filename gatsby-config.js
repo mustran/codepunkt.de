@@ -82,7 +82,7 @@ module.exports = {
             resolve: 'gatsby-remark-vscode',
             options: {
               colorTheme: {
-                defaultTheme: 'Ayu Mirage', // 'Ayu Mirage'
+                defaultTheme: 'Solarized Light', // 'Ayu Mirage'
                 prefersDarkTheme: 'Ayu Dark',
               },
               injectStyles: true,

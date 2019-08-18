@@ -1,4 +1,3 @@
-import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { graphql, Link } from 'gatsby'
 import React from 'react'
@@ -23,7 +22,7 @@ const Article = styled.article`
 `
 
 const StyledPostMeta = styled(PostMeta)`
-  margin-bottom: calc(1.72rem / 2);
+  margin-bottom: 0.43rem;
 `
 
 const Content = styled.div`
@@ -55,21 +54,10 @@ const BlogIndex = (props) => {
             return (
               <Article key={id}>
                 <Link to={path}>
-                  <h2>
-                    <span
-                      css={css`
-                        background-image: linear-gradient(
-                          transparent calc(65%),
-                          #d9e2ff 35%
-                        );
-                      `}
-                    >
-                      {title}
-                    </span>
-                  </h2>
                   <StyledPostMeta>
                     {formatPostDate(updated)} • {timeToRead} min read
                   </StyledPostMeta>
+                  <h2>{title}</h2>
                   <p>{excerpt}</p>
                 </Link>
               </Article>
