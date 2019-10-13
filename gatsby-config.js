@@ -64,7 +64,7 @@ module.exports = {
               linkImagesToOriginal: false,
             },
           },
-          // copies relative referenced files other than jpg and png to
+          // copies re448fealative referenced files other than jpg and png to
           // the public folder and adjusts the references accordingly
           {
             resolve: 'gatsby-remark-copy-linked-files',
@@ -82,7 +82,7 @@ module.exports = {
             resolve: 'gatsby-remark-vscode',
             options: {
               colorTheme: {
-                defaultTheme: 'Ayu Mirage',
+                defaultTheme: 'Solarized Light', // 'Ayu Mirage'
                 prefersDarkTheme: 'Ayu Dark',
               },
               injectStyles: true,

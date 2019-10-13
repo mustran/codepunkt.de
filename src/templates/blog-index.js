@@ -21,8 +21,12 @@ const Article = styled.article`
   margin-bottom: calc(1.72rem * 2);
 `
 
-const PM = styled(PostMeta)`
-  margin-bottom: calc(1.72rem / 2);
+const StyledPostMeta = styled(PostMeta)`
+  margin-bottom: 0.43rem;
+`
+
+const Content = styled.div`
+  width: 100%;
 `
 
 const BlogIndex = (props) => {
@@ -36,51 +40,49 @@ const BlogIndex = (props) => {
   } = props
 
   return (
-    <SiteLayout>
-      {currentPage !== 1 && <Meta title="Blog" />}
-
-      {nodes.map(
-        ({
-          frontmatter: { title, created, updated },
-          id,
-          timeToRead,
-          excerpt,
-          fields: { path },
-        }) => {
-          return (
-            <Article key={id}>
-              <header>
+    <SiteLayout small filePath="src/templates/blog-index.js">
+      <Meta title="Blog — Codepunkt" />
+      <Content>
+        {nodes.map(
+          ({
+            frontmatter: { title, created, updated },
+            id,
+            timeToRead,
+            excerpt,
+            fields: { path },
+          }) => {
+            return (
+              <Article key={id}>
                 <Link to={path}>
+                  <StyledPostMeta>
+                    {formatPostDate(updated)} • {timeToRead} min read
+                  </StyledPostMeta>
                   <h2>{title}</h2>
+                  <p>{excerpt}</p>
                 </Link>
-                <PM>
-                  {formatPostDate(updated)} • {timeToRead} min read
-                </PM>
-              </header>
-              <p>{excerpt}</p>
-              <Link to={path}>View Article</Link>
-            </Article>
-          )
-        }
-      )}
-      <nav aria-label="pagination">
-        <PaginationList>
-          {hasPreviousPage && (
-            <PaginationListItem>
-              <Link
-                to={currentPage === 2 ? '/blog' : `/blog/${currentPage - 1}`}
-              >
-                Newer Posts
-              </Link>
-            </PaginationListItem>
-          )}
-          {hasNextPage && (
-            <PaginationListItem>
-              <Link to={`/blog/${currentPage + 1}`}>Older Posts</Link>
-            </PaginationListItem>
-          )}
-        </PaginationList>
-      </nav>
+              </Article>
+            )
+          }
+        )}
+        <nav aria-label="pagination">
+          <PaginationList>
+            {hasPreviousPage && (
+              <PaginationListItem>
+                <Link
+                  to={currentPage === 2 ? '/blog' : `/blog/${currentPage - 1}`}
+                >
+                  Newer Posts
+                </Link>
+              </PaginationListItem>
+            )}
+            {hasNextPage && (
+              <PaginationListItem>
+                <Link to={`/blog/${currentPage + 1}`}>Older Posts</Link>
+              </PaginationListItem>
+            )}
+          </PaginationList>
+        </nav>
+      </Content>
     </SiteLayout>
   )
 }

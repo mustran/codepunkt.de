@@ -20,6 +20,16 @@ const Article = styled.article`
   ${linkStyle}
   ${quoteStyle}
   ${twitterStyle}
+  width: 100%;
+`
+
+const Header = styled.header`
+display: flex;
+flex-direction: column;
+`
+
+const Headline = styled.h1`
+  order: 2;
 `
 
 const BlogPost = (props) => {
@@ -34,30 +44,27 @@ const BlogPost = (props) => {
     },
   } = props
 
-  const editLink = `https://github.com/codepunkt/codepunkt.de/edit/master/src/content${path}index.mdx`
   const discussLink = `https://mobile.twitter.com/search?q=${encodeURIComponent(
     `https://codepunkt.de${path}`
   )}`
 
   return (
-    <SiteLayout>
+    <SiteLayout small filePath={`src/content${path}index.mdx`}>
       <Meta title={title} />
       <Article>
-        <header>
-          <h1>{title}</h1>
+        <Header>
+          <Headline>
+            {title}
+          </Headline>
           <PostMeta>
             {formatPostDate(updated)} • {timeToRead} min read
           </PostMeta>
-        </header>
+        </Header>
         <MDXRenderer>{body}</MDXRenderer>
         <footer>
           <p>
             <a href={discussLink} rel="noopener noreferrer" target="_blank">
               Discuss on Twitter
-            </a>
-            {` • `}
-            <a href={editLink} rel="noopener noreferrer" target="_blank">
-              Edit on GitHub
             </a>
           </p>
         </footer>

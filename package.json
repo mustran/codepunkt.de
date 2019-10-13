@@ -14,6 +14,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
+    "@loadable/component": "^5.10.2",
     "@mdx-js/mdx": "1.0.24",
     "@mdx-js/react": "^1.0.23",
     "@weknow/gatsby-remark-twitter": "^0.2.1",
@@ -42,11 +43,12 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
+    "react-media": "^1.9.2",
     "react-typography": "^0.16.19",
     "rehype-autolink-headings": "^2.0.5",
     "rehype-slug": "^2.0.3",
     "remark-external-links": "^5.0.0",
-    "typeface-lato": "^0.0.54",
+    "typeface-fira-mono": "^0.0.72",
     "typeface-merriweather": "^0.0.72",
     "typography": "^0.16.19"
   },
