@@ -6,7 +6,7 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.snippetSuggestions": "top",
-    "prettier.eslintIntegration": true,
+    "editor.codeLens": true,
     "eslint.autoFixOnSave": true,
     "eslint.alwaysShowStatus": true,
     "eslint.packageManager": "yarn",
@@ -20,7 +20,11 @@
     },
     "terminal.integrated.shell.linux": "/bin/zsh"
   },
-  "postCreateCommand": "yarn",
+  "runArgs": [
+    "-v",
+    "${env:HOME}${env:USERPROFILE}/.ssh:/root/.ssh-localhost:ro"
+  ],
+  "postCreateCommand": "mkdir -p /root/.ssh && cp -r /root/.ssh-localhost/* /root/.ssh && chmod 700 /root/.ssh && chmod 600 /root/.ssh/* && yarn",
   "extensions": [
     "cssho.vscode-svgviewer",
     "christian-kohler.npm-intellisense",
