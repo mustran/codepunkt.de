@@ -20,11 +20,17 @@
     },
     "terminal.integrated.shell.linux": "/bin/zsh"
   },
+  "workspaceMount": "src=${localWorkspaceFolder},dst=/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/workspace",
   "runArgs": [
+    "-u",
+    "node",
     "-v",
-    "${env:HOME}${env:USERPROFILE}/.ssh:/root/.ssh-localhost:ro"
+    "${env:HOME}${env:USERPROFILE}/.ssh:/home/node/.ssh-localhost:ro",
+    "-v",
+    "codepunkt.de-node_modules:/workspace/node_modules"
   ],
-  "postCreateCommand": "mkdir -p /root/.ssh && cp -r /root/.ssh-localhost/* /root/.ssh && chmod 700 /root/.ssh && chmod 600 /root/.ssh/* && yarn",
+  "postCreateCommand": "sudo chown node:node node_modules && mkdir -p /home/node/.ssh && cp -r /home/node/.ssh-localhost/* /home/node/.ssh && chmod 700 /home/node/.ssh && chmod 600 /home/node/.ssh/* && yarn",
   "extensions": [
     "cssho.vscode-svgviewer",
     "christian-kohler.npm-intellisense",
