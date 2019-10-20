@@ -21,10 +21,17 @@ RUN apt-get update \
     && apt-get update \
     && apt-get -y install --no-install-recommends yarn zsh \
     #
+    # Sudo support for non-root user
+    && apt-get -y install sudo \
+    && echo node ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/node \
+    && chmod 0440 /etc/sudoers.d/node \
+    #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+USER node
 
 # Configure and install zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" \
@@ -32,7 +39,7 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh
     && mkdir -p "$HOME/.zsh" \
     && git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure" \
     && echo 'fpath+=("$HOME/.zsh/pure")\n\
-export ZSH="/root/.oh-my-zsh"\n\
+export ZSH="/home/node/.oh-my-zsh"\n\
 ZSH_THEME=""\n\
 plugins=(git)\n\
 source $ZSH/oh-my-zsh.sh\n\
