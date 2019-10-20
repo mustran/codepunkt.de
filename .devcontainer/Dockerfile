@@ -19,12 +19,27 @@ RUN apt-get update \
     && curl -sS https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/pubkey.gpg | apt-key add - 2>/dev/null \
     && echo "deb https://dl.yarnpkg.com/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
-    && apt-get -y install --no-install-recommends yarn \
+    && apt-get -y install --no-install-recommends yarn zsh \
     #
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
+# Configure and install zsh
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" \
+    # Install and set up pure prompt
+    && mkdir -p "$HOME/.zsh" \
+    && git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure" \
+    && echo 'fpath+=("$HOME/.zsh/pure")\n\
+export ZSH="/root/.oh-my-zsh"\n\
+ZSH_THEME=""\n\
+plugins=(git)\n\
+source $ZSH/oh-my-zsh.sh\n\
+autoload -U promptinit; promptinit \n\
+prompt pure' > "$HOME/.zshrc"
+
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
+
+CMD ["zsh"]

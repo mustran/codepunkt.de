@@ -17,7 +17,8 @@
     },
     "eslint.options": {
       "configFile": ".eslintrc.js"
-    }
+    },
+    "terminal.integrated.shell.linux": "/bin/zsh"
   },
   "postCreateCommand": "yarn",
   "extensions": [
