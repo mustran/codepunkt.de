@@ -109,6 +109,9 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-emotion',
+    'gatsby-plugin-preact',
+    // removes clientside javascript from prod builds
+    // { resolve: 'gatsby-plugin-no-javascript' },
     {
       resolve: 'gatsby-plugin-typography',
       options: {
