@@ -109,6 +109,8 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-emotion',
+    // replaces react with preact in production builds
+    'gatsby-plugin-preact',
     {
       resolve: 'gatsby-plugin-typography',
       options: {

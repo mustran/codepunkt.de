@@ -93,7 +93,6 @@ export const query = graphql`
   query mdxPostList($ids: [String]) {
     allMdx(filter: { id: { in: $ids } }) {
       nodes {
-        body
         excerpt
         fields {
           path
