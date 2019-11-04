@@ -42,6 +42,7 @@ exports.createPages = ({ graphql, actions }) => {
         component: path.resolve('./src/templates/blog-post.js'),
         context: {
           id: node.id,
+          permaLink: `https://codepunkt.de${node.fields.path}`,
         },
       })
     })

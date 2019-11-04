@@ -1,22 +1,35 @@
+import { keyframes } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import React, { useState } from 'react'
 import Media from 'react-media'
-import fadeUpIn from '../style/animations/fade-up-in'
-import SiteLogo from './site-logo'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
+import fadeUpIn from '../style/animations/fade-up-in'
+import SiteLogo from './site-logo'
+
+const slideInDown = keyframes`
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+`
 
 const Header = styled.header`
-  position: fixed;
+  margin: 0 0 70px;
   width: 100%;
-  background: #fcfdff;
-  border-bottom: 1px solid #e5e8eb;
   height: 70px;
   z-index: 3;
-  top: 0;
   display: flex;
   align-items: center;
+
+  &.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    border-bottom: 2px solid #eeeef0;
+    margin: 0;
+    animation: ${slideInDown} 420ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
 `
 
 const Container = styled.div`
@@ -241,16 +254,16 @@ const MenuBackground = styled.div`
   }
 `
 
-const SiteHeader = ({ small }) => {
+const SiteHeader = ({ small, isHeaderFixed }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const handleMenuItemClick = () => isMenuOpen && setIsMenuOpen(false)
-  const handleModeToggleClick = () => setIsDarkMode(isDarkMode => !isDarkMode)
+  const handleModeToggleClick = () => setIsDarkMode((isDarkMode) => !isDarkMode)
 
   const ModeIcon = isDarkMode ? MoonIcon : SunIcon
 
   return (
-    <Header>
+    <Header className={isHeaderFixed ? 'fixed' : ''}>
       <Container small={small}>
         <SiteLogo />
         <Media

@@ -2,8 +2,9 @@ import styled from '@emotion/styled'
 import { graphql, Link } from 'gatsby'
 import React from 'react'
 import Meta from '../components/meta'
-import PostMeta from '../components/post-meta'
 import SiteLayout from '../components/site-layout'
+import CalendarIcon from '../images/calendar.svg'
+import CoffeeIcon from '../images/coffee.svg'
 import { formatPostDate } from '../utils'
 
 const PaginationList = styled.ol`
@@ -17,16 +18,40 @@ const PaginationListItem = styled.li`
   padding: 0;
 `
 
-const Article = styled.article`
+const Card = styled.article`
   margin-bottom: calc(1.72rem * 2);
 `
 
-const StyledPostMeta = styled(PostMeta)`
-  margin-bottom: 0.43rem;
+const CardFooter = styled.footer`
+  ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    font-size: 14px;
+  }
+  li {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    &:not(:last-child) {
+      margin-right: 16px;
+    }
+  }
+  svg {
+    margin-right: 4px;
+  }
 `
 
 const Content = styled.div`
   width: 100%;
+`
+
+const Icon = styled.svg`
+  width: 20px;
+  stroke: #448fea;
+  stroke-width: 1;
 `
 
 const BlogIndex = (props) => {
@@ -52,15 +77,24 @@ const BlogIndex = (props) => {
             fields: { path },
           }) => {
             return (
-              <Article key={id}>
+              <Card key={id}>
                 <Link to={path}>
-                  <StyledPostMeta>
-                    {formatPostDate(updated)} • {timeToRead} min read
-                  </StyledPostMeta>
                   <h2>{title}</h2>
-                  <p>{excerpt}</p>
                 </Link>
-              </Article>
+                <p>{excerpt}</p>
+                <CardFooter>
+                  <ul>
+                    <li>
+                      <Icon as={CalendarIcon} />
+                      {formatPostDate(updated)}
+                    </li>
+                    <li>
+                      <Icon as={CoffeeIcon} />
+                      {timeToRead} min read
+                    </li>
+                  </ul>
+                </CardFooter>
+              </Card>
             )
           }
         )}
@@ -93,7 +127,7 @@ export const query = graphql`
   query mdxPostList($ids: [String]) {
     allMdx(filter: { id: { in: $ids } }) {
       nodes {
-        excerpt
+        excerpt(pruneLength: 288)
         fields {
           path
         }

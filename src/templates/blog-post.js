@@ -21,31 +21,44 @@ const Article = styled.article`
   ${quoteStyle}
   ${twitterStyle}
   width: 100%;
+  /* make heading links on small screens fit next to the
+     heading content without wrapping */
+  @media only screen and (max-width: 879px) {
+    h1, h2, h3, h4, h5, h6 {
+      margin-right: 40px;
+    }
+  }
 `
 
 const Header = styled.header`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `
 
 const Headline = styled.h1`
   order: 2;
 `
 
+const baseUrl = 'https://github.com/codepunkt/codepunkt.de/edit/master'
+
 const BlogPost = (props) => {
   const {
     path,
+    pageContext: { permaLink },
     data: {
       mdx: {
         body,
-        frontmatter: { author, created, updated, title },
+        frontmatter: { updated, title },
         timeToRead,
       },
+      allWebMentionEntry: { edges: webmentions },
     },
   } = props
 
+  console.log(webmentions)
+
   const discussLink = `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `https://codepunkt.de${path}`
+    permaLink
   )}`
 
   return (
@@ -83,7 +96,7 @@ const BlogPost = (props) => {
 export default BlogPost
 
 export const query = graphql`
-  query mdxPostDetails($id: String) {
+  query mdxPostDetails($permaLink: String, $id: String) {
     mdx(id: { eq: $id }) {
       body
       frontmatter {
@@ -93,6 +106,28 @@ export const query = graphql`
         updated
       }
       timeToRead
+    }
+    allWebMentionEntry(filter: { wmTarget: { eq: $permaLink } }) {
+      edges {
+        node {
+          wmTarget
+          wmSource
+          wmProperty
+          wmId
+          type
+          url
+          likeOf
+          author {
+            url
+            type
+            photo
+            name
+          }
+          content {
+            text
+          }
+        }
+      }
     }
   }
 `

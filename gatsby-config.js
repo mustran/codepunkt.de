@@ -25,6 +25,20 @@ module.exports = {
     },
     { resolve: 'gatsby-plugin-react-svg' },
     {
+      resolve: 'gatsby-plugin-webmention',
+      options: {
+        username: 'codepunkt.de',
+        identity: {
+          github: 'codepunkt',
+          twitter: 'code_punkt',
+        },
+        mentions: true,
+        pingbacks: true,
+        domain: 'codepunkt.de',
+        token: process.env.WEBMENTIONS_TOKEN,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.mdx'],

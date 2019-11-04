@@ -53,23 +53,8 @@ export const codeStyle = css`
       }
     }
 
-    *:not(.vscode-highlight-line-highlighted)
-      + .vscode-highlight-line-highlighted,
-    .vscode-highlight-line-highlighted:first-of-type {
-      border-top: 1px solid #5e7592;
-    }
-
-    .vscode-highlight-line-highlighted
-      + *:not(.vscode-highlight-line-highlighted) {
-      border-top: 1px solid #5e7592;
-    }
-
-    .vscode-highlight-line-highlighted:last-of-type {
-      border-bottom: 1px solid #5e7592;
-    }
-
     .vscode-highlight-line-highlighted {
-      background-color: #2d3846;
+      background-color: #f9f3e6;
     }
 
     @media (prefers-color-scheme: dark) {
