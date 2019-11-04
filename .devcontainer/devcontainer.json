@@ -26,7 +26,7 @@
     "-u",
     "node",
     "-v",
-    "${env:HOME}${env:USERPROFILE}/.ssh:/home/node/.ssh-localhost:ro",
+    "${env:USERPROFILE}/.ssh:/home/node/.ssh-localhost:ro",
     "-v",
     "codepunkt.de-node_modules:/workspace/node_modules"
   ],

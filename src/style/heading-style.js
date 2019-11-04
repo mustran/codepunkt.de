@@ -11,13 +11,21 @@ export const headingStyle = css`
     > a {
       width: 16px;
       height: 16px;
-      background-image: url(/icons/link.svg);
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 16px;
       padding: 0 20px;
       box-shadow: none;
       display: inline-block;
+      background-image: url(/icons/link.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 0;
+    }
+    @media (hover: none) {
+      > a {
+        background-size: 16px;
+      }
+    }
+    &:hover > a {
+      background-size: 16px;
     }
 
     /* On larger screens, show heading links positioned to the left of
@@ -33,5 +41,9 @@ export const headingStyle = css`
         height: 100%;
       }
     }
+  }
+
+  header h1 > a {
+    background-image: url(/icons/pullrequest.svg);
   }
 `

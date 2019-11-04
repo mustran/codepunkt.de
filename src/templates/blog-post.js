@@ -55,6 +55,13 @@ const BlogPost = (props) => {
         <Header>
           <Headline>
             {title}
+            {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
+            <a
+              aria-label="Edit this page on GitHub"
+              aria-hidden="true"
+              title="Edit this page on GitHub"
+              href={`${baseUrl}/src/content${path}index.mdx`}
+            ></a>
           </Headline>
           <PostMeta>
             {formatPostDate(updated)} • {timeToRead} min read

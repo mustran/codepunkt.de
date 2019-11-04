@@ -50,7 +50,7 @@ module.exports = {
             require('rehype-autolink-headings'),
             {
               behavior: 'append',
-              properties: { ariaHidden: true },
+              properties: { ariaHidden: true, title: 'Link to this section' },
               content: [],
             },
           ],
