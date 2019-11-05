@@ -25,6 +25,10 @@ module.exports = {
     },
     { resolve: 'gatsby-plugin-react-svg' },
     {
+      resolve: 'gatsby-plugin-webpack-bundle-analyzer',
+      options: { production: true, analyzerMode: 'static' },
+    },
+    {
       resolve: 'gatsby-plugin-webmention',
       options: {
         username: 'codepunkt.de',

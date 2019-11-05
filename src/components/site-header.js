@@ -1,35 +1,24 @@
-import { keyframes } from '@emotion/core'
 import styled from '@emotion/styled'
+import { motion, useAnimation } from 'framer-motion'
 import { Link } from 'gatsby'
 import React, { useState } from 'react'
 import Media from 'react-media'
+import { useWindowScroll } from 'react-use'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
 import fadeUpIn from '../style/animations/fade-up-in'
 import SiteLogo from './site-logo'
 
-const slideInDown = keyframes`
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(0); }
-`
-
-const Header = styled.header`
-  margin: 0 0 70px;
+const Header = styled(motion.header)`
   width: 100%;
   height: 70px;
   z-index: 3;
   display: flex;
   align-items: center;
-
-  &.fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: #fff;
-    border-bottom: 2px solid #eeeef0;
-    margin: 0;
-    animation: ${slideInDown} 420ms cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
+  position: absolute;
+  background: #fff;
+  border-bottom: 1px solid #fff;
+  top: 0;
 `
 
 const Container = styled.div`
@@ -268,14 +257,50 @@ const ModeButton = styled.button`
   }
 `
 
-const SiteHeader = ({ small, isHeaderFixed }) => {
+const SiteHeader = ({ small }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const handleMenuItemClick = () => isMenuOpen && setIsMenuOpen(false)
   const handleModeToggleClick = () => setIsDarkMode((isDarkMode) => !isDarkMode)
 
+  const headerAnimation = useAnimation()
+  const { y } = useWindowScroll()
+  const [headerState, setHeaderState] = useState('initial')
+
+  React.useEffect(() => {
+    if (headerState !== 'fixed' && y > 250) {
+      setHeaderState('fixed')
+    }
+    if (headerState === 'fixed' && y < 25) {
+      setHeaderState('static')
+    }
+  }, [headerState, y])
+
+  React.useEffect(() => {
+    const animateHeader = async () => {
+      if (headerState === 'fixed') {
+        await headerAnimation.start(
+          { y: '-100%', position: 'fixed' },
+          { duration: 0 }
+        )
+        await headerAnimation.start({ y: 0, borderBottomColor: '#ddd' })
+      } else if (headerState === 'static') {
+        await headerAnimation.start(
+          { position: 'absolute', y: 25 },
+          { duration: 0 }
+        )
+        await headerAnimation.start({
+          borderBottomColor: '#fff',
+          y: 0,
+        })
+      }
+    }
+
+    animateHeader()
+  }, [headerAnimation, headerState])
+
   return (
-    <Header className={isHeaderFixed ? 'fixed' : ''}>
+    <Header animate={headerAnimation} transition={{ type: 'tween' }}>
       <Container small={small}>
         <SiteLogo />
         <Media
