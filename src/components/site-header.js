@@ -1,5 +1,5 @@
+import { keyframes } from '@emotion/core'
 import styled from '@emotion/styled'
-import { motion, useAnimation } from 'framer-motion'
 import { Link } from 'gatsby'
 import React, { useState } from 'react'
 import Media from 'react-media'
@@ -9,7 +9,17 @@ import SunIcon from '../images/sun.svg'
 import fadeUpIn from '../style/animations/fade-up-in'
 import SiteLogo from './site-logo'
 
-const Header = styled(motion.header)`
+const headerIn = keyframes`
+  0% { transform: translateY(-100%); border-bottom-color: #fff; }
+  100% { transform: translateY(0); border-bottom-color: #ddd }
+`
+
+const headerOut = keyframes`
+  0% { transform: translateY(25px); border-bottom-color: #ddd; }
+  100% { transform: translateY(0); border-bottom-color: #fff }
+`
+
+const Header = styled.header`
   width: 100%;
   height: 70px;
   z-index: 3;
@@ -19,6 +29,15 @@ const Header = styled(motion.header)`
   background: #fff;
   border-bottom: 1px solid #fff;
   top: 0;
+
+  &.fixed {
+    position: fixed;
+    animation: ${headerIn} 0.4s ease-out forwards;
+  }
+
+  &.static {
+    animation: ${headerOut} 0.2s ease-out forwards;
+  }
 `
 
 const Container = styled.div`
@@ -263,7 +282,6 @@ const SiteHeader = ({ small }) => {
   const handleMenuItemClick = () => isMenuOpen && setIsMenuOpen(false)
   const handleModeToggleClick = () => setIsDarkMode((isDarkMode) => !isDarkMode)
 
-  const headerAnimation = useAnimation()
   const { y } = useWindowScroll()
   const [headerState, setHeaderState] = useState('initial')
 
@@ -276,31 +294,8 @@ const SiteHeader = ({ small }) => {
     }
   }, [headerState, y])
 
-  React.useEffect(() => {
-    const animateHeader = async () => {
-      if (headerState === 'fixed') {
-        await headerAnimation.start(
-          { y: '-100%', position: 'fixed' },
-          { duration: 0 }
-        )
-        await headerAnimation.start({ y: 0, borderBottomColor: '#ddd' })
-      } else if (headerState === 'static') {
-        await headerAnimation.start(
-          { position: 'absolute', y: 25 },
-          { duration: 0 }
-        )
-        await headerAnimation.start({
-          borderBottomColor: '#fff',
-          y: 0,
-        })
-      }
-    }
-
-    animateHeader()
-  }, [headerAnimation, headerState])
-
   return (
-    <Header animate={headerAnimation} transition={{ type: 'tween' }}>
+    <Header className={headerState !== 'initial' ? headerState : ''}>
       <Container small={small}>
         <SiteLogo />
         <Media
