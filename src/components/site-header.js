@@ -34,7 +34,7 @@ const Header = styled.header`
 
 const Container = styled.div`
   max-width: ${(props) => (props.small ? 768 : 1200)}px;
-  margin: 1em auto 1rem auto;
+  margin: 1rem auto 1rem auto;
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -126,15 +126,13 @@ const MenuItemLink = styled(Link)`
 
 const MenuIcon = styled.button`
   border: 0 none;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   position: absolute;
   right: calc(5% - 5px);
-  top: 20px;
-  background: transparent;
+  background: lime;
   padding: 0;
   cursor: pointer;
-  outline: none;
   z-index: 99;
 
   @media only screen and (min-width: 668px) {
@@ -147,8 +145,8 @@ const MenuIcon = styled.button`
     content: '';
     background: #4b4237;
     width: 22px;
-    height: 3px;
-    left: 4px;
+    height: 1px;
+    left: 7px;
     border-radius: 5px;
     transition: all 150ms ease;
     ${Menu}.open & {
@@ -161,13 +159,13 @@ const MenuIcon = styled.button`
   }
 
   &::before {
-    top: 7px;
+    top: 10px;
     ${Menu}.open & {
       transform: translate3d(0, -50%, 0) rotate(45deg);
     }
   }
   &::after {
-    top: 21px;
+    top: 24px;
     ${Menu}.open & {
       transform: translate3d(0, -50%, 0) rotate(135deg);
     }
@@ -175,10 +173,10 @@ const MenuIcon = styled.button`
 `
 
 const MenuIconBar = styled.div`
-  width: 30px;
-  height: 3px;
+  width: 36px;
+  height: 1px;
   position: absolute;
-  top: 14px;
+  top: 17px;
   text-indent: -9999px;
 
   &::before,
@@ -187,7 +185,7 @@ const MenuIconBar = styled.div`
     position: absolute;
     content: '';
     width: 11px;
-    height: 3px;
+    height: 1px;
     background: #4b4237;
     ${Menu}.open & {
       width: 0;
@@ -254,13 +252,27 @@ const MenuBackground = styled.div`
   }
 `
 
+const ModeButton = styled.button`
+  border: 0;
+  background: papayawhip;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  width: 36px;
+  z-index: 99;
+
+  @media only screen and (max-width: 667px) {
+    position: absolute;
+    right: calc(5% + 40px);
+  }
+`
+
 const SiteHeader = ({ small, isHeaderFixed }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const handleMenuItemClick = () => isMenuOpen && setIsMenuOpen(false)
   const handleModeToggleClick = () => setIsDarkMode((isDarkMode) => !isDarkMode)
-
-  const ModeIcon = isDarkMode ? MoonIcon : SunIcon
 
   return (
     <Header className={isHeaderFixed ? 'fixed' : ''}>
@@ -288,7 +300,7 @@ const SiteHeader = ({ small, isHeaderFixed }) => {
               </MenuItem>
               <MenuItem>
                 <MenuItemLink
-                  to="/blog"
+                  to="/articles"
                   activeClassName="active"
                   partiallyActive={true}
                   onClick={handleMenuItemClick}
@@ -307,7 +319,9 @@ const SiteHeader = ({ small, isHeaderFixed }) => {
               </MenuItem>
             </MenuItemList>
           </MenuContent>
-          <ModeIcon onClick={handleModeToggleClick} />
+          <ModeButton onClick={handleModeToggleClick}>
+            {isDarkMode ? <MoonIcon /> : <SunIcon />}
+          </ModeButton>
         </Menu>
       </Container>
     </Header>

@@ -5,18 +5,18 @@ import SiteLayout from '../components/site-layout'
 
 const AboutPage = ({ small }) => {
   return (
-    <SiteLayout small filePath="src/pages/about.js">
+    <SiteLayout small>
       <Meta title="About Me — Codepunkt" />
       <div>
         <h1>
-          <span
-            css={css`
-            `}
-          >
-            Hey there!
-          </span>
+          <span css={css``}>Hey there!</span>
         </h1>
-        <article css={css`font-weight: 300;font-size:1.2rem;`}>
+        <article
+          css={css`
+            font-weight: 300;
+            font-size: 1.2rem;
+          `}
+        >
           <p>
             I'm Christoph Werner, a full-stack web developer based in Paderborn,
             Germany. I've been building stuff on the web for the last 20 years,

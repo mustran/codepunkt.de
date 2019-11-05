@@ -7,7 +7,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === 'Mdx') {
     const value = createFilePath({ node, getNode })
-    createNodeField({ node, name: 'path', value: `/blog${value}` })
+    createNodeField({ node, name: 'path', value: `/articles${value}` })
   }
 }
 
@@ -52,7 +52,7 @@ exports.createPages = ({ graphql, actions }) => {
       const currentPage = i + 1
 
       createPage({
-        path: currentPage === 1 ? `/blog/` : `/blog/${currentPage}/`,
+        path: currentPage === 1 ? `/articles/` : `/articles/${currentPage}/`,
         component: path.resolve('./src/templates/blog-index.js'),
         context: {
           pageInfo: {

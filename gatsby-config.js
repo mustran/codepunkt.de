@@ -4,7 +4,7 @@ module.exports = {
   siteMetadata: {
     title: 'Codepunkt',
     description:
-      'Personal blog by Christoph Werner. I write about web development topics.',
+      'Personal site of Christoph Werner. I write about web development topics.',
     author: '@code_punkt',
     lang: 'en',
   },
@@ -13,7 +13,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'posts',
-        path: `${__dirname}/src/content/blog`,
+        path: `${__dirname}/src/content/articles`,
       },
     },
     {

@@ -2,10 +2,8 @@ import styled from '@emotion/styled'
 import { graphql, Link } from 'gatsby'
 import React from 'react'
 import Meta from '../components/meta'
+import PostMeta from '../components/post-meta'
 import SiteLayout from '../components/site-layout'
-import CalendarIcon from '../images/calendar.svg'
-import CoffeeIcon from '../images/coffee.svg'
-import { formatPostDate } from '../utils'
 
 const PaginationList = styled.ol`
   list-style-type: none;
@@ -18,29 +16,15 @@ const PaginationListItem = styled.li`
   padding: 0;
 `
 
-const Card = styled.article`
-  margin-bottom: calc(1.72rem * 2);
-`
-
-const CardFooter = styled.footer`
-  ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    font-size: 14px;
+const ArticlePreview = styled.article`
+  &:not(:last-child) {
+    margin-bottom: 3.44rem;
   }
-  li {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    &:not(:last-child) {
-      margin-right: 16px;
-    }
+  p {
+    margin-bottom: 0.86rem;
   }
-  svg {
-    margin-right: 4px;
+  h3 {
+    margin-bottom: 0.86rem;
   }
 `
 
@@ -48,11 +32,7 @@ const Content = styled.div`
   width: 100%;
 `
 
-const Icon = styled.svg`
-  width: 20px;
-  stroke: #448fea;
-  stroke-width: 1;
-`
+const isProduction = process.env.NODE_ENV === 'production'
 
 const BlogIndex = (props) => {
   const {
@@ -64,46 +44,47 @@ const BlogIndex = (props) => {
     },
   } = props
 
+  const articles = nodes.filter((node) =>
+    isProduction ? !node.frontmatter.draft : true
+  )
+
   return (
-    <SiteLayout small filePath="src/templates/blog-index.js">
-      <Meta title="Blog — Codepunkt" />
+    <SiteLayout small>
+      <Meta title="Articles — Codepunkt" />
       <Content>
-        {nodes.map(
-          ({
-            frontmatter: { title, created, updated },
+        {articles.map((article) => {
+          const {
+            frontmatter: { draft, created, updated, title },
             id,
-            timeToRead,
             excerpt,
+            timeToRead,
             fields: { path },
-          }) => {
-            return (
-              <Card key={id}>
-                <Link to={path}>
-                  <h2>{title}</h2>
-                </Link>
-                <p>{excerpt}</p>
-                <CardFooter>
-                  <ul>
-                    <li>
-                      <Icon as={CalendarIcon} />
-                      {formatPostDate(updated)}
-                    </li>
-                    <li>
-                      <Icon as={CoffeeIcon} />
-                      {timeToRead} min read
-                    </li>
-                  </ul>
-                </CardFooter>
-              </Card>
-            )
-          }
-        )}
+          } = article
+          return (
+            <ArticlePreview key={id}>
+              <Link to={path}>
+                <h3>{title}</h3>
+              </Link>
+              <p>{excerpt}</p>
+              <PostMeta
+                draft={draft}
+                created={created}
+                updated={updated}
+                timeToRead={timeToRead}
+              />
+            </ArticlePreview>
+          )
+        })}
         <nav aria-label="pagination">
           <PaginationList>
             {hasPreviousPage && (
               <PaginationListItem>
                 <Link
-                  to={currentPage === 2 ? '/blog' : `/blog/${currentPage - 1}`}
+                  to={
+                    currentPage === 2
+                      ? '/article'
+                      : `/article/${currentPage - 1}`
+                  }
                 >
                   Newer Posts
                 </Link>
@@ -111,7 +92,7 @@ const BlogIndex = (props) => {
             )}
             {hasNextPage && (
               <PaginationListItem>
-                <Link to={`/blog/${currentPage + 1}`}>Older Posts</Link>
+                <Link to={`/article/${currentPage + 1}`}>Older Posts</Link>
               </PaginationListItem>
             )}
           </PaginationList>
@@ -127,7 +108,7 @@ export const query = graphql`
   query mdxPostList($ids: [String]) {
     allMdx(filter: { id: { in: $ids } }) {
       nodes {
-        excerpt(pruneLength: 288)
+        excerpt(pruneLength: 144)
         fields {
           path
         }
@@ -136,6 +117,7 @@ export const query = graphql`
           created
           title
           updated
+          draft
         }
         id
         timeToRead

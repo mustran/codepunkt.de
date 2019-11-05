@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import React from 'react'
 import BookmarkIcon from '../images/bookmark.svg'
-import EditIcon from '../images/edit.svg'
 
 const Footer = styled.footer`
   padding: 1rem 0;
@@ -70,9 +69,7 @@ const Icon = styled.svg`
   }
 `
 
-const baseUrl = 'https://github.com/codepunkt/codepunkt.de/edit/master'
-
-const SiteFooter = ({ small, filePath }) => {
+const SiteFooter = ({ small }) => {
   return (
     <Footer>
       <Container small={small}>
@@ -80,16 +77,6 @@ const SiteFooter = ({ small, filePath }) => {
           <Link to="/legal">Legal Notice</Link>
         </Copyright>
         <Social>
-          <ExternalLink
-            href={`${baseUrl}/${filePath}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon as={EditIcon} />
-            <IconText>
-              Edit <span>on GitHub</span>
-            </IconText>
-          </ExternalLink>
           <ExternalLink
             href="https://github.com/codepunkt"
             target="_blank"

@@ -39,7 +39,7 @@ function Foo() {
   return <span>Foo!</span>
 }
 
-const SiteLayout = ({ children, small, filePath }) => {
+const SiteLayout = ({ children, small }) => {
   const { y } = useWindowScroll()
   const isHeaderFixed = y >= 250
 
@@ -54,7 +54,7 @@ const SiteLayout = ({ children, small, filePath }) => {
           <Main small={small} isHeaderFixed={isHeaderFixed}>
             {children}
           </Main>
-          <SiteFooter small={small} filePath={filePath} />
+          <SiteFooter small={small} />
         </Container>
       </MDXProvider>
     </ThemeProvider>

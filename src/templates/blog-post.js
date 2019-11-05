@@ -12,7 +12,6 @@ import {
   quoteStyle,
   twitterStyle,
 } from '../style'
-import { formatPostDate } from '../utils'
 
 const Article = styled.article`
   ${codeStyle}
@@ -36,7 +35,7 @@ const Header = styled.header`
 `
 
 const Headline = styled.h1`
-  order: 2;
+  margin-bottom: 0.43rem;
 `
 
 const baseUrl = 'https://github.com/codepunkt/codepunkt.de/edit/master'
@@ -48,7 +47,7 @@ const BlogPost = (props) => {
     data: {
       mdx: {
         body,
-        frontmatter: { updated, title },
+        frontmatter: { draft, created, updated, title },
         timeToRead,
       },
       allWebMentionEntry: { edges: webmentions },
@@ -62,7 +61,7 @@ const BlogPost = (props) => {
   )}`
 
   return (
-    <SiteLayout small filePath={`src/content${path}index.mdx`}>
+    <SiteLayout small>
       <Meta title={title} />
       <Article>
         <Header>
@@ -76,9 +75,13 @@ const BlogPost = (props) => {
               href={`${baseUrl}/src/content${path}index.mdx`}
             ></a>
           </Headline>
-          <PostMeta>
-            {formatPostDate(updated)} • {timeToRead} min read
-          </PostMeta>
+          <PostMeta
+            as="p"
+            draft={draft}
+            created={created}
+            updated={updated}
+            timeToRead={timeToRead}
+          />
         </Header>
         <MDXRenderer>{body}</MDXRenderer>
         <footer>
@@ -104,6 +107,7 @@ export const query = graphql`
         author
         created
         updated
+        draft
       }
       timeToRead
     }

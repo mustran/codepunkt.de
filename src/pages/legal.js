@@ -4,7 +4,7 @@ import Meta from '../components/meta'
 import SiteLayout from '../components/site-layout'
 
 const LegalPage = () => (
-  <SiteLayout small filePath="src/pages/legal.js">
+  <SiteLayout small>
     <div>
       <Meta title="Legal Notice — Codepunkt" />
       <h1>

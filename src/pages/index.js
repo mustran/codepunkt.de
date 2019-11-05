@@ -71,7 +71,7 @@ const HeroBody = styled.p`
     &::after {
       transform-origin: 0 50%;
       transform: scaleX(0);
-      transition: transform .3s cubic-bezier(.86,0,.07,1);
+      transition: transform 0.3s cubic-bezier(0.86, 0, 0.07, 1);
     }
     &:nth-of-type(1)::after {
       background-image: linear-gradient(transparent calc(65%), #ffd2d2 35%);
@@ -107,7 +107,7 @@ const BackgroundAnimation = loadable(() =>
 
 const HomePage = () => {
   return (
-    <SiteLayout small filePath="src/pages/index.js">
+    <SiteLayout small>
       <Meta title="Codepunkt" />
       <Hero>
         <BackgroundAnimation />
@@ -127,9 +127,9 @@ const HomePage = () => {
             >
               dSPACE
             </a>
-            , where i coach and mentor teams that build web
-            applications. I also write about web development on my{' '}
-            <Link to="/blog">Blog</Link> and on{' '}
+            , where i coach and mentor teams that build web applications. I also
+            write about web development on my <Link to="/articles">Blog</Link>{' '}
+            and on{' '}
             <a
               href="https://twitter.com/code_punkt"
               target="_blank"

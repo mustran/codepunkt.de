@@ -4,7 +4,7 @@ import Meta from '../components/meta'
 import SiteLayout from '../components/site-layout'
 
 const NotFoundPage = () => (
-  <SiteLayout small filePath="src/pages/404.js">
+  <SiteLayout small>
     <div>
       <Meta title="Not found — Codepunkt" />
       <h1>
