@@ -1,22 +1,21 @@
 import { graphql, Link } from 'gatsby'
-import { styled } from 'linaria/react'
+import { css } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
 import PostMeta from '../components/post-meta'
-import SiteLayout from '../components/site-layout'
 
-const PaginationList = styled.ol`
+const pagination = css`
   list-style-type: none;
   margin: 0;
   display: flex;
   justify-content: space-between;
 `
 
-const PaginationListItem = styled.li`
+const paginationItem = css`
   padding: 0;
 `
 
-const ArticlePreview = styled.article`
+const preview = css`
   &:not(:last-child) {
     margin-bottom: 3.44rem;
   }
@@ -28,8 +27,9 @@ const ArticlePreview = styled.article`
   }
 `
 
-const Content = styled.div`
+const content = css`
   width: 100%;
+  margin-top: 1.72rem;
 `
 
 const isProduction = process.env.NODE_ENV === 'production'
@@ -49,56 +49,52 @@ const BlogIndex = (props) => {
   )
 
   return (
-    <SiteLayout small>
+    <div className={content}>
       <Meta title="Articles — Codepunkt" />
-      <Content>
-        {articles.map((article) => {
-          const {
-            frontmatter: { draft, created, updated, title },
-            id,
-            excerpt,
-            timeToRead,
-            fields: { path },
-          } = article
-          return (
-            <ArticlePreview key={id}>
-              <Link to={path}>
-                <h3>{title}</h3>
+      {articles.map((article) => {
+        const {
+          frontmatter: { draft, created, updated, title },
+          id,
+          excerpt,
+          timeToRead,
+          fields: { path },
+        } = article
+        return (
+          <article className={preview} key={id}>
+            <Link to={path}>
+              <h3>{title}</h3>
+            </Link>
+            <p>{excerpt}</p>
+            <PostMeta
+              draft={draft}
+              created={created}
+              updated={updated}
+              timeToRead={timeToRead}
+            />
+          </article>
+        )
+      })}
+      <nav aria-label="pagination">
+        <ol className={pagination}>
+          {hasPreviousPage && (
+            <li className={paginationItem}>
+              <Link
+                to={
+                  currentPage === 2 ? '/article' : `/article/${currentPage - 1}`
+                }
+              >
+                Newer Posts
               </Link>
-              <p>{excerpt}</p>
-              <PostMeta
-                draft={draft}
-                created={created}
-                updated={updated}
-                timeToRead={timeToRead}
-              />
-            </ArticlePreview>
-          )
-        })}
-        <nav aria-label="pagination">
-          <PaginationList>
-            {hasPreviousPage && (
-              <PaginationListItem>
-                <Link
-                  to={
-                    currentPage === 2
-                      ? '/article'
-                      : `/article/${currentPage - 1}`
-                  }
-                >
-                  Newer Posts
-                </Link>
-              </PaginationListItem>
-            )}
-            {hasNextPage && (
-              <PaginationListItem>
-                <Link to={`/article/${currentPage + 1}`}>Older Posts</Link>
-              </PaginationListItem>
-            )}
-          </PaginationList>
-        </nav>
-      </Content>
-    </SiteLayout>
+            </li>
+          )}
+          {hasNextPage && (
+            <li className={paginationItem}>
+              <Link to={`/article/${currentPage + 1}`}>Older Posts</Link>
+            </li>
+          )}
+        </ol>
+      </nav>
+    </div>
   )
 }
 

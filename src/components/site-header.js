@@ -1,6 +1,5 @@
 import { Link } from 'gatsby'
-import { css } from 'linaria'
-import { styled } from 'linaria/react'
+import { css, cx } from 'linaria'
 import React, { useState } from 'react'
 import Media from 'react-media'
 import { useWindowScroll } from 'react-use'
@@ -8,17 +7,19 @@ import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
 import SiteLogo from './site-logo'
 
-const Header = styled.header`
+const header = css`
   width: 100%;
   height: 70px;
   z-index: 3;
   display: flex;
   align-items: center;
   position: absolute;
-  background: #fff;
+  background: transparent;
   border-bottom: 1px solid #fff;
   top: 0;
+`
 
+const headerFixed = css`
   @keyframes headerIn {
     from {
       transform: translateY(-100%);
@@ -30,6 +31,12 @@ const Header = styled.header`
     }
   }
 
+  position: fixed;
+  background: #fff;
+  animation: headerIn 0.4s ease-out forwards;
+`
+
+const headerStatic = css`
   @keyframes headerOut {
     from {
       transform: translateY(25px);
@@ -41,17 +48,10 @@ const Header = styled.header`
     }
   }
 
-  &.fixed {
-    position: fixed;
-    animation: headerIn 0.4s ease-out forwards;
-  }
-
-  &.static {
-    animation: headerOut 0.2s ease-out forwards;
-  }
+  animation: headerOut 0.2s ease-out forwards;
 `
 
-const Container = styled.div`
+const container = css`
   max-width: 768px;
   margin: 1rem auto 1rem auto;
   width: 90%;
@@ -60,36 +60,36 @@ const Container = styled.div`
   align-items: center;
 `
 
-const Menu = styled.nav`
+const menu = css`
   font-size: 18px;
   display: flex;
   align-items: center;
 `
 
-const MenuItem = styled.li`
+const menuItem = css`
   counter-increment: menu;
   margin: 0;
-
-  ${Menu}.open & {
-    display: block;
-    width: 100%;
-  }
 `
 
-const MenuItemList = styled.ol`
+const menuItemOpen = css`
+  display: block;
+  width: 100%;
+`
+
+const menuItemList = css`
   counter-reset: menu;
   list-style-type: none;
   display: flex;
   margin: 0;
   height: 100%;
   align-items: center;
+`
 
+const menuItemListOpen = css`
   @media only screen and (max-width: 667px) {
-    ${Menu}.open & {
-      flex: 1 0 auto;
-      justify-content: center;
-      flex-direction: column;
-    }
+    flex: 1 0 auto;
+    justify-content: center;
+    flex-direction: column;
   }
 `
 
@@ -137,12 +137,24 @@ const link = css`
       transform: translateY(0);
     }
   }
+`
 
-  ${Menu}.open & {
-    transition: none;
-    animation: fadeUpIn 0.2s ease-out 0.25s forwards;
+const linkOpen = css`
+  @keyframes fadeUpIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
+  transition: none;
+  animation: fadeUpIn 0.2s ease-out 0.25s forwards;
+`
+/* 
   ${Menu}.open li:nth-of-type(1) & {
     animation-delay: 0.25s;
   }
@@ -151,16 +163,15 @@ const link = css`
   }
   ${Menu}.open li:nth-of-type(3) & {
     animation-delay: 0.29s;
-  }
-`
+  } */
 
-const MenuIcon = styled.button`
+const menuIcon = css`
   border: 0 none;
   width: 36px;
   height: 36px;
   position: absolute;
   right: calc(5% - 5px);
-  background: lime;
+  background: transparent;
   padding: 0;
   cursor: pointer;
   z-index: 99;
@@ -179,30 +190,33 @@ const MenuIcon = styled.button`
     left: 7px;
     border-radius: 5px;
     transition: all 150ms ease;
-    ${Menu}.open & {
-      top: 50%;
-    }
-  }
-
-  ${Menu}.open & {
-    position: fixed;
   }
 
   &::before {
     top: 10px;
-    ${Menu}.open & {
-      transform: translate3d(0, -50%, 0) rotate(45deg);
-    }
   }
   &::after {
     top: 24px;
-    ${Menu}.open & {
-      transform: translate3d(0, -50%, 0) rotate(135deg);
-    }
   }
 `
 
-const MenuIconBar = styled.div`
+const menuIconOpen = css`
+  position: fixed;
+
+  &::before,
+  &::after {
+    top: 50%;
+  }
+
+  &::before {
+    transform: translate3d(0, -50%, 0) rotate(45deg);
+  }
+  &::after {
+    transform: translate3d(0, -50%, 0) rotate(135deg);
+  }
+`
+
+const menuIconBar = css`
   width: 36px;
   height: 1px;
   position: absolute;
@@ -217,9 +231,6 @@ const MenuIconBar = styled.div`
     width: 11px;
     height: 1px;
     background: #4b4237;
-    ${Menu}.open & {
-      width: 0;
-    }
   }
   &::before {
     right: 50%;
@@ -233,7 +244,14 @@ const MenuIconBar = styled.div`
   }
 `
 
-const MenuContent = styled.div`
+const menuIconBarOpen = css`
+  &::before,
+  &::after {
+    width: 0;
+  }
+`
+
+const menuContent = css`
   display: flex;
   visibility: visible;
   margin-right: 1.72rem;
@@ -244,20 +262,22 @@ const MenuContent = styled.div`
     margin-right: 0;
     width: 0;
     height: 0;
-
-    ${Menu}.open & {
-      visibility: visible;
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: 2;
-    }
   }
 `
 
-const MenuBackground = styled.div`
+const menuContentOpen = css`
+  @media only screen and (max-width: 667px) {
+    visibility: visible;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+`
+
+const menuBackground = css`
   position: fixed;
   right: calc(9px + 5%);
   top: 33px;
@@ -268,23 +288,23 @@ const MenuBackground = styled.div`
   z-index: 1;
   background: #eee;
   visibility: hidden;
-
-  ${Menu}.open & {
-    visibility: visible;
-    transition: width 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
-      height 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
-      top 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
-      right 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06);
-    width: 400vmax;
-    height: 400vmax;
-    top: calc(26px + 2.5rem - 200vmax);
-    right: calc(15px + 5% - 200vmax);
-  }
 `
 
-const ModeButton = styled.button`
+const menuBackgroundOpen = css`
+  visibility: visible;
+  transition: width 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
+    height 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
+    top 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
+    right 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  width: 400vmax;
+  height: 400vmax;
+  top: calc(26px + 2.5rem - 200vmax);
+  right: calc(15px + 5% - 200vmax);
+`
+
+const modeButton = css`
   border: 0;
-  background: papayawhip;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -298,7 +318,7 @@ const ModeButton = styled.button`
   }
 `
 
-const SiteHeader = ({ small }) => {
+const SiteHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const handleMenuItemClick = () => isMenuOpen && setIsMenuOpen(false)
@@ -317,59 +337,72 @@ const SiteHeader = ({ small }) => {
   }, [headerState, y])
 
   return (
-    <Header className={headerState !== 'initial' ? headerState : ''}>
-      <Container>
+    <header
+      className={cx(
+        header,
+        headerState === 'fixed' && headerFixed,
+        headerState === 'static' && headerStatic
+      )}
+    >
+      <div className={container}>
         <SiteLogo />
         <Media
           query={{ minWidth: 668 }}
           onChange={() => setIsMenuOpen(false)}
         />
-        <Menu className={isMenuOpen ? 'open' : ''}>
-          <MenuIcon onClick={() => setIsMenuOpen((open) => !open)}>
-            <MenuIconBar>{isMenuOpen ? 'Open menu' : 'Close menu'}</MenuIconBar>
-          </MenuIcon>
-          <MenuBackground></MenuBackground>
-          <MenuContent>
-            <MenuItemList>
-              <MenuItem>
+        <nav className={`${menu}${isMenuOpen ? ' open' : ' '}`}>
+          <button
+            className={cx(menuIcon, isMenuOpen && menuIconOpen)}
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            <div className={cx(menuIconBar, isMenuOpen && menuIconBarOpen)}>
+              {isMenuOpen ? 'Open menu' : 'Close menu'}
+            </div>
+          </button>
+          <div
+            className={cx(menuBackground, isMenuOpen && menuBackgroundOpen)}
+          ></div>
+          <div className={cx(menuContent, isMenuOpen && menuContentOpen)}>
+            <ul className={cx(menuItemList, isMenuOpen && menuItemListOpen)}>
+              <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
                 <Link
                   to="/"
                   activeClassName="active"
                   onClick={handleMenuItemClick}
-                  className={link}
+                  className={cx(link, isMenuOpen && linkOpen)}
                 >
                   Home
                 </Link>
-              </MenuItem>
-              <MenuItem>
+              </li>
+              <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
                 <Link
                   to="/articles"
                   activeClassName="active"
                   partiallyActive={true}
                   onClick={handleMenuItemClick}
-                  className={link}
+                  className={cx(link, isMenuOpen && linkOpen)}
                 >
                   Articles
                 </Link>
-              </MenuItem>
-              <MenuItem>
+              </li>
+              <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
                 <Link
                   to="/about"
                   activeClassName="active"
                   onClick={handleMenuItemClick}
-                  className={link}
+                  className={cx(link, isMenuOpen && linkOpen)}
                 >
                   About
                 </Link>
-              </MenuItem>
-            </MenuItemList>
-          </MenuContent>
-          <ModeButton onClick={handleModeToggleClick}>
+              </li>
+            </ul>
+          </div>
+          <button className={modeButton} onClick={handleModeToggleClick}>
             {isDarkMode ? <MoonIcon /> : <SunIcon />}
-          </ModeButton>
-        </Menu>
-      </Container>
-    </Header>
+          </button>
+        </nav>
+      </div>
+    </header>
   )
 }
 

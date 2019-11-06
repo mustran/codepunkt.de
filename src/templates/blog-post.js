@@ -1,13 +1,13 @@
 import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
-import { styled } from 'linaria/react'
+import { css } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
 import PostMeta from '../components/post-meta'
-import SiteLayout from '../components/site-layout'
 
-const Article = styled.article`
+const article = css`
   width: 100%;
+  margin-top: 1.72rem;
 
   /* quotes */
   blockquote {
@@ -150,13 +150,17 @@ const Article = styled.article`
   }
 `
 
-const Header = styled.header`
+const header = css`
   display: flex;
   flex-direction: column;
 `
 
-const Headline = styled.h1`
+const headline = css`
   margin-bottom: 0.43rem;
+`
+
+const meta = css`
+  margin-bottom: 1.72rem;
 `
 
 const baseUrl = 'https://github.com/codepunkt/codepunkt.de/edit/master'
@@ -182,38 +186,36 @@ const BlogPost = (props) => {
   )}`
 
   return (
-    <SiteLayout small>
+    <article className={article}>
       <Meta title={title} />
-      <Article>
-        <Header>
-          <Headline>
-            {title}
-            {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
-            <a
-              aria-label="Edit this page on GitHub"
-              aria-hidden="true"
-              title="Edit this page on GitHub"
-              href={`${baseUrl}/src/content${path}index.mdx`}
-            ></a>
-          </Headline>
-          <PostMeta
-            as="p"
-            draft={draft}
-            created={created}
-            updated={updated}
-            timeToRead={timeToRead}
-          />
-        </Header>
-        <MDXRenderer>{body}</MDXRenderer>
-        <footer>
-          <p>
-            <a href={discussLink} rel="noopener noreferrer" target="_blank">
-              Discuss on Twitter
-            </a>
-          </p>
-        </footer>
-      </Article>
-    </SiteLayout>
+      <header className={header}>
+        <h1 className={headline}>
+          {title}
+          {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
+          <a
+            aria-label="Edit this page on GitHub"
+            aria-hidden="true"
+            title="Edit this page on GitHub"
+            href={`${baseUrl}/src/content${path}index.mdx`}
+          ></a>
+        </h1>
+        <PostMeta
+          className={meta}
+          draft={draft}
+          created={created}
+          updated={updated}
+          timeToRead={timeToRead}
+        />
+      </header>
+      <MDXRenderer>{body}</MDXRenderer>
+      <footer>
+        <p>
+          <a href={discussLink} rel="noopener noreferrer" target="_blank">
+            Discuss on Twitter
+          </a>
+        </p>
+      </footer>
+    </article>
   )
 }
 

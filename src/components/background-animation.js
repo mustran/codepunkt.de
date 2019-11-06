@@ -1,7 +1,7 @@
-import { styled } from 'linaria/react'
+import { css } from 'linaria'
 import React, { useEffect, useRef } from 'react'
 
-const Canvas = styled.canvas`
+const canvas = css`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -207,7 +207,7 @@ const BackgroundAnimation = () => {
     }
   }, [canvasRef])
 
-  return <Canvas ref={canvasRef} />
+  return <canvas className={canvas} ref={canvasRef} />
 }
 
 export default BackgroundAnimation

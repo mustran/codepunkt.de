@@ -1,9 +1,9 @@
 import { Link } from 'gatsby'
-import { styled } from 'linaria/react'
+import { css } from 'linaria'
 import React from 'react'
 import BookmarkIcon from '../images/bookmark.svg'
 
-const Footer = styled.footer`
+const footer = css`
   padding: 1rem 0;
   margin-top: 2.5rem;
   border-top: 1px solid #ddd;
@@ -23,7 +23,7 @@ const Footer = styled.footer`
   }
 `
 
-const Container = styled.div`
+const container = css`
   max-width: 768px;
   margin: 0 auto;
   width: 90%;
@@ -31,18 +31,18 @@ const Container = styled.div`
   justify-content: space-between;
 `
 
-const Copyright = styled.div`
+const copyright = css`
   display: flex;
   align-items: center;
 `
 
-const Social = styled.div`
+const social = css`
   display: flex;
   margin-right: -8px;
   align-items: center;
 `
 
-const IconText = styled.span`
+const iconText = css`
   margin-left: 4px;
 
   @media only screen and (max-width: 450px) {
@@ -52,42 +52,43 @@ const IconText = styled.span`
   }
 `
 
-const ExternalLink = styled.a`
+const externalLink = css`
   display: flex;
   align-items: center;
   box-shadow: none;
   margin: 0 8px;
-`
 
-const Icon = styled.svg`
-  width: 20px;
-  stroke: #448fea;
-  stroke-width: 1;
-
-  ${ExternalLink}:hover & {
+  &:hover svg {
     stroke: #ff8009;
   }
 `
 
-const SiteFooter = ({ small }) => {
+const icon = css`
+  width: 20px;
+  stroke: #448fea;
+  stroke-width: 1;
+`
+
+const SiteFooter = () => {
   return (
-    <Footer>
-      <Container>
-        <Copyright>
+    <footer className={footer}>
+      <div className={container}>
+        <div className={copyright}>
           <Link to="/legal">Legal Notice</Link>
-        </Copyright>
-        <Social>
-          <ExternalLink
+        </div>
+        <div className={social}>
+          <a
+            className={externalLink}
             href="https://github.com/codepunkt"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon as={BookmarkIcon} />
-            <IconText>RSS</IconText>
-          </ExternalLink>
-        </Social>
-      </Container>
-    </Footer>
+            <BookmarkIcon className={icon} />
+            <span className={iconText}>RSS</span>
+          </a>
+        </div>
+      </div>
+    </footer>
   )
 }
 

@@ -23,11 +23,17 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    { resolve: 'gatsby-plugin-react-svg' },
     {
       resolve: 'gatsby-plugin-webpack-bundle-analyzer',
       options: { production: true, analyzerMode: 'static' },
     },
+    {
+      resolve: 'gatsby-plugin-layout',
+      options: {
+        component: require.resolve(`./src/components/site-layout`),
+      },
+    },
+    { resolve: 'gatsby-plugin-react-svg' },
     {
       resolve: 'gatsby-plugin-webmention',
       options: {

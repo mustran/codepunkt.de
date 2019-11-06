@@ -1,11 +1,10 @@
 import loadable from '@loadable/component'
 import { Link } from 'gatsby'
-import { styled } from 'linaria/react'
+import { css } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
-import SiteLayout from '../components/site-layout'
 
-const Hero = styled.article`
+const hero = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,7 +12,7 @@ const Hero = styled.article`
   width: 100%;
 `
 
-const HeroTitle = styled.h1`
+const title = css`
   margin-bottom: 0.86rem;
   font-size: 3.5rem;
 
@@ -30,7 +29,7 @@ const HeroTitle = styled.h1`
   }
 `
 
-const HeroGreeting = styled.p`
+const greeting = css`
   order: -1;
   margin-bottom: 0.86rem;
   font-size: 1.5rem;
@@ -45,7 +44,7 @@ const HeroGreeting = styled.p`
   }
 `
 
-const HeroBody = styled.p`
+const body = css`
   font-size: 1.7rem;
   margin-bottom: 0;
   font-weight: 300;
@@ -96,7 +95,7 @@ const HeroBody = styled.p`
   }
 `
 
-const HeroContent = styled.div`
+const content = css`
   display: flex;
   flex-direction: column;
 `
@@ -107,41 +106,37 @@ const BackgroundAnimation = loadable(() =>
 
 const HomePage = () => {
   return (
-    <SiteLayout small>
+    <article className={hero}>
       <Meta title="Codepunkt" />
-      <Hero>
-        <BackgroundAnimation />
-        <HeroContent>
-          <HeroTitle>
-            <span>I build & teach web technology.</span>
-          </HeroTitle>
-          <HeroGreeting>
-            <span>Hello, my name is Christoph</span>
-          </HeroGreeting>
-          <HeroBody>
-            I'm a software architect at{' '}
-            <a
-              href="https://dspace.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              dSPACE
-            </a>
-            , where i coach and mentor teams that build web applications. I also
-            write about web development on my <Link to="/articles">Blog</Link>{' '}
-            and on{' '}
-            <a
-              href="https://twitter.com/code_punkt"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Twitter
-            </a>
-            .
-          </HeroBody>
-        </HeroContent>
-      </Hero>
-    </SiteLayout>
+      <BackgroundAnimation />
+      <div className={content}>
+        <h1 className={title}>
+          <span>I build & teach web technology.</span>
+        </h1>
+        <p className={greeting}>Hello, my name is Christoph</p>
+        <p className={body}>
+          I'm a software architect at{' '}
+          <a
+            href="https://dspace.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            dSPACE
+          </a>
+          , where i coach and mentor teams that build web applications. I also
+          write about web development on my <Link to="/articles">Blog</Link> and
+          on{' '}
+          <a
+            href="https://twitter.com/code_punkt"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Twitter
+          </a>
+          .
+        </p>
+      </div>
+    </article>
   )
 }
 
