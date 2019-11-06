@@ -1,7 +1,12 @@
-import { css } from '@emotion/core'
+import { styled } from 'linaria/react'
 import React from 'react'
 import Meta from '../components/meta'
 import SiteLayout from '../components/site-layout'
+
+const Introduction = styled.article`
+  font-weight: 300;
+  font-size: 1.2rem;
+`
 
 const AboutPage = ({ small }) => {
   return (
@@ -9,14 +14,9 @@ const AboutPage = ({ small }) => {
       <Meta title="About Me — Codepunkt" />
       <div>
         <h1>
-          <span css={css``}>Hey there!</span>
+          <span>Hey there!</span>
         </h1>
-        <article
-          css={css`
-            font-weight: 300;
-            font-size: 1.2rem;
-          `}
-        >
+        <Introduction>
           <p>
             I'm Christoph Werner, a full-stack web developer based in Paderborn,
             Germany. I've been building stuff on the web for the last 20 years,
@@ -28,7 +28,7 @@ const AboutPage = ({ small }) => {
             couple of years, i've helped build a few web applications and shaped
             a lot of developer tooling and processes.
           </p>
-        </article>
+        </Introduction>
         <h2>Work</h2>
         <p>
           I work at{' '}

@@ -1,5 +1,5 @@
-import styled from '@emotion/styled'
 import { Link } from 'gatsby'
+import { styled } from 'linaria/react'
 import React from 'react'
 import BookmarkIcon from '../images/bookmark.svg'
 
@@ -24,7 +24,7 @@ const Footer = styled.footer`
 `
 
 const Container = styled.div`
-  max-width: ${(props) => (props.small ? 768 : 1200)}px;
+  max-width: 768px;
   margin: 0 auto;
   width: 90%;
   display: flex;
@@ -72,7 +72,7 @@ const Icon = styled.svg`
 const SiteFooter = ({ small }) => {
   return (
     <Footer>
-      <Container small={small}>
+      <Container>
         <Copyright>
           <Link to="/legal">Legal Notice</Link>
         </Copyright>

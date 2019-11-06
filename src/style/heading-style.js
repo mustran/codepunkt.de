@@ -1,6 +1,4 @@
-import { css } from '@emotion/core'
-
-export const headingStyle = css`
+export const headingStyle = `
   h1,
   h2,
   h3,

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import { styled } from 'linaria/react'
 import React from 'react'
 import CalendarIcon from '../images/calendar.svg'
 import CoffeeIcon from '../images/coffee.svg'

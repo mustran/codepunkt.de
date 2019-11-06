@@ -1,23 +1,12 @@
-import { keyframes } from '@emotion/core'
-import styled from '@emotion/styled'
 import { Link } from 'gatsby'
+import { css } from 'linaria'
+import { styled } from 'linaria/react'
 import React, { useState } from 'react'
 import Media from 'react-media'
 import { useWindowScroll } from 'react-use'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
-import fadeUpIn from '../style/animations/fade-up-in'
 import SiteLogo from './site-logo'
-
-const headerIn = keyframes`
-  0% { transform: translateY(-100%); border-bottom-color: #fff; }
-  100% { transform: translateY(0); border-bottom-color: #ddd }
-`
-
-const headerOut = keyframes`
-  0% { transform: translateY(25px); border-bottom-color: #ddd; }
-  100% { transform: translateY(0); border-bottom-color: #fff }
-`
 
 const Header = styled.header`
   width: 100%;
@@ -30,18 +19,40 @@ const Header = styled.header`
   border-bottom: 1px solid #fff;
   top: 0;
 
+  @keyframes headerIn {
+    from {
+      transform: translateY(-100%);
+      border-bottom-color: #fff;
+    }
+    to {
+      transform: translateY(0);
+      border-bottom-color: #ddd;
+    }
+  }
+
+  @keyframes headerOut {
+    from {
+      transform: translateY(25px);
+      border-bottom-color: #ddd;
+    }
+    to {
+      transform: translateY(0);
+      border-bottom-color: #fff;
+    }
+  }
+
   &.fixed {
     position: fixed;
-    animation: ${headerIn} 0.4s ease-out forwards;
+    animation: headerIn 0.4s ease-out forwards;
   }
 
   &.static {
-    animation: ${headerOut} 0.2s ease-out forwards;
+    animation: headerOut 0.2s ease-out forwards;
   }
 `
 
 const Container = styled.div`
-  max-width: ${(props) => (props.small ? 768 : 1200)}px;
+  max-width: 768px;
   margin: 1rem auto 1rem auto;
   width: 90%;
   display: flex;
@@ -82,7 +93,7 @@ const MenuItemList = styled.ol`
   }
 `
 
-const MenuItemLink = styled(Link)`
+const link = css`
   box-shadow: none;
   color: #333;
   position: relative;
@@ -116,9 +127,20 @@ const MenuItemLink = styled(Link)`
     }
   }
 
+  @keyframes fadeUpIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   ${Menu}.open & {
     transition: none;
-    animation: ${fadeUpIn} 0.2s ease-out 0.25s forwards;
+    animation: fadeUpIn 0.2s ease-out 0.25s forwards;
   }
 
   ${Menu}.open li:nth-of-type(1) & {
@@ -296,7 +318,7 @@ const SiteHeader = ({ small }) => {
 
   return (
     <Header className={headerState !== 'initial' ? headerState : ''}>
-      <Container small={small}>
+      <Container>
         <SiteLogo />
         <Media
           query={{ minWidth: 668 }}
@@ -310,32 +332,35 @@ const SiteHeader = ({ small }) => {
           <MenuContent>
             <MenuItemList>
               <MenuItem>
-                <MenuItemLink
+                <Link
                   to="/"
                   activeClassName="active"
                   onClick={handleMenuItemClick}
+                  className={link}
                 >
                   Home
-                </MenuItemLink>
+                </Link>
               </MenuItem>
               <MenuItem>
-                <MenuItemLink
+                <Link
                   to="/articles"
                   activeClassName="active"
                   partiallyActive={true}
                   onClick={handleMenuItemClick}
+                  className={link}
                 >
                   Articles
-                </MenuItemLink>
+                </Link>
               </MenuItem>
               <MenuItem>
-                <MenuItemLink
+                <Link
                   to="/about"
                   activeClassName="active"
                   onClick={handleMenuItemClick}
+                  className={link}
                 >
                   About
-                </MenuItemLink>
+                </Link>
               </MenuItem>
             </MenuItemList>
           </MenuContent>

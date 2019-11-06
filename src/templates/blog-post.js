@@ -1,31 +1,152 @@
-import styled from '@emotion/styled'
 import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
+import { styled } from 'linaria/react'
 import React from 'react'
 import Meta from '../components/meta'
 import PostMeta from '../components/post-meta'
 import SiteLayout from '../components/site-layout'
-import {
-  codeStyle,
-  headingStyle,
-  linkStyle,
-  quoteStyle,
-  twitterStyle,
-} from '../style'
 
 const Article = styled.article`
-  ${codeStyle}
-  ${headingStyle}
-  ${linkStyle}
-  ${quoteStyle}
-  ${twitterStyle}
   width: 100%;
-  /* make heading links on small screens fit next to the
+
+  /* quotes */
+  blockquote {
+    margin-left: 0;
+    border-left: 5px solid #ddd;
+    padding-left: 1.72rem;
+    font-style: italic;
+
+    @media only screen and (min-width: 880px) {
+      margin-left: -1.72rem;
+    }
+  }
+
+  /* Hide annotations for screenreaders on external link off screen. */
+  a[target='_blank'] span {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  /* syntax highlighted code */
+  code:not(.vscode-highlight-code) {
+    background: #fefaf1;
+    padding: 3px 5px;
+    border-radius: 3px;
+    color: #5c5e7b;
+    font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
+      monospace;
+  }
+
+  .vscode-highlight {
+    border-radius: 4px;
+    counter-reset: line;
+    background: #fefaf1;
+
+    .vscode-highlight-code {
+      /* font-size: 16px; */
+      font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
+        monospace;
+      line-height: 1.65;
+    }
+
+    .vscode-highlight-line {
+      &::before {
+        counter-increment: line;
+        content: counter(line);
+        margin: 0 12px 0 -8px;
+        user-select: none;
+        color: #d7c9b3;
+        text-align: right;
+        width: 20px;
+        display: inline-block;
+      }
+
+      @media only screen and (min-width: 668px) {
+        padding-left: 1em;
+        padding-right: 1em;
+        &::before {
+          margin: 0 16px 0 -8px;
+        }
+      }
+
+      .mtk7 {
+        color: #2aa198;
+      }
+      .mtk9 {
+        color: #b58900;
+      }
+      .mtk10 {
+        color: #3374ff;
+      }
+    }
+
+    .vscode-highlight-line-highlighted {
+      background-color: #f9f3e6;
+    }
+  }
+
+  /* horizontally center twitter widget */
+  twitter-widget,
+  iframe.twitter-tweet {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /* Show heading links inline after headline on hover */
+    > a {
+      width: 16px;
+      height: 16px;
+      padding: 0 20px;
+      box-shadow: none;
+      display: inline-block;
+      background-image: url(/icons/link.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 0;
+    }
+    @media (hover: none) {
+      > a {
+        background-size: 16px;
+      }
+    }
+    &:hover > a {
+      background-size: 16px;
+    }
+    /* make heading links on small screens fit next to the
      heading content without wrapping */
-  @media only screen and (max-width: 879px) {
-    h1, h2, h3, h4, h5, h6 {
+
+    @media only screen and (max-width: 879px) {
       margin-right: 40px;
     }
+
+    /* On larger screens, show heading links positioned to the left of
+       the headline on hover */
+    @media only screen and (min-width: 880px) {
+      position: relative;
+
+      > a {
+        position: absolute;
+        left: -40px;
+        top: 0;
+        margin: 0;
+        height: 100%;
+      }
+    }
+  }
+
+  header h1 > a {
+    background-image: url(/icons/pullrequest.svg);
   }
 `
 

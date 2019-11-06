@@ -1,6 +1,4 @@
-import { css } from '@emotion/core'
-
-export const linkStyle = (props) => css`
+export const linkStyle = `
   /* Hide annotations for screenreaders on external link off screen. */
   a[target='_blank'] span {
     position: absolute;

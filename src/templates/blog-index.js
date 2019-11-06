@@ -1,5 +1,5 @@
-import styled from '@emotion/styled'
 import { graphql, Link } from 'gatsby'
+import { styled } from 'linaria/react'
 import React from 'react'
 import Meta from '../components/meta'
 import PostMeta from '../components/post-meta'

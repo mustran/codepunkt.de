@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import { styled } from 'linaria/react'
 import React, { useEffect, useRef } from 'react'
 
 const Canvas = styled.canvas`

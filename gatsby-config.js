@@ -126,7 +126,7 @@ module.exports = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-emotion',
+    'gatsby-plugin-linaria',
     // replaces react with preact in production builds
     'gatsby-plugin-preact',
     {

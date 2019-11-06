@@ -1,6 +1,6 @@
-import styled from '@emotion/styled'
 import loadable from '@loadable/component'
 import { Link } from 'gatsby'
+import { styled } from 'linaria/react'
 import React from 'react'
 import Meta from '../components/meta'
 import SiteLayout from '../components/site-layout'

@@ -1,21 +1,12 @@
-import { css, Global } from '@emotion/core'
-import { withTheme } from 'emotion-theming'
-import React from 'react'
+import { css } from 'linaria'
 
-export const GlobalStyle = withTheme(({ theme: { colors } }) => {
-  const styles = css`
+export const globals = css`
+  :global() {
     /* Box sizing rules */
     *,
     *::before,
     *::after {
       box-sizing: border-box;
-    }
-
-    /* Set core body defaults */
-    body {
-      min-height: 100%;
-      scroll-behavior: smooth;
-      text-rendering: optimizeSpeed;
     }
 
     /* Remove list styles on ul, ol elements with a class attribute */
@@ -69,6 +60,9 @@ export const GlobalStyle = withTheme(({ theme: { colors } }) => {
       -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       background: #fff;
+      min-height: 100%;
+      scroll-behavior: smooth;
+      text-rendering: optimizeSpeed;
     }
 
     noscript {
@@ -83,7 +77,7 @@ export const GlobalStyle = withTheme(({ theme: { colors } }) => {
     }
 
     a {
-      color: ${colors.link};
+      color: ##1669f3;
       text-decoration: none;
       box-shadow: 0 1px 0 0 #ccc;
 
@@ -91,6 +85,5 @@ export const GlobalStyle = withTheme(({ theme: { colors } }) => {
         box-shadow: 0 1px 0 0 transparent;
       }
     }
-  `
-  return <Global styles={styles} />
-})
+  }
+`

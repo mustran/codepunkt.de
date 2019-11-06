@@ -1,5 +1,3 @@
-export { codeStyle } from './code-style'
-export { twitterStyle } from './embed-style'
 export { GlobalStyle } from './global-style'
 export { headingStyle } from './heading-style'
 export { linkStyle } from './link-style'

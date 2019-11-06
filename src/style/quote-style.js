@@ -1,6 +1,4 @@
-import { css } from '@emotion/core'
-
-export const quoteStyle = css`
+export const quoteStyle = `
   blockquote {
     margin-left: 0;
     border-left: 5px solid #ddd;
