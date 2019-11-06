@@ -108,12 +108,14 @@ const getTransitionStyles = {
   entering: {
     position: 'absolute',
     opacity: 0,
-    transform: 'translateY(20px)',
+    marginTop: -20,
+    // transform: 'translateY(20px)',
   },
   entered: {
     transition: `all ${timeout}ms ease-in-out`,
     opacity: 1,
-    transform: 'translateY(0)',
+    marginTop: 0,
+    // transform: 'translateY(0)',
   },
   exiting: {
     transition: `all ${timeout}ms ease-in-out`,

@@ -10,6 +10,7 @@ const hero = css`
   justify-content: center;
   flex: 1 0 auto;
   width: 100%;
+  height: calc(100vh - 210px);
 `
 
 const title = css`
