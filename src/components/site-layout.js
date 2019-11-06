@@ -93,10 +93,14 @@ const container = css`
 
 const main = css`
   max-width: 768px;
-  margin: 110px auto 0;
   width: 90%;
   /* ie9-11 hack, see https://stackoverflow.com/a/20095764 */
   display: block;
+  margin: 120px auto 0;
+
+  @media only screen and (min-width: 668px) {
+    margin: 160px auto 0;
+  }
 `
 
 function Foo() {
@@ -104,24 +108,41 @@ function Foo() {
 }
 
 const timeout = 150
+
+/**
+ * animating translateY would be better performance-wise, but since
+ * transformed elements form their own stacking context, positioning inner
+ * elements gets harder.
+ *
+ * this is why we animate margin-top instead. if we do that, we also need
+ * to animate margin-bottom to prevent the footer from jumping.
+ */
 const getTransitionStyles = {
   entering: {
     position: 'absolute',
     opacity: 0,
     marginTop: -20,
-    // transform: 'translateY(20px)',
+    marginBottom: 20,
   },
   entered: {
     transition: `all ${timeout}ms ease-in-out`,
     opacity: 1,
     marginTop: 0,
-    // transform: 'translateY(0)',
+    marginBottom: 0,
   },
   exiting: {
     transition: `all ${timeout}ms ease-in-out`,
     opacity: 0,
   },
 }
+
+const minHeight = css`
+  min-height: calc(100vh - 120px - 6rem);
+
+  @media only screen and (min-width: 668px) {
+    min-height: calc(100vh - 160px - 6rem);
+  }
+`
 
 const Transition = ({ children, location }) => {
   return (
@@ -139,7 +160,7 @@ const Transition = ({ children, location }) => {
               ...getTransitionStyles[status],
             }}
           >
-            {children}
+            {React.cloneElement(children, { className: minHeight })}
           </div>
         )}
       </ReactTransition>

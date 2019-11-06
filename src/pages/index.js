@@ -1,16 +1,21 @@
 import loadable from '@loadable/component'
 import { Link } from 'gatsby'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
+
+/**
+ * TODOS
+ *
+ * - move draft status check to gatsby-xxx files
+ * - useBreakpoint hook to stop transition animation when hamburger menu exists
+ */
 
 const hero = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex: 1 0 auto;
-  width: 100%;
-  height: calc(100vh - 210px);
 `
 
 const title = css`
@@ -34,7 +39,6 @@ const greeting = css`
   order: -1;
   margin-bottom: 0.86rem;
   font-size: 1.5rem;
-  text-transform: uppercase;
 
   @media only screen and (max-width: 600px) {
     font-size: 1.3rem;
@@ -105,9 +109,9 @@ const BackgroundAnimation = loadable(() =>
   import('../components/background-animation')
 )
 
-const HomePage = () => {
+const HomePage = ({ className }) => {
   return (
-    <article className={hero}>
+    <article className={cx(className, hero)}>
       <Meta title="Codepunkt" />
       <BackgroundAnimation />
       <div className={content}>

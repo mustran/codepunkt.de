@@ -2,9 +2,9 @@ import { css } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
 
-const AboutPage = ({ small }) => {
+const AboutPage = ({ className }) => {
   return (
-    <div>
+    <div className={className}>
       <Meta title="About Me — Codepunkt" />
       <h1>
         <span>Hey there!</span>

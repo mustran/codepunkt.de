@@ -1,14 +1,11 @@
 import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
 import PostMeta from '../components/post-meta'
 
 const article = css`
-  width: 100%;
-  margin-top: 1.72rem;
-
   /* quotes */
   blockquote {
     margin-left: 0;
@@ -167,6 +164,7 @@ const baseUrl = 'https://github.com/codepunkt/codepunkt.de/edit/master'
 
 const BlogPost = (props) => {
   const {
+    className,
     path,
     pageContext: { permaLink },
     data: {
@@ -186,7 +184,7 @@ const BlogPost = (props) => {
   )}`
 
   return (
-    <article className={article}>
+    <article className={cx(className, article)}>
       <Meta title={title} />
       <header className={header}>
         <h1 className={headline}>

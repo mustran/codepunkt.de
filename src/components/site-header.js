@@ -1,15 +1,18 @@
 import { Link } from 'gatsby'
 import { css, cx } from 'linaria'
 import React, { useState } from 'react'
+import Helmet from 'react-helmet'
 import Media from 'react-media'
 import { useWindowScroll } from 'react-use'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
 import SiteLogo from './site-logo'
 
+const headerHeight = 70
+
 const header = css`
   width: 100%;
-  height: 70px;
+  height: ${headerHeight}px;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -17,43 +20,47 @@ const header = css`
   background: transparent;
   border-bottom: 1px solid #fff;
   top: 0;
+  margin-top: 4px;
+
+  @media only screen and (min-width: 668px) {
+    margin-top: 16px;
+  }
 `
 
 const headerFixed = css`
   @keyframes headerIn {
     from {
       transform: translateY(-100%);
-      border-bottom-color: #fff;
     }
     to {
       transform: translateY(0);
-      border-bottom-color: #ddd;
     }
   }
 
   position: fixed;
   background: #fff;
+  border-bottom-color: #d6dce3;
   animation: headerIn 0.4s ease-out forwards;
+  margin-top: 0;
 `
 
 const headerStatic = css`
   @keyframes headerOut {
     from {
       transform: translateY(25px);
-      border-bottom-color: #ddd;
     }
     to {
       transform: translateY(0);
-      border-bottom-color: #fff;
     }
   }
 
+  border-bottom-color: #fff;
   animation: headerOut 0.2s ease-out forwards;
 `
 
 const container = css`
   max-width: 768px;
-  margin: 1rem auto 1rem auto;
+  margin: 0 auto;
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -77,25 +84,28 @@ const menuItemOpen = css`
 `
 
 const menuItemList = css`
+  display: flex;
   counter-reset: menu;
   list-style-type: none;
-  display: flex;
   margin: 0;
   height: 100%;
   align-items: center;
+
+  @media only screen and (max-width: 667px) {
+    display: none;
+  }
 `
 
 const menuItemListOpen = css`
-  @media only screen and (max-width: 667px) {
-    flex: 1 0 auto;
-    justify-content: center;
-    flex-direction: column;
-  }
+  display: flex;
+  height: auto;
+  justify-content: center;
+  flex-direction: column;
 `
 
 const link = css`
   box-shadow: none;
-  color: #333;
+  color: #4b4237;
   position: relative;
   padding: 6px 12px;
   box-shadow: 0 none;
@@ -152,6 +162,7 @@ const linkOpen = css`
   }
 
   transition: none;
+  padding: 0;
   animation: fadeUpIn 0.2s ease-out 0.25s forwards;
 `
 /* 
@@ -256,6 +267,10 @@ const menuContent = css`
   visibility: visible;
   margin-right: 1.72rem;
 
+  h1 {
+    display: none;
+  }
+
   @media only screen and (max-width: 667px) {
     visibility: hidden;
     margin-top: 0;
@@ -266,27 +281,34 @@ const menuContent = css`
 `
 
 const menuContentOpen = css`
+  h1 {
+    display: block;
+  }
+
   @media only screen and (max-width: 667px) {
     visibility: visible;
     position: fixed;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     top: 0;
     left: 0;
     z-index: 2;
+    flex-direction: column;
+    padding: 120px 5% 0;
   }
 `
 
 const menuBackground = css`
   position: fixed;
-  right: calc(9px + 5%);
-  top: 33px;
+  right: calc(12px + 5%);
+  top: 34px;
   border-radius: 50%;
   width: 0px;
   height: 0px;
   transition: none;
   z-index: 1;
-  background: #eee;
+  background: #fff;
+  box-shadow: 0 0 0 10px #aaaacc22;
   visibility: hidden;
 `
 
@@ -318,6 +340,10 @@ const modeButton = css`
   }
 `
 
+const overflowHidden = css`
+  overflow: hidden;
+`
+
 const SiteHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
@@ -331,7 +357,7 @@ const SiteHeader = () => {
     if (headerState !== 'fixed' && y > 250) {
       setHeaderState('fixed')
     }
-    if (headerState === 'fixed' && y < 25) {
+    if (headerState === 'fixed' && y < 40) {
       setHeaderState('static')
     }
   }, [headerState, y])
@@ -344,6 +370,9 @@ const SiteHeader = () => {
         headerState === 'static' && headerStatic
       )}
     >
+      <Helmet>
+        <html className={cx(isMenuOpen && overflowHidden)} />
+      </Helmet>
       <div className={container}>
         <SiteLogo />
         <Media
@@ -363,6 +392,9 @@ const SiteHeader = () => {
             className={cx(menuBackground, isMenuOpen && menuBackgroundOpen)}
           ></div>
           <div className={cx(menuContent, isMenuOpen && menuContentOpen)}>
+            <h1>
+              <span>Menu</span>
+            </h1>
             <ul className={cx(menuItemList, isMenuOpen && menuItemListOpen)}>
               <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
                 <Link

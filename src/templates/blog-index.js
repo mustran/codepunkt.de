@@ -27,15 +27,11 @@ const preview = css`
   }
 `
 
-const content = css`
-  width: 100%;
-  margin-top: 1.72rem;
-`
-
 const isProduction = process.env.NODE_ENV === 'production'
 
 const BlogIndex = (props) => {
   const {
+    className,
     data: {
       allMdx: { nodes },
     },
@@ -49,7 +45,7 @@ const BlogIndex = (props) => {
   )
 
   return (
-    <div className={content}>
+    <div className={className}>
       <Meta title="Articles — Codepunkt" />
       {articles.map((article) => {
         const {

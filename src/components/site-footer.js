@@ -4,7 +4,7 @@ import React from 'react'
 import BookmarkIcon from '../images/bookmark.svg'
 
 const footer = css`
-  padding: 1rem 0;
+  height: 3.5rem;
   margin-top: 2.5rem;
   border-top: 1px solid #ddd;
   background: #fbfbfb;
@@ -17,16 +17,13 @@ const footer = css`
       color: #4b4237 !important;
     }
   }
-
-  @media only screen and (max-width: 450px) {
-    margin-top: calc(1.72rem * 1.5);
-  }
 `
 
 const container = css`
   max-width: 768px;
   margin: 0 auto;
   width: 90%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
 `
@@ -44,12 +41,6 @@ const social = css`
 
 const iconText = css`
   margin-left: 4px;
-
-  @media only screen and (max-width: 450px) {
-    span {
-      display: none;
-    }
-  }
 `
 
 const externalLink = css`

@@ -7,16 +7,17 @@ const link = css`
   display: inline-block;
   box-shadow: none !important;
   height: 45px;
+  z-index: 99;
 `
 
 const logo = css`
   font-size: 18px;
-  margin-top: 2px;
-  width: 160px;
+  margin-top: 4px;
+  width: 140px;
   height: 45px;
 
   path {
-    fill: #5185c5;
+    fill: #000;
     stroke: none;
   }
 `
