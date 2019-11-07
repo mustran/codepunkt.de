@@ -6,8 +6,6 @@ import BookmarkIcon from '../images/bookmark.svg'
 const footer = css`
   height: 3.5rem;
   margin-top: 2.5rem;
-  border-top: 1px solid #ddd;
-  background: #fbfbfb;
 
   a {
     color: #999 !important;

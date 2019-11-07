@@ -7,7 +7,6 @@ import Meta from '../components/meta'
 /**
  * TODOS
  *
- * - move draft status check to gatsby-xxx files
  * - useBreakpoint hook to stop transition animation when hamburger menu exists
  */
 
@@ -20,39 +19,44 @@ const hero = css`
 
 const title = css`
   margin-bottom: 0.86rem;
-  font-size: 3.5rem;
+  font-size: 10vw;
 
   span {
     background: #efe0fb;
   }
 
-  @media only screen and (max-width: 600px) {
-    font-size: 2.6rem;
-  }
-
-  @media only screen and (max-width: 400px) {
-    font-size: 2rem;
+  @media only screen and (min-width: 668px) {
+    font-size: 66.7px;
   }
 `
 
 const greeting = css`
   order: -1;
   margin-bottom: 0.86rem;
-  font-size: 1.5rem;
+  font-size: 5.3vw;
+  font-weight: 300;
 
-  @media only screen and (max-width: 600px) {
-    font-size: 1.3rem;
+  span {
+    font-weight: 400;
   }
 
-  @media only screen and (max-width: 400px) {
-    font-size: 1rem;
+  @media only screen and (min-width: 668px) {
+    font-size: 35.351px;
   }
 `
 
 const body = css`
-  font-size: 1.7rem;
   margin-bottom: 0;
-  font-weight: 300;
+  font-weight: 400;
+  font-size: 4.6vw;
+
+  @media only screen and (min-width: 500px) {
+    font-weight: 300;
+  }
+
+  @media only screen and (min-width: 668px) {
+    font-size: 30.682px;
+  }
 
   a {
     position: relative;
@@ -90,14 +94,6 @@ const body = css`
       transform: scaleX(1);
     }
   }
-
-  @media only screen and (max-width: 600px) {
-    font-size: 1.2rem;
-  }
-
-  @media only screen and (max-width: 400px) {
-    font-size: 1rem;
-  }
 `
 
 const content = css`
@@ -118,7 +114,9 @@ const HomePage = ({ className }) => {
         <h1 className={title}>
           <span>I build & teach web technology.</span>
         </h1>
-        <p className={greeting}>Hello, my name is Christoph</p>
+        <p className={greeting}>
+          Hello, my name is <span>Christoph</span>
+        </p>
         <p className={body}>
           I'm a software architect at{' '}
           <a

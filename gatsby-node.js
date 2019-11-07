@@ -17,7 +17,14 @@ exports.createPages = ({ graphql, actions }) => {
 
   return graphql(`
     query {
-      allMdx(sort: { order: DESC, fields: [frontmatter___created] }) {
+      allMdx(
+        sort: { order: DESC, fields: [frontmatter___created] }
+        ${
+          process.env.NODE_ENV === 'production'
+            ? 'filter: {frontmatter: {draft: {ne: true}}}'
+            : ''
+        }
+      ) {
         edges {
           node {
             id

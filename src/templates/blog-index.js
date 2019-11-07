@@ -27,22 +27,16 @@ const preview = css`
   }
 `
 
-const isProduction = process.env.NODE_ENV === 'production'
-
 const BlogIndex = (props) => {
   const {
     className,
     data: {
-      allMdx: { nodes },
+      allMdx: { nodes: articles },
     },
     pageContext: {
       pageInfo: { hasPreviousPage, hasNextPage, currentPage },
     },
   } = props
-
-  const articles = nodes.filter((node) =>
-    isProduction ? !node.frontmatter.draft : true
-  )
 
   return (
     <div className={className}>

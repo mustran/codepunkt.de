@@ -81,6 +81,16 @@ const menuItem = css`
 const menuItemOpen = css`
   display: block;
   width: 100%;
+
+  &:nth-of-type(1) a {
+    animation-delay: 0.25s;
+  }
+  &:nth-of-type(2) a {
+    animation-delay: 0.27s;
+  }
+  &:nth-of-type(3) a {
+    animation-delay: 0.29s;
+  }
 `
 
 const menuItemList = css`
@@ -120,8 +130,7 @@ const link = css`
     display: flex;
     align-items: center;
     padding: 1rem 20%;
-    font-size: 2rem;
-    font-family: Merriweather, serif;
+    font-size: 1.4rem;
 
     &::before {
       display: none;
@@ -164,6 +173,10 @@ const linkOpen = css`
   transition: none;
   padding: 0;
   animation: fadeUpIn 0.2s ease-out 0.25s forwards;
+
+  &.active {
+    border: 0;
+  }
 `
 /* 
   ${Menu}.open li:nth-of-type(1) & {
