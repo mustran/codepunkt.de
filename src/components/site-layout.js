@@ -169,9 +169,9 @@ const Transition = ({ children, location }) => {
 }
 
 const SiteLayout = ({ children, location }) => {
-  // MDXProvider provides components that are usable in mdx files
-  // without importing them
   return (
+    // MDXProvider provides components that are usable in mdx files
+    // without importing them
     <MDXProvider components={{ Foo }}>
       <div className={cx(global, container)}>
         <SiteHeader />

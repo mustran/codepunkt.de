@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Helmet from 'react-helmet'
 import Media from 'react-media'
 import { useWindowScroll } from 'react-use'
-import FeatherIcon from '../images/feather.svg'
+import EditIcon from '../images/edit.svg'
 import HomeIcon from '../images/home.svg'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
@@ -30,17 +30,13 @@ const header = css`
   }
 `
 
-const headerOpen = css`
-  position: static;
-`
-
 const headerFixed = css`
   @keyframes headerIn {
     from {
-      transform: translateY(-100%);
+      margin-top: -70px;
     }
     to {
-      transform: translateY(0);
+      margin-top: 0;
     }
   }
 
@@ -54,15 +50,19 @@ const headerFixed = css`
 const headerStatic = css`
   @keyframes headerOut {
     from {
-      transform: translateY(25px);
+      margin-top: 25px;
     }
     to {
-      transform: translateY(0);
+      margin-top: 0;
     }
   }
 
   border-bottom-color: #fff;
   animation: headerOut 0.2s ease-out forwards;
+`
+
+const headerOpen = css`
+  position: fixed;
 `
 
 const container = css`
@@ -81,7 +81,6 @@ const menu = css`
 `
 
 const menuItem = css`
-  counter-increment: menu;
   margin: 0;
 `
 
@@ -102,7 +101,6 @@ const menuItemOpen = css`
 
 const menuItemList = css`
   display: flex;
-  counter-reset: menu;
   list-style-type: none;
   margin: 0;
   height: 100%;
@@ -345,25 +343,19 @@ const overflowHidden = css`
 const background = css`
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  top: calc(-50% + 37px);
+  right: calc(-45% + 12px);
   visibility: hidden;
-  z-index: 2;
-
-  circle {
-    transform: scale(1);
-    transform-origin: 50% 50%;
-    transition: transform 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
-  }
+  position: fixed;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition-duration: 0s;
 `
 
 const backgroundOpen = css`
   visibility: visible;
-
-  circle {
-    transform: scale(20);
-  }
+  transition: transform 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  transform: scale(50);
 `
 
 const SiteHeader = () => {
@@ -396,6 +388,27 @@ const SiteHeader = () => {
       <Helmet>
         <html className={cx(isMenuOpen && overflowHidden)} />
       </Helmet>
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="xMidyMid meet"
+        className={cx(background, isMenuOpen && backgroundOpen)}
+      >
+        <radialGradient id="g">
+          <stop offset="60%" stop-color="white" />
+          <stop offset="61%" stop-color="black" />
+          <stop offset="68%" stop-color="black" />
+          <stop offset="69%" stop-color="white" />
+        </radialGradient>
+        <mask id="m">
+          <circle cx="50" cy="50" r="5" fill="white" />
+          <circle cx="50" cy="50" r="3" fill="black" />
+          <circle cx="50" cy="50" r="2.6" fill="white" />
+        </mask>
+        <circle cx="50" cy="50" r="5" fill="rgba(0, 0, 0, 0.2)" />
+        <circle cx="50" cy="50" r="5" fill="#fff" mask="url(#m)" />
+      </svg>
       <div className={container}>
         <SiteLogo />
         <Media
@@ -411,27 +424,6 @@ const SiteHeader = () => {
               {isMenuOpen ? 'Open menu' : 'Close menu'}
             </div>
           </button>
-          {/* <div
-            className={cx(menuBackground, isMenuOpen && menuBackgroundOpen)}
-            style={{ background: '#ddd' }}
-          ></div>
-          <div
-            className={cx(menuBackground, isMenuOpen && menuBackgroundOpen)}
-            style={{ transitionDelay: '2ms' }}
-          ></div> */}
-          <svg className={cx(background, isMenuOpen && backgroundOpen)}>
-            <clipPath id="c">
-              <circle cx="50%" cy="50%" r="5%" />
-            </clipPath>
-            <rect
-              x="0"
-              y="0"
-              width="100%"
-              height="100%"
-              fill="papayawhip"
-              clipPath="url(#c)"
-            />
-          </svg>
           <div className={cx(menuContent, isMenuOpen && menuContentOpen)}>
             <ul className={cx(menuItemList, isMenuOpen && menuItemListOpen)}>
               <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
@@ -453,7 +445,7 @@ const SiteHeader = () => {
                   onClick={handleMenuItemClick}
                   className={cx(link, isMenuOpen && linkOpen)}
                 >
-                  <FeatherIcon />
+                  <EditIcon />
                   <span>Articles</span>
                 </Link>
               </li>
