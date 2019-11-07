@@ -4,8 +4,11 @@ import React, { useState } from 'react'
 import Helmet from 'react-helmet'
 import Media from 'react-media'
 import { useWindowScroll } from 'react-use'
+import FeatherIcon from '../images/feather.svg'
+import HomeIcon from '../images/home.svg'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
+import UserIcon from '../images/user.svg'
 import SiteLogo from './site-logo'
 
 const headerHeight = 70
@@ -25,6 +28,10 @@ const header = css`
   @media only screen and (min-width: 668px) {
     margin-top: 16px;
   }
+`
+
+const headerOpen = css`
+  position: static;
 `
 
 const headerFixed = css`
@@ -177,17 +184,12 @@ const linkOpen = css`
   &.active {
     border: 0;
   }
+
+  svg {
+    margin-right: 8px;
+    stroke-width: 1;
+  }
 `
-/* 
-  ${Menu}.open li:nth-of-type(1) & {
-    animation-delay: 0.25s;
-  }
-  ${Menu}.open li:nth-of-type(2) & {
-    animation-delay: 0.27s;
-  }
-  ${Menu}.open li:nth-of-type(3) & {
-    animation-delay: 0.29s;
-  } */
 
 const menuIcon = css`
   border: 0 none;
@@ -280,10 +282,6 @@ const menuContent = css`
   visibility: visible;
   margin-right: 1.72rem;
 
-  h1 {
-    display: none;
-  }
-
   @media only screen and (max-width: 667px) {
     visibility: hidden;
     margin-top: 0;
@@ -294,47 +292,34 @@ const menuContent = css`
 `
 
 const menuContentOpen = css`
-  h1 {
-    display: block;
-  }
-
-  @media only screen and (max-width: 667px) {
-    visibility: visible;
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    flex-direction: column;
-    padding: 120px 5% 0;
-  }
+  visibility: visible;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  flex-direction: column;
+  padding: 120px 5% 0;
 `
 
 const menuBackground = css`
   position: fixed;
-  right: calc(12px + 5%);
-  top: 34px;
+  right: calc(5% - 5px);
+  top: 20px;
   border-radius: 50%;
-  width: 0px;
-  height: 0px;
+  width: 36px;
+  height: 36px;
   transition: none;
   z-index: 1;
   background: #fff;
-  box-shadow: 0 0 0 10px #aaaacc22;
   visibility: hidden;
 `
 
 const menuBackgroundOpen = css`
   visibility: visible;
-  transition: width 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
-    height 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
-    top 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06),
-    right 0.3s cubic-bezier(0.755, 0.05, 0.855, 0.06);
-  width: 400vmax;
-  height: 400vmax;
-  top: calc(26px + 2.5rem - 200vmax);
-  right: calc(15px + 5% - 200vmax);
+  transition: transform 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  transform: scale(100);
 `
 
 const modeButton = css`
@@ -355,6 +340,30 @@ const modeButton = css`
 
 const overflowHidden = css`
   overflow: hidden;
+`
+
+const background = css`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  z-index: 2;
+
+  circle {
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  }
+`
+
+const backgroundOpen = css`
+  visibility: visible;
+
+  circle {
+    transform: scale(20);
+  }
 `
 
 const SiteHeader = () => {
@@ -380,7 +389,8 @@ const SiteHeader = () => {
       className={cx(
         header,
         headerState === 'fixed' && headerFixed,
-        headerState === 'static' && headerStatic
+        headerState === 'static' && headerStatic,
+        isMenuOpen && headerOpen
       )}
     >
       <Helmet>
@@ -401,13 +411,28 @@ const SiteHeader = () => {
               {isMenuOpen ? 'Open menu' : 'Close menu'}
             </div>
           </button>
+          {/* <div
+            className={cx(menuBackground, isMenuOpen && menuBackgroundOpen)}
+            style={{ background: '#ddd' }}
+          ></div>
           <div
             className={cx(menuBackground, isMenuOpen && menuBackgroundOpen)}
-          ></div>
+            style={{ transitionDelay: '2ms' }}
+          ></div> */}
+          <svg className={cx(background, isMenuOpen && backgroundOpen)}>
+            <clipPath id="c">
+              <circle cx="50%" cy="50%" r="5%" />
+            </clipPath>
+            <rect
+              x="0"
+              y="0"
+              width="100%"
+              height="100%"
+              fill="papayawhip"
+              clipPath="url(#c)"
+            />
+          </svg>
           <div className={cx(menuContent, isMenuOpen && menuContentOpen)}>
-            <h1>
-              <span>Menu</span>
-            </h1>
             <ul className={cx(menuItemList, isMenuOpen && menuItemListOpen)}>
               <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
                 <Link
@@ -416,7 +441,8 @@ const SiteHeader = () => {
                   onClick={handleMenuItemClick}
                   className={cx(link, isMenuOpen && linkOpen)}
                 >
-                  Home
+                  <HomeIcon />
+                  <span>Home</span>
                 </Link>
               </li>
               <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
@@ -427,7 +453,8 @@ const SiteHeader = () => {
                   onClick={handleMenuItemClick}
                   className={cx(link, isMenuOpen && linkOpen)}
                 >
-                  Articles
+                  <FeatherIcon />
+                  <span>Articles</span>
                 </Link>
               </li>
               <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
@@ -437,7 +464,8 @@ const SiteHeader = () => {
                   onClick={handleMenuItemClick}
                   className={cx(link, isMenuOpen && linkOpen)}
                 >
-                  About
+                  <UserIcon />
+                  <span>About</span>
                 </Link>
               </li>
             </ul>

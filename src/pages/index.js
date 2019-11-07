@@ -7,6 +7,8 @@ import Meta from '../components/meta'
 /**
  * TODOS
  *
+ * - remove IE from browserslist
+ * - write gatsby plugin that adds browserslist regex
  * - useBreakpoint hook to stop transition animation when hamburger menu exists
  */
 
