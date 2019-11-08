@@ -334,7 +334,7 @@ const background = css`
   transition-duration: 0s;
 
   > circle:not(:last-child) {
-    opacity: 0.2;
+    opacity: 0.5;
   }
 `
 
@@ -392,8 +392,8 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
           />
           <circle cx="50" cy="50" r="2.6" fill="white" />
         </mask>
-        <circle cx="50" cy="50" r="4.5" fill={sneakPeakColor} />
-        <circle cx="50" cy="50" r="5" fill="#f8f8f8" mask="url(#m)" />
+        <circle cx="50" cy="50" r="4.5" fill="#f3f3f3" />
+        <circle cx="50" cy="50" r="5" fill="#fff" mask="url(#m)" />
       </svg>
       <div className={container}>
         <SiteLogo />

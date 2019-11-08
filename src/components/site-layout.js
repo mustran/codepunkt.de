@@ -74,7 +74,7 @@ const global = css`
     }
 
     a {
-      color: ##1669f3;
+      color: #1669f3;
       text-decoration: none;
       box-shadow: 0 1px 0 0 #ccc;
 

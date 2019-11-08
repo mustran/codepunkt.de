@@ -2,6 +2,7 @@ import loadable from '@loadable/component'
 import { Link } from 'gatsby'
 import { css, cx } from 'linaria'
 import React from 'react'
+import { useOrientation } from 'react-use'
 import Meta from '../components/meta'
 
 /**
@@ -21,7 +22,7 @@ const hero = css`
 
 const title = css`
   margin-bottom: 0.86rem;
-  font-size: 10vw;
+  font-size: 10vmin;
 
   span {
     background: #efe0fb;
@@ -35,7 +36,7 @@ const title = css`
 const greeting = css`
   order: -1;
   margin-bottom: 0.86rem;
-  font-size: 5.3vw;
+  font-size: 5.3vmin;
   font-weight: 300;
 
   span {
@@ -50,7 +51,7 @@ const greeting = css`
 const body = css`
   margin-bottom: 0;
   font-weight: 400;
-  font-size: 4.6vw;
+  font-size: 4.6vmin;
 
   @media only screen and (min-width: 500px) {
     font-weight: 300;
@@ -108,6 +109,8 @@ const BackgroundAnimation = loadable(() =>
 )
 
 const HomePage = ({ className }) => {
+  const orientation = useOrientation()
+
   return (
     <article className={cx(className, hero)}>
       <Meta title="Codepunkt" />
@@ -138,7 +141,7 @@ const HomePage = ({ className }) => {
           >
             Twitter
           </a>
-          .
+          . {JSON.stringify(orientation, null, 2)}
         </p>
       </div>
     </article>
