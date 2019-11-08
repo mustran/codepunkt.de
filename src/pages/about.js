@@ -2,12 +2,18 @@ import { css } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
 
-const AboutPage = ({ className }) => {
+const AboutPage = ({ accentColor }) => {
   return (
-    <div className={className}>
+    <div>
       <Meta title="About Me — Codepunkt" />
       <h1>
-        <span>Hey there!</span>
+        <span
+          className={css`
+            background: #e7fbe0;
+          `}
+        >
+          Hey there!
+        </span>
       </h1>
       <article
         className={css`

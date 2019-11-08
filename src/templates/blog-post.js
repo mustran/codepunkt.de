@@ -117,7 +117,8 @@ const article = css`
         background-size: 16px;
       }
     }
-    &:hover > a {
+    &:hover > a,
+    & a:focus {
       background-size: 16px;
     }
     /* make heading links on small screens fit next to the
@@ -188,7 +189,13 @@ const BlogPost = (props) => {
       <Meta title={title} />
       <header className={header}>
         <h1 className={headline}>
-          {title}
+          <span
+            className={css`
+              background: #e0f0fb;
+            `}
+          >
+            {title}
+          </span>
           {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
           <a
             aria-label="Edit this page on GitHub"

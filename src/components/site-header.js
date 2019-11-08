@@ -1,14 +1,11 @@
 import { Link } from 'gatsby'
 import { css, cx } from 'linaria'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Helmet from 'react-helmet'
 import Media from 'react-media'
 import { useWindowScroll } from 'react-use'
-import EditIcon from '../images/edit.svg'
-import HomeIcon from '../images/home.svg'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
-import UserIcon from '../images/user.svg'
 import SiteLogo from './site-logo'
 
 const headerHeight = 70
@@ -125,9 +122,11 @@ const link = css`
   padding: 6px 12px;
   box-shadow: 0 none;
 
-  &.active {
-    background: #fff;
-    border: 1px solid #dfe3e8;
+  @media only screen and (min-width: 668px) {
+    &.active {
+      background: #fff;
+      border: 1px solid #dfe3e8;
+    }
   }
 
   @media only screen and (max-width: 667px) {
@@ -135,7 +134,11 @@ const link = css`
     display: flex;
     align-items: center;
     padding: 1rem 20%;
-    font-size: 1.4rem;
+    font-weight: 500;
+    font-size: 2rem;
+    font-family: Merriweather, 'Lucida Bright', Lucidabright, 'Lucida Serif',
+      Lucida, 'DejaVu Serif', 'Bitstream Vera Serif', 'Liberation Serif',
+      Georgia, serif;
 
     &::before {
       display: none;
@@ -189,16 +192,16 @@ const linkOpen = css`
   }
 `
 
-const menuIcon = css`
+const menuButton = css`
   border: 0 none;
   width: 36px;
   height: 36px;
-  position: absolute;
-  right: calc(5% - 5px);
   background: transparent;
   padding: 0;
   cursor: pointer;
   z-index: 99;
+  margin-right: -4px;
+  position: relative;
 
   @media only screen and (min-width: 668px) {
     display: none;
@@ -224,9 +227,7 @@ const menuIcon = css`
   }
 `
 
-const menuIconOpen = css`
-  position: fixed;
-
+const menuButtonOpen = css`
   &::before,
   &::after {
     top: 50%;
@@ -301,25 +302,6 @@ const menuContentOpen = css`
   padding: 120px 5% 0;
 `
 
-const menuBackground = css`
-  position: fixed;
-  right: calc(5% - 5px);
-  top: 20px;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  transition: none;
-  z-index: 1;
-  background: #fff;
-  visibility: hidden;
-`
-
-const menuBackgroundOpen = css`
-  visibility: visible;
-  transition: transform 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
-  transform: scale(100);
-`
-
 const modeButton = css`
   border: 0;
   background: transparent;
@@ -328,11 +310,11 @@ const modeButton = css`
   align-items: center;
   height: 36px;
   width: 36px;
-  z-index: 99;
+  margin-right: 4px;
 
-  @media only screen and (max-width: 667px) {
-    position: absolute;
-    right: calc(5% + 40px);
+  @media only screen and (min-width: 668px) {
+    margin-right: -4px;
+    order: 1;
   }
 `
 
@@ -343,13 +325,17 @@ const overflowHidden = css`
 const background = css`
   width: 100%;
   height: 100%;
-  top: calc(-50% + 37px);
-  right: calc(-45% + 12px);
+  top: calc(-50% + 39px);
+  right: calc(-45% + 13px);
   visibility: hidden;
   position: fixed;
   transform: scale(1);
   transform-origin: 50% 50%;
   transition-duration: 0s;
+
+  > circle:not(:last-child) {
+    opacity: 0.2;
+  }
 `
 
 const backgroundOpen = css`
@@ -358,12 +344,12 @@ const backgroundOpen = css`
   transform: scale(50);
 `
 
-const SiteHeader = () => {
+const SiteHeader = ({ sneakPeakColor, path }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
   const handleMenuItemClick = () => isMenuOpen && setIsMenuOpen(false)
   const handleModeToggleClick = () => setIsDarkMode((isDarkMode) => !isDarkMode)
-
+  useEffect(() => setIsMenuOpen(false), [path])
   const { y } = useWindowScroll()
   const [headerState, setHeaderState] = useState('initial')
 
@@ -392,22 +378,22 @@ const SiteHeader = () => {
         width="100%"
         height="100%"
         viewBox="0 0 100 100"
-        preserveAspectRatio="xMidyMid meet"
+        preserveAspectRatio="xMidYMid meet"
         className={cx(background, isMenuOpen && backgroundOpen)}
       >
-        <radialGradient id="g">
-          <stop offset="60%" stop-color="white" />
-          <stop offset="61%" stop-color="black" />
-          <stop offset="68%" stop-color="black" />
-          <stop offset="69%" stop-color="white" />
-        </radialGradient>
         <mask id="m">
-          <circle cx="50" cy="50" r="5" fill="white" />
-          <circle cx="50" cy="50" r="3" fill="black" />
+          <circle cx="50" cy="50" r="6" fill="white" />
+          <circle
+            cx="50"
+            cy="50"
+            r="3"
+            transform="translate(0.15 0)"
+            fill="black"
+          />
           <circle cx="50" cy="50" r="2.6" fill="white" />
         </mask>
-        <circle cx="50" cy="50" r="5" fill="rgba(0, 0, 0, 0.2)" />
-        <circle cx="50" cy="50" r="5" fill="#fff" mask="url(#m)" />
+        <circle cx="50" cy="50" r="4.5" fill={sneakPeakColor} />
+        <circle cx="50" cy="50" r="5" fill="#f8f8f8" mask="url(#m)" />
       </svg>
       <div className={container}>
         <SiteLogo />
@@ -416,8 +402,11 @@ const SiteHeader = () => {
           onChange={() => setIsMenuOpen(false)}
         />
         <nav className={`${menu}${isMenuOpen ? ' open' : ' '}`}>
+          <button className={modeButton} onClick={handleModeToggleClick}>
+            {isDarkMode ? <MoonIcon /> : <SunIcon />}
+          </button>
           <button
-            className={cx(menuIcon, isMenuOpen && menuIconOpen)}
+            className={cx(menuButton, isMenuOpen && menuButtonOpen)}
             onClick={() => setIsMenuOpen((open) => !open)}
           >
             <div className={cx(menuIconBar, isMenuOpen && menuIconBarOpen)}>
@@ -433,7 +422,6 @@ const SiteHeader = () => {
                   onClick={handleMenuItemClick}
                   className={cx(link, isMenuOpen && linkOpen)}
                 >
-                  <HomeIcon />
                   <span>Home</span>
                 </Link>
               </li>
@@ -445,7 +433,6 @@ const SiteHeader = () => {
                   onClick={handleMenuItemClick}
                   className={cx(link, isMenuOpen && linkOpen)}
                 >
-                  <EditIcon />
                   <span>Articles</span>
                 </Link>
               </li>
@@ -456,15 +443,11 @@ const SiteHeader = () => {
                   onClick={handleMenuItemClick}
                   className={cx(link, isMenuOpen && linkOpen)}
                 >
-                  <UserIcon />
                   <span>About</span>
                 </Link>
               </li>
             </ul>
           </div>
-          <button className={modeButton} onClick={handleModeToggleClick}>
-            {isDarkMode ? <MoonIcon /> : <SunIcon />}
-          </button>
         </nav>
       </div>
     </header>

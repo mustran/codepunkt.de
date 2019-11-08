@@ -41,6 +41,15 @@ const BlogIndex = (props) => {
   return (
     <div className={className}>
       <Meta title="Articles — Codepunkt" />
+      <h1>
+        <span
+          className={css`
+            background: #e0f0fb;
+          `}
+        >
+          Articles
+        </span>
+      </h1>
       {articles.map((article) => {
         const {
           frontmatter: { draft, created, updated, title },

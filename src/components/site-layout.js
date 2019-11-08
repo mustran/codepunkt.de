@@ -82,6 +82,15 @@ const global = css`
         box-shadow: 0 1px 0 0 transparent;
       }
     }
+
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html:not([data-whatinput='keyboard']) * {
+      outline: none;
+    }
   }
 `
 
@@ -160,7 +169,9 @@ const Transition = ({ children, location }) => {
               ...getTransitionStyles[status],
             }}
           >
-            {React.cloneElement(children, { className: minHeight })}
+            {React.cloneElement(children, {
+              className: minHeight,
+            })}
           </div>
         )}
       </ReactTransition>
@@ -168,13 +179,21 @@ const Transition = ({ children, location }) => {
   )
 }
 
+const sneakPeakColors = {
+  '/': '#8241b5',
+  '/about': '#53bd2d',
+  '/legal': '#bf4242',
+}
+
 const SiteLayout = ({ children, location }) => {
+  const sneakPeakColor = sneakPeakColors[location.pathname] || '#4684b1'
+
   return (
     // MDXProvider provides components that are usable in mdx files
     // without importing them
     <MDXProvider components={{ Foo }}>
       <div className={cx(global, container)}>
-        <SiteHeader />
+        <SiteHeader path={location.pathname} sneakPeakColor={sneakPeakColor} />
         <main id="main" className={main}>
           <Transition location={location}>{children}</Transition>
         </main>
