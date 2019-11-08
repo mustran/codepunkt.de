@@ -2,7 +2,6 @@ import loadable from '@loadable/component'
 import { Link } from 'gatsby'
 import { css, cx } from 'linaria'
 import React from 'react'
-import { useOrientation } from 'react-use'
 import Meta from '../components/meta'
 
 /**
@@ -109,8 +108,6 @@ const BackgroundAnimation = loadable(() =>
 )
 
 const HomePage = ({ className }) => {
-  const orientation = useOrientation()
-
   return (
     <article className={cx(className, hero)}>
       <Meta title="Codepunkt" />
@@ -141,7 +138,7 @@ const HomePage = ({ className }) => {
           >
             Twitter
           </a>
-          . {JSON.stringify(orientation, null, 2)}
+          .
         </p>
       </div>
     </article>

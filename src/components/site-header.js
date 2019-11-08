@@ -3,7 +3,7 @@ import { css, cx } from 'linaria'
 import React, { useEffect, useState } from 'react'
 import Helmet from 'react-helmet'
 import Media from 'react-media'
-import { useWindowScroll } from 'react-use'
+import { useOrientation, useWindowScroll } from 'react-use'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
 import SiteLogo from './site-logo'
@@ -352,6 +352,7 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
   useEffect(() => setIsMenuOpen(false), [path])
   const { y } = useWindowScroll()
   const [headerState, setHeaderState] = useState('initial')
+  const { angle } = useOrientation()
 
   React.useEffect(() => {
     if (headerState !== 'fixed' && y > 250) {
@@ -422,7 +423,10 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
                   onClick={handleMenuItemClick}
                   className={cx(link, isMenuOpen && linkOpen)}
                 >
-                  <span>Home</span>
+                  <span>
+                    Home{' '}
+                    {angle === 90 || angle === 270 ? 'landscape' : 'portrait'}
+                  </span>
                 </Link>
               </li>
               <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
