@@ -41,7 +41,15 @@ const BlogIndex = (props) => {
   return (
     <div className={className}>
       <Meta title="Articles — Codepunkt" />
-      <h1>Articles</h1>
+      <h1>
+        <span
+          className={css`
+            background: #e0f0fb;
+          `}
+        >
+          Articles
+        </span>
+      </h1>
       {articles.map((article) => {
         const {
           frontmatter: { draft, created, updated, title },
@@ -54,13 +62,7 @@ const BlogIndex = (props) => {
           <article className={preview} key={id}>
             <Link to={path}>
               <h3>
-                <span
-                  className={css`
-                    background: #e0f0fb;
-                  `}
-                >
-                  {title}
-                </span>
+                <span className={css``}>{title}</span>
               </h3>
             </Link>
             <p>{excerpt}</p>

@@ -7,7 +7,6 @@ const link = css`
   display: inline-block;
   box-shadow: none !important;
   height: 45px;
-  z-index: 99;
 `
 
 const logo = css`
@@ -17,7 +16,7 @@ const logo = css`
   height: 45px;
 
   path {
-    fill: #004faf;
+    fill: #4b4237;
     stroke: none;
   }
 `

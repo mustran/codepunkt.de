@@ -84,15 +84,26 @@ const menuItem = css`
 const menuItemOpen = css`
   display: block;
   width: 100%;
+  padding: 0 15%;
+  margin: 1vh 0;
 
   &:nth-of-type(1) a {
     animation-delay: 0.25s;
   }
+  &:nth-of-type(1) a.active::before {
+    background: #efe0fb;
+  }
   &:nth-of-type(2) a {
     animation-delay: 0.27s;
   }
+  &:nth-of-type(2) a.active::before {
+    background: #e0f0fb;
+  }
   &:nth-of-type(3) a {
     animation-delay: 0.29s;
+  }
+  &:nth-of-type(3) a.active::before {
+    background: #e7fbe0;
   }
 `
 
@@ -134,23 +145,21 @@ const link = css`
     display: flex;
     align-items: center;
     padding: 1rem 20%;
-    font-weight: 500;
     font-size: 2rem;
+    font-weight: 300;
     font-family: Merriweather, 'Lucida Bright', Lucidabright, 'Lucida Serif',
       Lucida, 'DejaVu Serif', 'Bitstream Vera Serif', 'Liberation Serif',
       Georgia, serif;
 
     &::before {
-      display: none;
-    }
-
-    &.active::before {
+      content: '';
       display: block;
+      background: #fbfbfb;
       left: 0;
-      right: auto;
-      width: calc(20% - 12px);
-      height: 12px;
-      bottom: calc(50% - 6px);
+      width: 200%;
+      height: 5px;
+      bottom: 0;
+      position: absolute;
     }
   }
 
@@ -181,6 +190,7 @@ const linkOpen = css`
   transition: none;
   padding: 0;
   animation: fadeUpIn 0.2s ease-out 0.25s forwards;
+  padding: 0 12px;
 
   &.active {
     border: 0;
@@ -299,7 +309,12 @@ const menuContentOpen = css`
   left: 0;
   z-index: 2;
   flex-direction: column;
-  padding: 120px 5% 0;
+  padding: 20vh 5% 0;
+`
+
+const menuContentOpenLandscape = css`
+  padding: 0 15% 0 30%;
+  justify-content: center;
 `
 
 const modeButton = css`
@@ -353,6 +368,7 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
   const { y } = useWindowScroll()
   const [headerState, setHeaderState] = useState('initial')
   const { angle } = useOrientation()
+  const isLandscape = angle === 90 || angle === 270
 
   React.useEffect(() => {
     if (headerState !== 'fixed' && y > 250) {
@@ -414,7 +430,13 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
               {isMenuOpen ? 'Open menu' : 'Close menu'}
             </div>
           </button>
-          <div className={cx(menuContent, isMenuOpen && menuContentOpen)}>
+          <div
+            className={cx(
+              menuContent,
+              isMenuOpen && menuContentOpen,
+              isMenuOpen && isLandscape && menuContentOpenLandscape
+            )}
+          >
             <ul className={cx(menuItemList, isMenuOpen && menuItemListOpen)}>
               <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
                 <Link
@@ -423,10 +445,7 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
                   onClick={handleMenuItemClick}
                   className={cx(link, isMenuOpen && linkOpen)}
                 >
-                  <span>
-                    Home{' '}
-                    {angle === 90 || angle === 270 ? 'landscape' : 'portrait'}
-                  </span>
+                  <span>Home</span>
                 </Link>
               </li>
               <li className={cx(menuItem, isMenuOpen && menuItemOpen)}>
