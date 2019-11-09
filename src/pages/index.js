@@ -9,7 +9,7 @@ import Meta from '../components/meta'
  *
  * - remove IE from browserslist
  * - write gatsby plugin that adds browserslist regex
- * - useBreakpoint hook to stop transition animation when hamburger menu exists
+ * - simplify header styles
  */
 
 const hero = css`
@@ -23,12 +23,12 @@ const title = css`
   margin-bottom: 0.86rem;
   font-size: 10vmin;
 
-  span {
-    background: #efe0fb;
-  }
-
   @media only screen and (min-width: 668px) {
     font-size: 66.7px;
+  }
+
+  span {
+    background: #efe0fb;
   }
 `
 

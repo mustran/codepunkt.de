@@ -1,12 +1,9 @@
 import { Link } from 'gatsby'
 import { css, cx } from 'linaria'
 import React, { useEffect, useState } from 'react'
-import Helmet from 'react-helmet'
-import Media from 'react-media'
 import { useOrientation, useWindowScroll } from 'react-use'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
-import SiteLogo from './site-logo'
 
 const headerHeight = 70
 
@@ -341,97 +338,76 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
   }, [headerState, y])
 
   return (
-    <header
-      className={cx(
-        header,
-        headerState === 'fixed' && headerFixed,
-        headerState === 'static' && headerStatic,
-        isMenuOpen && headerOpen
-      )}
-    >
-      <Helmet>
-        <html className={cx(isMenuOpen && overflowHidden)} />
-      </Helmet>
-      <div className={container}>
-        <SiteLogo />
-        <Media
-          query={{ minWidth: 668 }}
-          onChange={() => setIsMenuOpen(false)}
-        />
-        <nav className={`${menu}${isMenuOpen ? ' open' : ' '}`}>
-          <button
-            className={`modeButton ${modeButton}`}
-            onClick={handleModeToggleClick}
+    <nav className={`${menu}${isMenuOpen ? ' open' : ' '}`}>
+      <button
+        className={`modeButton ${modeButton}`}
+        onClick={handleModeToggleClick}
+      >
+        {isDarkMode ? <MoonIcon /> : <SunIcon />}
+      </button>
+      <button
+        className={`menuButton ${menuButton}`}
+        onClick={() => setIsMenuOpen((open) => !open)}
+      >
+        <div>{isMenuOpen ? 'Open menu' : 'Close menu'}</div>
+      </button>
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="xMidYMid meet"
+        className={`menuBackground ${menuBackground}`}
+      >
+        <mask id="m">
+          <circle cx="50" cy="50" r="6" fill="white" />
+          <circle
+            cx="50"
+            cy="50"
+            r="3"
+            transform="translate(0.15 0)"
+            fill="black"
+          />
+          <circle cx="50" cy="50" r="2.6" fill="white" />
+        </mask>
+        <circle cx="50" cy="50" r="4.5" fill="#f3f3f3" />
+        <circle cx="50" cy="50" r="5" fill="#fff" mask="url(#m)" />
+      </svg>
+      <ul
+        className={`menuItems ${isLandscape ? 'landscape ' : ''}${menuItems}`}
+      >
+        <li className={`menuItem ${menuItem}`}>
+          <Link
+            to="/"
+            activeClassName="active"
+            onClick={handleMenuItemClick}
+            className={cx(link, isMenuOpen && linkOpen)}
           >
-            {isDarkMode ? <MoonIcon /> : <SunIcon />}
-          </button>
-          <button
-            className={`menuButton ${menuButton}`}
-            onClick={() => setIsMenuOpen((open) => !open)}
+            <span>Home</span>
+          </Link>
+        </li>
+        <li className={`menuItem ${menuItem}`}>
+          <Link
+            to="/articles"
+            activeClassName="active"
+            partiallyActive={true}
+            onClick={handleMenuItemClick}
+            className={cx(link, isMenuOpen && linkOpen)}
           >
-            <div>{isMenuOpen ? 'Open menu' : 'Close menu'}</div>
-          </button>
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="xMidYMid meet"
-            className={`menuBackground ${menuBackground}`}
+            <span>Articles</span>
+          </Link>
+        </li>
+        <li className={`menuItem ${menuItem}`}>
+          <Link
+            to="/about"
+            activeClassName="active"
+            onClick={handleMenuItemClick}
+            className={cx(link, isMenuOpen && linkOpen)}
           >
-            <mask id="m">
-              <circle cx="50" cy="50" r="6" fill="white" />
-              <circle
-                cx="50"
-                cy="50"
-                r="3"
-                transform="translate(0.15 0)"
-                fill="black"
-              />
-              <circle cx="50" cy="50" r="2.6" fill="white" />
-            </mask>
-            <circle cx="50" cy="50" r="4.5" fill="#f3f3f3" />
-            <circle cx="50" cy="50" r="5" fill="#fff" mask="url(#m)" />
-          </svg>
-          <ul
-            className={`menuItems ${
-              isLandscape ? 'landscape ' : ''
-            }${menuItems}`}
-          >
-            <li className={`menuItem ${menuItem}`}>
-              <Link
-                to="/"
-                activeClassName="active"
-                onClick={handleMenuItemClick}
-                className={cx(link, isMenuOpen && linkOpen)}
-              >
-                <span>Home</span>
-              </Link>
-            </li>
-            <li className={`menuItem ${menuItem}`}>
-              <Link
-                to="/articles"
-                activeClassName="active"
-                partiallyActive={true}
-                onClick={handleMenuItemClick}
-                className={cx(link, isMenuOpen && linkOpen)}
-              >
-                <span>Articles</span>
-              </Link>
-            </li>
-            <li className={`menuItem ${menuItem}`}>
-              <Link
-                to="/about"
-                activeClassName="active"
-                onClick={handleMenuItemClick}
-                className={cx(link, isMenuOpen && linkOpen)}
-              >
-                <span>About</span>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+            <span>About</span>
+          </Link>
+        </li>
+      </ul>
+    </nav>
   )
 }
 

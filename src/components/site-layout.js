@@ -91,6 +91,13 @@ const global = css`
     html:not([data-whatinput='keyboard']) * {
       outline: none;
     }
+
+    h1 {
+      font-size: 9vmin;
+      @media only screen and (min-width: 668px) {
+        font-size: 60.03px;
+      }
+    }
   }
 `
 
@@ -179,21 +186,13 @@ const Transition = ({ children, location }) => {
   )
 }
 
-const sneakPeakColors = {
-  '/': '#8241b5',
-  '/about': '#53bd2d',
-  '/legal': '#bf4242',
-}
-
 const SiteLayout = ({ children, location }) => {
-  const sneakPeakColor = sneakPeakColors[location.pathname] || '#4684b1'
-
   return (
     // MDXProvider provides components that are usable in mdx files
     // without importing them
     <MDXProvider components={{ Foo }}>
       <div className={cx(global, container)}>
-        <SiteHeader path={location.pathname} sneakPeakColor={sneakPeakColor} />
+        <SiteHeader path={location.pathname} />
         <main id="main" className={main}>
           <Transition location={location}>{children}</Transition>
         </main>

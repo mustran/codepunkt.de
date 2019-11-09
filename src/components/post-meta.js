@@ -6,12 +6,12 @@ import WarningIcon from '../images/warning.svg'
 import { formatPostDate } from '../utils'
 
 const meta = css`
-  list-style: none;
   display: flex;
   flex-wrap: wrap;
   margin: 0;
   font-size: 16px;
   color: #888;
+
   li {
     margin: 0;
     display: flex;
@@ -21,10 +21,11 @@ const meta = css`
       margin-right: 16px;
     }
   }
+
   svg {
     margin-right: 6px;
     width: 20px;
-    stroke: #2b628a;
+    stroke: #7493a9;
     stroke-width: 1;
   }
 `
