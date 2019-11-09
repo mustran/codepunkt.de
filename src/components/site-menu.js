@@ -104,7 +104,7 @@ const link = css`
 
   @media only screen and (min-width: 668px) {
     &.active {
-      background: #fff;
+      font-weight: 500;
     }
   }
 

@@ -36,7 +36,7 @@ const headerFixed = css`
   }
 
   position: fixed;
-  background: #eee;
+  background: #fff;
   border-bottom-color: #d6dce3;
   animation: headerIn 0.4s ease-out forwards;
   margin-top: 0;

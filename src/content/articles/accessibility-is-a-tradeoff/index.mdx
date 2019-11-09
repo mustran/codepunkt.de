@@ -10,3 +10,32 @@ This article is a work in progress. Until it's finished, the main takeaway messa
 Accessibility is important. However, it is also a tradeoff in certain situations. Please continue to educate others about the importance of accessibility.
 
 Also, if you're not entirely sure, develop your websites and applications with basic accessibility in mind. Using semantic HTML elements and managing both tab index and focus properly are not a lot of work most of the times, yet help a lot!
+
+```jsx{14,15}
+import { Link } from 'gatsby'
+import { css } from 'linaria'
+import React from 'react'
+import LogoSvg from './site-logo.svg'
+
+const logo = css`
+  font-size: 18px;
+  margin-top: 4px;
+  width: 140px;
+  height: 45px;
+
+  path {
+    fill: #4b4237;
+    stroke: none;
+  }
+`
+
+const SiteLogo = () => {
+  return (
+    <Link to="/">
+      <LogoSvg role="img" className={logo} />
+    </Link>
+  )
+}
+
+export default SiteLogo
+```

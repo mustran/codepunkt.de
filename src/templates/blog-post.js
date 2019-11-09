@@ -83,7 +83,7 @@ const article = css`
     }
 
     .vscode-highlight-line-highlighted {
-      background-color: #fffcdd;
+      background-color: #fffce1;
     }
   }
 
