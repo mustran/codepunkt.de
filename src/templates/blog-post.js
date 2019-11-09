@@ -30,7 +30,7 @@ const article = css`
 
   /* syntax highlighted code */
   code:not(.vscode-highlight-code) {
-    background: #fefaf1;
+    background: #f8f8f8;
     padding: 3px 5px;
     border-radius: 3px;
     color: #5c5e7b;
@@ -40,8 +40,9 @@ const article = css`
 
   .vscode-highlight {
     border-radius: 4px;
+    border: 1px solid #e5e5e5;
     counter-reset: line;
-    background: #fefaf1;
+    background: #fdfdfd;
 
     .vscode-highlight-code {
       /* font-size: 16px; */
@@ -56,7 +57,7 @@ const article = css`
         content: counter(line);
         margin: 0 12px 0 -8px;
         user-select: none;
-        color: #d7c9b3;
+        color: #bbb;
         text-align: right;
         width: 20px;
         display: inline-block;
@@ -82,7 +83,7 @@ const article = css`
     }
 
     .vscode-highlight-line-highlighted {
-      background-color: #f9f3e6;
+      background-color: #fffcdd;
     }
   }
 

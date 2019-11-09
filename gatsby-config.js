@@ -106,7 +106,7 @@ module.exports = {
             resolve: 'gatsby-remark-vscode',
             options: {
               colorTheme: {
-                defaultTheme: 'Solarized Light', // 'Ayu Mirage'
+                defaultTheme: 'Github Plus', // 'Ayu Mirage'
                 prefersDarkTheme: 'Ayu Dark',
               },
               injectStyles: true,
@@ -115,6 +115,7 @@ module.exports = {
               ),
               extensions: [
                 { identifier: 'teabyii.ayu', version: '0.18.0' },
+                { identifier: 'thenikso.github-plus-theme', version: '1.2.1' },
                 {
                   identifier: 'jpoissonnier.vscode-styled-components',
                   version: '0.0.26',

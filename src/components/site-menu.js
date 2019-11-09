@@ -1,138 +1,82 @@
 import { Link } from 'gatsby'
 import { css, cx } from 'linaria'
 import React, { useEffect, useState } from 'react'
-import { useOrientation, useWindowScroll } from 'react-use'
-import MoonIcon from '../images/moon.svg'
-import SunIcon from '../images/sun.svg'
-
-const headerHeight = 70
-
-const header = css`
-  width: 100%;
-  height: ${headerHeight}px;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  background: transparent;
-  border-bottom: 1px solid #fff;
-  top: 0;
-  margin-top: 4px;
-
-  @media only screen and (min-width: 668px) {
-    margin-top: 16px;
-  }
-`
-
-const headerFixed = css`
-  @keyframes headerIn {
-    from {
-      margin-top: -70px;
-    }
-    to {
-      margin-top: 0;
-    }
-  }
-
-  position: fixed;
-  background: #fff;
-  border-bottom-color: #d6dce3;
-  animation: headerIn 0.4s ease-out forwards;
-  margin-top: 0;
-`
-
-const headerStatic = css`
-  @keyframes headerOut {
-    from {
-      margin-top: 25px;
-    }
-    to {
-      margin-top: 0;
-    }
-  }
-
-  border-bottom-color: #fff;
-  animation: headerOut 0.2s ease-out forwards;
-`
-
-const headerOpen = css`
-  position: fixed;
-
-  .menuBackground {
-    visibility: visible;
-    transition: transform 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
-    transform: scale(50);
-  }
-
-  .menuButton::before,
-  .menuButton::after {
-    top: 50%;
-  }
-
-  .menuButton::before {
-    transform: translate3d(0, -50%, 0) rotate(45deg);
-  }
-  .menuButton::after {
-    transform: translate3d(0, -50%, 0) rotate(135deg);
-  }
-
-  .menuButton > div::before,
-  .menuButton > div::after {
-    width: 0;
-  }
-
-  .menuItems {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    padding: 20vh 5% 0;
-    align-items: center;
-  }
-
-  .menuItem {
-    display: block;
-    width: 100%;
-    padding: 0 15%;
-    margin: 1vh 0;
-
-    &:nth-of-type(1) a {
-      animation-delay: 0.25s;
-    }
-    &:nth-of-type(1) a.active::before {
-      background: #efe0fb;
-    }
-    &:nth-of-type(2) a {
-      animation-delay: 0.27s;
-    }
-    &:nth-of-type(2) a.active::before {
-      background: #e0f0fb;
-    }
-    &:nth-of-type(3) a {
-      animation-delay: 0.29s;
-    }
-    &:nth-of-type(3) a.active::before {
-      background: #d8efd0;
-    }
-  }
-`
-
-const container = css`
-  max-width: 768px;
-  margin: 0 auto;
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`
+import Helmet from 'react-helmet'
+import Media from 'react-media'
+import { useOrientation } from 'react-use'
 
 const menu = css`
   font-size: 18px;
   display: flex;
   align-items: center;
+
+  &.open {
+    .menuBackground {
+      visibility: visible;
+      transition: transform 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      transform: scale(50);
+    }
+
+    .menuButton::before,
+    .menuButton::after {
+      top: 50%;
+    }
+
+    .menuButton::before {
+      transform: translate3d(0, -50%, 0) rotate(45deg);
+    }
+    .menuButton::after {
+      transform: translate3d(0, -50%, 0) rotate(135deg);
+    }
+
+    .menuButton > div::before,
+    .menuButton > div::after {
+      width: 0;
+    }
+
+    .menuItems {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      padding: 20vh 5% 0;
+      align-items: center;
+    }
+
+    .menuItems.landscape {
+      padding: 0 15% 0 30%;
+      justify-content: center;
+    }
+
+    .menuItem {
+      display: block;
+      width: 100%;
+      padding: 0 15%;
+      margin: 1vh 0;
+
+      &:nth-of-type(1) a {
+        animation-delay: 0.25s;
+      }
+      &:nth-of-type(1) a.active::before {
+        background: #efe0fb;
+      }
+      &:nth-of-type(2) a {
+        animation-delay: 0.27s;
+      }
+      &:nth-of-type(2) a.active::before {
+        background: #e0f0fb;
+      }
+      &:nth-of-type(3) a {
+        animation-delay: 0.29s;
+      }
+      &:nth-of-type(3) a.active::before {
+        background: #d8efd0;
+      }
+    }
+  }
 `
 
 const menuItem = css`
@@ -161,7 +105,6 @@ const link = css`
   @media only screen and (min-width: 668px) {
     &.active {
       background: #fff;
-      border: 1px solid #dfe3e8;
     }
   }
 
@@ -281,22 +224,6 @@ const menuButton = css`
   }
 `
 
-const modeButton = css`
-  border: 0;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-  width: 36px;
-  margin: 0 4px 0 0;
-
-  @media only screen and (min-width: 668px) {
-    margin: 0 -4px 0 32px;
-    order: 1;
-  }
-`
-
 const overflowHidden = css`
   overflow: hidden;
 `
@@ -317,34 +244,19 @@ const menuBackground = css`
   }
 `
 
-const SiteHeader = ({ sneakPeakColor, path }) => {
+const Menu = ({ path }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
   const handleMenuItemClick = () => isMenuOpen && setIsMenuOpen(false)
-  const handleModeToggleClick = () => setIsDarkMode((isDarkMode) => !isDarkMode)
   useEffect(() => setIsMenuOpen(false), [path])
-  const { y } = useWindowScroll()
-  const [headerState, setHeaderState] = useState('initial')
   const { angle } = useOrientation()
   const isLandscape = angle === 90 || angle === 270
 
-  React.useEffect(() => {
-    if (headerState !== 'fixed' && y > 250) {
-      setHeaderState('fixed')
-    }
-    if (headerState === 'fixed' && y < 40) {
-      setHeaderState('static')
-    }
-  }, [headerState, y])
-
   return (
     <nav className={`${menu}${isMenuOpen ? ' open' : ' '}`}>
-      <button
-        className={`modeButton ${modeButton}`}
-        onClick={handleModeToggleClick}
-      >
-        {isDarkMode ? <MoonIcon /> : <SunIcon />}
-      </button>
+      <Helmet>
+        <html className={cx(isMenuOpen && overflowHidden)} />
+      </Helmet>
+      <Media query={{ minWidth: 668 }} onChange={() => setIsMenuOpen(false)} />
       <button
         className={`menuButton ${menuButton}`}
         onClick={() => setIsMenuOpen((open) => !open)}
@@ -411,4 +323,4 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
   )
 }
 
-export default SiteHeader
+export default Menu
