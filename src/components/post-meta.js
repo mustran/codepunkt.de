@@ -10,7 +10,7 @@ const meta = css`
   flex-wrap: wrap;
   margin: 0;
   font-size: 16px;
-  color: #888;
+  color: #8899a6;
 
   li {
     margin: 0;
@@ -25,7 +25,7 @@ const meta = css`
   svg {
     margin-right: 6px;
     width: 20px;
-    stroke: #7493a9;
+    stroke: #576773;
     stroke-width: 1;
   }
 `

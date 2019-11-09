@@ -7,9 +7,11 @@ import Meta from '../components/meta'
 /**
  * TODOS
  *
+ * - adjust color of headline links in dark mode to color of text links
+ * - find a way to toggle gatsby-remark-vscode themes w/o mediaquery
  * - remove IE from browserslist
  * - write gatsby plugin that adds browserslist regex
- * - simplify header styles
+ * - actually make webmentions work
  */
 
 const hero = css`
@@ -22,13 +24,17 @@ const hero = css`
 const title = css`
   margin-bottom: 0.86rem;
   font-size: 10vmin;
-
+  transform: rotate(0.6deg);
   @media only screen and (min-width: 668px) {
     font-size: 66.7px;
   }
 
   span {
     background: #efe0fb;
+  }
+
+  .dark-mode & span {
+    background: #6f488e;
   }
 `
 
@@ -92,8 +98,25 @@ const body = css`
     &:nth-of-type(3)::after {
       background-image: linear-gradient(transparent calc(65%), #a6ddff 35%);
     }
-    &:hover::after {
+    &:hover::after,
+    &:focus::after {
       transform: scaleX(1);
+    }
+  }
+
+  .dark-mode & a {
+    color: #fff;
+    &::before {
+      background-image: linear-gradient(transparent calc(65%), #2d3946 35%);
+    }
+    &:nth-of-type(1)::after {
+      background-image: linear-gradient(transparent calc(65%), #582c2c 35%);
+    }
+    &:nth-of-type(2)::after {
+      background-image: linear-gradient(transparent calc(65%), #316537 35%);
+    }
+    &:nth-of-type(3)::after {
+      background-image: linear-gradient(transparent calc(65%), #154a6b 35%);
     }
   }
 `

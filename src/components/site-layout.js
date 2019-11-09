@@ -68,9 +68,15 @@ const global = css`
       -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       background: #fff;
+      color: #333;
       min-height: 100%;
       scroll-behavior: smooth;
       text-rendering: optimizeSpeed;
+
+      &.dark-mode {
+        background: #15202b;
+        color: #e3e7ea;
+      }
     }
 
     a {
@@ -80,6 +86,10 @@ const global = css`
 
       &:hover {
         box-shadow: 0 1px 0 0 transparent;
+      }
+
+      .dark-mode & {
+        color: #90baff;
       }
     }
 
@@ -96,6 +106,17 @@ const global = css`
       font-size: 9vmin;
       @media only screen and (min-width: 668px) {
         font-size: 60.03px;
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      .dark-mode & {
+        color: #fff;
       }
     }
   }

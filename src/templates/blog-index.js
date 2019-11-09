@@ -15,15 +15,32 @@ const paginationItem = css`
   padding: 0;
 `
 
-const preview = css`
+const article = css`
   &:not(:last-child) {
-    margin-bottom: 3.44rem;
+    margin: 3.44rem 0;
+  }
+  a {
+    display: inline-block;
   }
   p {
-    margin-bottom: 0.86rem;
+    margin: 0.86rem 0;
   }
   h3 {
-    margin-bottom: 0.86rem;
+    margin-bottom: 0;
+    .dark-mode & {
+      color: #90baff;
+    }
+  }
+`
+
+const headline = css`
+  transform: rotate(-1deg);
+
+  span {
+    background: #e0f0fb;
+    .dark-mode & {
+      background: #44568c;
+    }
   }
 `
 
@@ -41,40 +58,35 @@ const BlogIndex = (props) => {
   return (
     <div className={className}>
       <Meta title="Articles — Codepunkt" />
-      <h1>
-        <span
-          className={css`
-            background: #e0f0fb;
-          `}
-        >
-          Articles
-        </span>
+      <h1 className={headline}>
+        <span>Articles</span>
       </h1>
-      {articles.map((article) => {
-        const {
+      {articles.map(
+        ({
           frontmatter: { draft, created, updated, title },
           id,
           excerpt,
           timeToRead,
           fields: { path },
-        } = article
-        return (
-          <article className={preview} key={id}>
-            <Link to={path}>
-              <h3>
-                <span className={css``}>{title}</span>
-              </h3>
-            </Link>
-            <p>{excerpt}</p>
-            <PostMeta
-              draft={draft}
-              created={created}
-              updated={updated}
-              timeToRead={timeToRead}
-            />
-          </article>
-        )
-      })}
+        }) => {
+          return (
+            <article className={article} key={id}>
+              <Link to={path}>
+                <h3>
+                  <span className={css``}>{title}</span>
+                </h3>
+              </Link>
+              <p>{excerpt}</p>
+              <PostMeta
+                draft={draft}
+                created={created}
+                updated={updated}
+                timeToRead={timeToRead}
+              />
+            </article>
+          )
+        }
+      )}
       <nav aria-label="pagination">
         <ol className={pagination}>
           {hasPreviousPage && (

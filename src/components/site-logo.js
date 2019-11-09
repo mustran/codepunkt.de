@@ -19,6 +19,10 @@ const logo = css`
     fill: #4b4237;
     stroke: none;
   }
+
+  .dark-mode & path {
+    fill: #fff;
+  }
 `
 
 const SiteLogo = () => {

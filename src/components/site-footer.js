@@ -14,6 +14,12 @@ const footer = css`
     &:hover {
       color: #4b4237 !important;
     }
+    .dark-mode & {
+      color: #777 !important;
+    }
+    .dark-mode &:hover {
+      color: #aaa !important;
+    }
   }
 `
 

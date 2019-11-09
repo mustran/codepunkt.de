@@ -2,25 +2,30 @@ import { css } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
 
+const headline = css`
+  transform: rotate(1deg);
+
+  span {
+    background: #d8efd0;
+    .dark-mode & {
+      background: #39612c;
+    }
+  }
+`
+
+const heroText = css`
+  font-weight: 300;
+  font-size: 1.2rem;
+`
+
 const AboutPage = () => {
   return (
     <div>
       <Meta title="About Me — Codepunkt" />
-      <h1>
-        <span
-          className={css`
-            background: #d8efd0;
-          `}
-        >
-          Hey there!
-        </span>
+      <h1 className={headline}>
+        <span>Hey there!</span>
       </h1>
-      <article
-        className={css`
-          font-weight: 300;
-          font-size: 1.2rem;
-        `}
-      >
+      <article className={heroText}>
         <p>
           I'm Christoph Werner, a full-stack web developer based in Paderborn,
           Germany. I've been building stuff on the web for the last 20 years,

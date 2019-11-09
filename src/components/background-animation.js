@@ -1,5 +1,6 @@
 import { css } from 'linaria'
 import React, { useEffect, useRef } from 'react'
+import useDarkMode from 'use-dark-mode'
 
 const canvas = css`
   width: 100%;
@@ -18,7 +19,8 @@ const canvas = css`
 
 const radius = 1
 const outOfCanvasOffset = radius + 50
-const color = { r: 240, g: 240, b: 240 }
+const colorBright = { r: 232, g: 232, b: 238 }
+const colorDark = { r: 50, g: 54, b: 63 }
 const alpha_f = 0.03
 const link_line_width = 0.8
 const distanceLimit = 250
@@ -48,6 +50,8 @@ const getVelocity = (pos) => {
 
 const BackgroundAnimation = () => {
   const canvasRef = useRef(null)
+  const { value: isDarkMode } = useDarkMode()
+  const color = isDarkMode ? colorDark : colorBright
 
   const randomSidePos = (length) => {
     return Math.ceil(Math.random() * length)
@@ -205,7 +209,7 @@ const BackgroundAnimation = () => {
         window.clearTimeout(timeout)
       }
     }
-  }, [canvasRef])
+  }, [canvasRef, color.b, color.g, color.r, isDarkMode])
 
   return <canvas className={canvas} ref={canvasRef} />
 }

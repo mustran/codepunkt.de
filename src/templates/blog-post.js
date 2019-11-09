@@ -37,6 +37,10 @@ const article = css`
     font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
       monospace;
   }
+  .dark-mode & code:not(.vscode-highlight-code) {
+    background: #0a1723;
+    color: #bbb;
+  }
 
   .vscode-highlight {
     border-radius: 4px;
@@ -85,6 +89,13 @@ const article = css`
     .vscode-highlight-line-highlighted {
       background-color: #fffce1;
     }
+  }
+  .dark-mode & .vscode-highlight {
+    background: #0a1723;
+    border: 1px solid transparent;
+  }
+  .dark-mode & .vscode-highlight-line-highlighted {
+    background-color: #1b2835;
   }
 
   /* horizontally center twitter widget */
@@ -193,6 +204,9 @@ const BlogPost = (props) => {
           <span
             className={css`
               background: #e0f0fb;
+              .dark-mode & {
+                background: #44568c;
+              }
             `}
           >
             {title}

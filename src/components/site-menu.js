@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Helmet from 'react-helmet'
 import Media from 'react-media'
 import { useOrientation } from 'react-use'
+import useDarkMode from 'use-dark-mode'
 
 const menu = css`
   font-size: 18px;
@@ -63,17 +64,26 @@ const menu = css`
       &:nth-of-type(1) a.active::before {
         background: #efe0fb;
       }
+      .dark-mode &:nth-of-type(1) a.active::before {
+        background: #6f488e;
+      }
       &:nth-of-type(2) a {
         animation-delay: 0.27s;
       }
       &:nth-of-type(2) a.active::before {
         background: #e0f0fb;
       }
+      .dark-mode &:nth-of-type(2) a.active::before {
+        background: #44568c;
+      }
       &:nth-of-type(3) a {
         animation-delay: 0.29s;
       }
       &:nth-of-type(3) a.active::before {
         background: #d8efd0;
+      }
+      .dark-mode &:nth-of-type(3) a.active::before {
+        background: #39612c;
       }
     }
   }
@@ -97,14 +107,22 @@ const menuItems = css`
 
 const link = css`
   box-shadow: none;
-  color: #4b4237;
+  color: #666;
   position: relative;
   padding: 6px 12px;
   box-shadow: 0 none;
 
+  .dark-mode & {
+    color: #ccc;
+  }
+  .dark-mode &.active {
+    color: #fff;
+  }
+
   @media only screen and (min-width: 668px) {
     &.active {
       font-weight: 500;
+      color: #4b4237;
     }
   }
 
@@ -122,12 +140,16 @@ const link = css`
     &::before {
       content: '';
       display: block;
-      background: #fbfbfb;
+      background: #eee;
       left: 0;
       width: 200%;
       height: 5px;
       bottom: 0;
       position: absolute;
+    }
+
+    .dark-mode &::before {
+      background: #253342;
     }
   }
 
@@ -172,6 +194,10 @@ const menuButton = css`
   margin-right: -4px;
   position: relative;
 
+  .dark-mode & {
+    color: #fff;
+  }
+
   @media only screen and (min-width: 668px) {
     display: none;
   }
@@ -180,7 +206,7 @@ const menuButton = css`
   &::after {
     position: absolute;
     content: '';
-    background: #4b4237;
+    background: currentColor;
     width: 22px;
     height: 1px;
     left: 7px;
@@ -209,7 +235,7 @@ const menuButton = css`
       content: '';
       width: 11px;
       height: 1px;
-      background: #4b4237;
+      background: currentColor;
     }
     &::before {
       right: 50%;
@@ -249,6 +275,7 @@ const Menu = ({ path }) => {
   const handleMenuItemClick = () => isMenuOpen && setIsMenuOpen(false)
   useEffect(() => setIsMenuOpen(false), [path])
   const { angle } = useOrientation()
+  const { value: isDarkMode } = useDarkMode()
   const isLandscape = angle === 90 || angle === 270
 
   return (
@@ -281,8 +308,19 @@ const Menu = ({ path }) => {
           />
           <circle cx="50" cy="50" r="2.6" fill="white" />
         </mask>
-        <circle cx="50" cy="50" r="4.5" fill="#f3f3f3" />
-        <circle cx="50" cy="50" r="5" fill="#fff" mask="url(#m)" />
+        <circle
+          cx="50"
+          cy="50"
+          r="4.5"
+          fill={isDarkMode ? '#263b50' : '#f3f3f3'}
+        />
+        <circle
+          cx="50"
+          cy="50"
+          r="5"
+          fill={isDarkMode ? '#15202b' : '#fff'}
+          mask="url(#m)"
+        />
       </svg>
       <ul
         className={`menuItems ${isLandscape ? 'landscape ' : ''}${menuItems}`}

@@ -31,8 +31,6 @@ const typography = new Typography({
     'Helvetica Neue',
     'sans-serif',
   ],
-  headerColor: '#4B4237',
-  bodyColor: '#333',
   headerWeight: 500,
   bodyWeight: 400,
   boldWeight: 500,

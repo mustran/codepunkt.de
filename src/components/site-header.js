@@ -1,6 +1,7 @@
 import { css, cx } from 'linaria'
 import React, { useState } from 'react'
 import { useWindowScroll } from 'react-use'
+import useDarkMode from 'use-dark-mode'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
 import SiteLogo from './site-logo'
@@ -16,7 +17,7 @@ const header = css`
   align-items: center;
   position: absolute;
   background: transparent;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid transparent;
   top: 0;
   margin-top: 4px;
 
@@ -40,6 +41,11 @@ const headerFixed = css`
   border-bottom-color: #d6dce3;
   animation: headerIn 0.4s ease-out forwards;
   margin-top: 0;
+
+  .dark-mode & {
+    background: #15202b;
+    border-bottom-color: #3e5165;
+  }
 `
 
 const headerStatic = css`
@@ -52,7 +58,6 @@ const headerStatic = css`
     }
   }
 
-  border-bottom-color: #fff;
   animation: headerOut 0.2s ease-out forwards;
 `
 
@@ -69,6 +74,13 @@ const rightSide = css`
   display: flex;
 `
 
+const sunIcon = css`
+  stroke-width: 1.3;
+`
+const moonIcon = css`
+  stroke-width: 0.8;
+`
+
 const modeButton = css`
   border: 0;
   background: transparent;
@@ -83,11 +95,15 @@ const modeButton = css`
     margin: 0 -4px 0 32px;
     order: 1;
   }
+
+  .dark-mode & {
+    color: #fff;
+  }
 `
 
 const SiteHeader = ({ sneakPeakColor, path }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false)
-  const handleModeToggleClick = () => setIsDarkMode((isDarkMode) => !isDarkMode)
+  const { value: isDarkMode, toggle: toggleDarkMode } = useDarkMode(false)
+
   const { y } = useWindowScroll()
   const [headerState, setHeaderState] = useState('initial')
 
@@ -113,9 +129,13 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
         <div className={rightSide}>
           <button
             className={`modeButton ${modeButton}`}
-            onClick={handleModeToggleClick}
+            onClick={toggleDarkMode}
           >
-            {isDarkMode ? <MoonIcon /> : <SunIcon />}
+            {isDarkMode ? (
+              <SunIcon className={sunIcon} />
+            ) : (
+              <MoonIcon className={moonIcon} />
+            )}
           </button>
           <Menu path={path} />
         </div>
