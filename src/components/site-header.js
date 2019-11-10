@@ -75,15 +75,15 @@ const rightSide = css`
 `
 
 const sunIcon = css`
-  stroke-width: 1;
+  stroke-width: 1.3;
 `
 const moonIcon = css`
-  stroke-width: 1;
+  stroke-width: 0.8;
 `
 
 const modeButton = css`
   border: 0;
-  background: transparent;
+  background: red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,6 +95,10 @@ const modeButton = css`
   @media only screen and (min-width: 668px) {
     margin: 0 -4px 0 32px;
     order: 1;
+  }
+
+  svg {
+    background: green;
   }
 
   .dark-mode & {
