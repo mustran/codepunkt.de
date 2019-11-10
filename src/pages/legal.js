@@ -6,9 +6,9 @@ const headline = css`
   transform: rotate(-1deg);
 
   span {
-    background: #fbe0e0;
+    background: #b0eae8;
     .dark-mode & {
-      background: #902c2c;
+      background: #2c908b;
     }
   }
 `

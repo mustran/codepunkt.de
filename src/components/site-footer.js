@@ -1,7 +1,6 @@
 import { Link } from 'gatsby'
 import { css } from 'linaria'
 import React from 'react'
-import BookmarkIcon from '../images/bookmark.svg'
 
 const footer = css`
   height: 3.5rem;
@@ -39,7 +38,6 @@ const copyright = css`
 
 const social = css`
   display: flex;
-  margin-right: -8px;
   align-items: center;
 `
 
@@ -70,19 +68,10 @@ const SiteFooter = () => {
       <div className={container}>
         <div className={copyright}>
           <Link to="/legal">Legal Notice</Link>
-          <a href="https://twitter.com/code_punkt" className="h-card" rel="me">
-            Twitter
-          </a>
         </div>
         <div className={social}>
-          <a
-            className={externalLink}
-            href="https://github.com/codepunkt"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <BookmarkIcon className={icon} />
-            <span className={iconText}>RSS</span>
+          <a href="https://twitter.com/code_punkt" className="h-card" rel="me">
+            Twitter
           </a>
         </div>
       </div>
