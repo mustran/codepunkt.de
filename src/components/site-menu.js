@@ -15,7 +15,7 @@ const menu = css`
     .menuBackground {
       visibility: visible;
       transition: transform 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
-      transform: scale(5);
+      transform: scale(1);
     }
 
     .menuButton::before,
@@ -256,13 +256,13 @@ const overflowHidden = css`
 `
 
 const menuBackground = css`
-  width: 1000%;
-  height: 1000%;
-  top: calc(-500% + 39px);
-  right: calc(-495% + 13px);
+  width: 5000%;
+  height: 5000%;
+  top: calc(-2500% + 39px);
+  right: calc(-2495% + 13px);
   visibility: hidden;
   position: fixed;
-  transform: scale(0.02);
+  transform: scale(0.005);
   transform-origin: 50% 50%;
   transition-duration: 0s;
 
@@ -295,6 +295,7 @@ const Menu = ({ path }) => {
         width="100%"
         height="100%"
         viewBox="0 0 100 100"
+        version="1.1"
         preserveAspectRatio="xMidYMid meet"
         className={`menuBackground ${menuBackground}`}
       >

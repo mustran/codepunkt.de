@@ -37,11 +37,14 @@ const AboutPage = () => {
           with companies and clients across various industries.
         </p>
         <p>
-          Over the last couple of years, i've shifted my focus to help teams of
-          developers become acquainted to the web and cloud ecosystems. I've
-          built a few teams and helped improve their knowledge and further their
-          personal development, gaining more experience and efficiency,
-          resulting in a for the customer.
+          My focus is on creating enjoyable, accessible and performant user
+          interfaces and observable, reliable and scalable APIs. Over the last
+          couple of years, i've also become a "developer of developers", getting
+          development teams acquainted to the fast moving web and cloud
+          ecosystems. I am helping teams improve their knowledge, broaden their
+          skill-sets and personal growth. Besides all of this teaching and
+          mentoring, i'm also consistently evaluating new or alternative
+          technologies to find the best product-team-technology fit.
         </p>
       </article>
       <h2>Work</h2>
