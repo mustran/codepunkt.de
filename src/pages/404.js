@@ -7,7 +7,7 @@ const headline = css`
   transform: rotate(-1deg);
 
   span {
-    background: #fbe0e0;
+    background: #ffb2b2;
     .dark-mode & {
       background: #902c2c;
     }
@@ -20,7 +20,7 @@ const illustration = css`
   margin: 16px 0;
 
   .page {
-    fill: #fbe0e0;
+    fill: #ffb2b2;
   }
   .floor {
     fill: #d8d8d8;
@@ -34,8 +34,30 @@ const illustration = css`
   .bush {
     fill: #5a7962;
   }
-  .helmet {
-    fill: #696f6a;
+  .sun {
+    fill: #ffc100;
+  }
+  .eye {
+    fill: #fff;
+  }
+  .pupil {
+    fill: #4669bd;
+  }
+
+  .dark-mode & .page {
+    fill: #902c2c;
+  }
+  .dark-mode & .floor {
+    fill: #374756;
+  }
+  .dark-mode & .tree {
+    fill: #193520;
+  }
+  .dark-mode & .wood {
+    fill: #3f3d56;
+  }
+  .dark-mode & .bush {
+    fill: #549062;
   }
 `
 
@@ -71,8 +93,8 @@ const NotFoundPage = ({ className }) => (
     </h1>
     <NotFoundIllustration className={illustration} />
     <p className={introduction}>
-      We couldn't find the page you requested. Maybe it is just scared and
-      keeping a low profile!
+      We couldn't find the page you requested! Maybe it's just scared and
+      prefers to hide?
     </p>
   </article>
 )

@@ -1,6 +1,7 @@
 import { Link } from 'gatsby'
 import { css } from 'linaria'
 import React from 'react'
+import TwitterIcon from '../images/twitter.svg'
 
 const footer = css`
   height: 3.5rem;
@@ -13,11 +14,8 @@ const footer = css`
     &:hover {
       color: #4b4237 !important;
     }
-    .dark-mode & {
-      color: #777 !important;
-    }
     .dark-mode &:hover {
-      color: #aaa !important;
+      color: #bbb !important;
     }
   }
 `
@@ -45,14 +43,17 @@ const iconText = css`
   margin-left: 4px;
 `
 
-const externalLink = css`
+const socialLink = css`
   display: flex;
   align-items: center;
   box-shadow: none;
-  margin: 0 8px;
 
+  svg {
+    margin-right: 8px;
+    stroke-width: 1.2;
+  }
   &:hover svg {
-    stroke: #ff8009;
+    stroke: #1da1f2;
   }
 `
 
@@ -70,8 +71,12 @@ const SiteFooter = () => {
           <Link to="/legal">Legal Notice</Link>
         </div>
         <div className={social}>
-          <a href="https://twitter.com/code_punkt" className="h-card" rel="me">
-            Twitter
+          <a
+            href="https://twitter.com/code_punkt"
+            className={`h-card ${socialLink}`}
+            rel="me"
+          >
+            <TwitterIcon /> Follow me on Twitter
           </a>
         </div>
       </div>
