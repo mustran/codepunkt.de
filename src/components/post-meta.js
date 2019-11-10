@@ -9,7 +9,7 @@ const meta = css`
   display: flex;
   flex-wrap: wrap;
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
   color: #8899a6;
 
   li {

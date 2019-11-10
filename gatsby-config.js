@@ -5,7 +5,8 @@ module.exports = {
     title: 'Codepunkt',
     description:
       'Personal site of Christoph Werner. I write about web development topics.',
-    author: '@code_punkt',
+    siteUrl: 'https://codepunkt.de',
+    author: 'Christoph Werner',
     lang: 'en',
   },
   plugins: [
@@ -113,6 +114,7 @@ module.exports = {
               extensionDataDirectory: path.resolve(
                 'vendor/gatsby-remark-vscode-extensions'
               ),
+              selectorDark: '.dark-mode',
               extensions: [
                 { identifier: 'teabyii.ayu', version: '0.18.0' },
                 { identifier: 'felipe-mendes.slack-theme', version: '1.9.10' },
@@ -156,9 +158,66 @@ module.exports = {
         icon: 'src/images/codepunkt-icon.png',
       },
     },
+    {
+      resolve: 'gatsby-plugin-feed',
+      options: {
+        query: `
+        {
+          site {
+            siteMetadata {
+              title
+              description
+              site_url: siteUrl
+            }
+          }
+        }
+      `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.edges.map((edge) => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  title: edge.node.frontmatter.title,
+                  description: edge.node.excerpt,
+                  date: edge.node.frontmatter.created,
+                  url: site.siteMetadata.site_url + edge.node.fields.path,
+                  guid: site.siteMetadata.site_url + edge.node.fields.path,
+                })
+              })
+            },
+            query: `
+            {
+              allMdx(
+                limit: 1000,
+                filter: { frontmatter: { draft: { ne: true } }},
+                sort: { order: DESC, fields: [frontmatter___created] },
+              ) {
+                edges {
+                  node {
+                    excerpt(pruneLength: 288)
+                    fields { path }
+                    frontmatter {
+                      title
+                      created
+                    }
+                  }
+                }
+              }
+            }
+          `,
+            output: '/articles/rss.xml',
+            title: 'Codepunkt Blog RSS Feed',
+            // optional configuration to insert feed reference in pages:
+            // if `string` is used, it will be used to create RegExp and then test if pathname of
+            // current page satisfied this regular expression;
+            // if not provided or `undefined`, all pages will have feed reference inserted
+            match: '^/articles/',
+          },
+        ],
+      },
+    },
     // TODO: evaluate plugins:
     // 'gatsby-plugin-offline',
-    // 'gatsby-plugin-feed',
     // 'gatsby-plugin-i18n',
   ],
 }

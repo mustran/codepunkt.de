@@ -87,7 +87,8 @@ const article = css`
     }
 
     .vscode-highlight-line-highlighted {
-      background-color: #fffce1;
+      background-color: #f7f7f7;
+      border-right: 5px solid #e6e6e6;
     }
   }
   .dark-mode & .vscode-highlight {
@@ -95,7 +96,8 @@ const article = css`
     border: 1px solid transparent;
   }
   .dark-mode & .vscode-highlight-line-highlighted {
-    background-color: #1b2835;
+    background-color: #0c1a27;
+    border-right: 5px solid #263848;
   }
 
   /* horizontally center twitter widget */
@@ -167,6 +169,13 @@ const header = css`
 
 const headline = css`
   margin-bottom: 0.43rem;
+
+  span {
+    background: #d8efd0;
+    .dark-mode & {
+      background: #39612c;
+    }
+  }
 `
 
 const meta = css`
@@ -201,16 +210,7 @@ const BlogPost = (props) => {
       <Meta title={title} />
       <header className={header}>
         <h1 className={headline}>
-          <span
-            className={css`
-              background: #e0f0fb;
-              .dark-mode & {
-                background: #44568c;
-              }
-            `}
-          >
-            {title}
-          </span>
+          <span>{title}</span>
           {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
           <a
             aria-label="Edit this page on GitHub"

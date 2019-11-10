@@ -70,6 +70,9 @@ const SiteFooter = () => {
       <div className={container}>
         <div className={copyright}>
           <Link to="/legal">Legal Notice</Link>
+          <a href="https://twitter.com/code_punkt" className="h-card" rel="me">
+            Twitter
+          </a>
         </div>
         <div className={social}>
           <a

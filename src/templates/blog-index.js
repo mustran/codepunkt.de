@@ -26,6 +26,8 @@ const article = css`
     margin: 0.86rem 0;
   }
   h3 {
+    font-family: 'Open Sans', '-apple-system', BlinkMacSystemFont, 'Segoe UI',
+      Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     margin-bottom: 0;
     .dark-mode & {
       color: #90baff;
@@ -37,10 +39,19 @@ const headline = css`
   transform: rotate(-1deg);
 
   span {
-    background: #e0f0fb;
+    background: #d8efd0;
     .dark-mode & {
-      background: #44568c;
+      background: #39612c;
     }
+  }
+`
+
+const introduction = css`
+  color: #666;
+  font-size: 1.2rem;
+
+  .dark-mode & {
+    color: #9aa2ab;
   }
 `
 
@@ -61,6 +72,16 @@ const BlogIndex = (props) => {
       <h1 className={headline}>
         <span>Articles</span>
       </h1>
+      <article className={introduction}>
+        <p>
+          Welcome to my Blog! I'm excited to share insights about software
+          development, cloud technology and the open web.
+        </p>
+        <p>
+          You can keep track of new articles by subscribing to my blog's{' '}
+          <a href="rss.xml">RSS feed</a>.
+        </p>
+      </article>
       {articles.map(
         ({
           frontmatter: { draft, created, updated, title },
@@ -73,7 +94,7 @@ const BlogIndex = (props) => {
             <article className={article} key={id}>
               <Link to={path}>
                 <h3>
-                  <span className={css``}>{title}</span>
+                  <span>{title}</span>
                 </h3>
               </Link>
               <p>{excerpt}</p>

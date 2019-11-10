@@ -69,7 +69,6 @@ const body = css`
   a {
     position: relative;
     box-shadow: none;
-    color: #333;
     &::before,
     &::after {
       content: '';
@@ -82,7 +81,7 @@ const body = css`
     }
     &::before {
       width: 100%;
-      background-image: linear-gradient(transparent calc(65%), #eceeef 35%);
+      background-image: linear-gradient(transparent calc(65%), #e4e4e4 35%);
     }
     &::after {
       transform-origin: 0 50%;
@@ -105,7 +104,6 @@ const body = css`
   }
 
   .dark-mode & a {
-    color: #fff;
     &::before {
       background-image: linear-gradient(transparent calc(65%), #2d3946 35%);
     }

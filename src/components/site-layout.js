@@ -82,14 +82,15 @@ const global = css`
     a {
       color: #1669f3;
       text-decoration: none;
-      box-shadow: 0 1px 0 0 #ccc;
+      box-shadow: 0 1px 0 0 #e4e4e4;
 
       &:hover {
-        box-shadow: 0 1px 0 0 transparent;
+        box-shadow: 0 1px 0 0 transparent !important;
       }
 
       .dark-mode & {
         color: #90baff;
+        box-shadow: 0 1px 0 0 #2d3946;
       }
     }
 

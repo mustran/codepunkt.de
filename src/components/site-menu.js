@@ -71,19 +71,19 @@ const menu = css`
         animation-delay: 0.27s;
       }
       &:nth-of-type(2) a.active::before {
-        background: #e0f0fb;
+        background: #d8efd0;
       }
       .dark-mode &:nth-of-type(2) a.active::before {
-        background: #44568c;
+        background: #39612c;
       }
       &:nth-of-type(3) a {
         animation-delay: 0.29s;
       }
       &:nth-of-type(3) a.active::before {
-        background: #d8efd0;
+        background: #ffe8b1;
       }
       .dark-mode &:nth-of-type(3) a.active::before {
-        background: #39612c;
+        background: #b58f36;
       }
     }
   }
@@ -114,6 +114,7 @@ const link = css`
 
   .dark-mode & {
     color: #ccc;
+    box-shadow: none;
   }
   .dark-mode &.active {
     color: #fff;

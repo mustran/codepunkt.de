@@ -90,6 +90,7 @@ const modeButton = css`
   height: 36px;
   width: 36px;
   margin: 0 4px 0 0;
+  order: -1;
 
   @media only screen and (min-width: 668px) {
     margin: 0 -4px 0 32px;
@@ -127,6 +128,7 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
       <div className={container}>
         <SiteLogo />
         <div className={rightSide}>
+          <Menu path={path} />
           <button
             className={`modeButton ${modeButton}`}
             onClick={toggleDarkMode}
@@ -137,7 +139,6 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
               <MoonIcon className={moonIcon} />
             )}
           </button>
-          <Menu path={path} />
         </div>
       </div>
     </header>
