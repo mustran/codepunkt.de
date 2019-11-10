@@ -31,15 +31,17 @@ const AboutPage = () => {
       </h1>
       <article className={introduction}>
         <p>
-          I'm Christoph Werner, a full-stack web developer based in Paderborn,
-          Germany. I've been building stuff on the web for the last 20 years,
-          working with companies and clients across various industries.
+          I'm Christoph Werner, a software architect and full-stack web
+          developer based in Paderborn, Germany. I've been building sites,
+          applications and services on the web for more than 2 decades, working
+          with companies and clients across various industries.
         </p>
         <p>
-          My focus is on creating enjoyable, accessible and performant user
-          interfaces and observable, reliable and scalable APIs. Over the last
-          couple of years, i've helped build a few web applications and shaped a
-          lot of developer tooling and processes.
+          Over the last couple of years, i've shifted my focus to help teams of
+          developers become acquainted to the web and cloud ecosystems. I've
+          built a few teams and helped improve their knowledge and further their
+          personal development, gaining more experience and efficiency,
+          resulting in a for the customer.
         </p>
       </article>
       <h2>Work</h2>

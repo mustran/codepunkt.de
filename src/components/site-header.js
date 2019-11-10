@@ -75,10 +75,10 @@ const rightSide = css`
 `
 
 const sunIcon = css`
-  stroke-width: 1.3;
+  stroke-width: 1;
 `
 const moonIcon = css`
-  stroke-width: 0.8;
+  stroke-width: 1;
 `
 
 const modeButton = css`

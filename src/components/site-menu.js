@@ -15,7 +15,7 @@ const menu = css`
     .menuBackground {
       visibility: visible;
       transition: transform 300ms cubic-bezier(0.755, 0.05, 0.855, 0.06);
-      transform: scale(50);
+      transform: scale(5);
     }
 
     .menuButton::before,
@@ -256,13 +256,13 @@ const overflowHidden = css`
 `
 
 const menuBackground = css`
-  width: 100%;
-  height: 100%;
-  top: calc(-50% + 39px);
-  right: calc(-45% + 13px);
+  width: 1000%;
+  height: 1000%;
+  top: calc(-500% + 39px);
+  right: calc(-495% + 13px);
   visibility: hidden;
   position: fixed;
-  transform: scale(1);
+  transform: scale(0.02);
   transform-origin: 50% 50%;
   transition-duration: 0s;
 
