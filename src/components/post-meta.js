@@ -43,7 +43,7 @@ const PostMeta = ({ className, draft, created, updated, timeToRead }) => {
       )}
       <li>
         <CalendarIcon />
-        {formatPostDate(updated)}
+        {formatPostDate(created)}
       </li>
       <li>
         <CoffeeIcon />

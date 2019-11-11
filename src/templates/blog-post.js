@@ -195,6 +195,9 @@ const BlogPost = (props) => {
         frontmatter: { draft, created, updated, title },
         timeToRead,
       },
+      site: {
+        siteMetadata: { siteUrl },
+      },
       allWebMentionEntry: { edges: webmentions },
     },
   } = props
@@ -206,11 +209,11 @@ const BlogPost = (props) => {
   )}`
 
   return (
-    <article className={cx(className, article)}>
+    <article className={cx('h-entry', className, article)}>
       <Meta title={title} />
       <header className={header}>
         <h1 className={headline}>
-          <span>{title}</span>
+          <span className="p-name">{title}</span>
           {/* eslint-disable-next-line jsx-a11y/anchor-has-content */}
           <a
             aria-label="Edit this page on GitHub"
@@ -226,8 +229,19 @@ const BlogPost = (props) => {
           updated={updated}
           timeToRead={timeToRead}
         />
+        <a
+          className={`u-url ${css`
+            display: none;
+          `}`}
+          aria-hidden="true"
+          href={`${siteUrl}${path}`}
+        >
+          <time class="dt-published" datetime={created}></time>
+        </a>
       </header>
-      <MDXRenderer>{body}</MDXRenderer>
+      <div className="e-content">
+        <MDXRenderer>{body}</MDXRenderer>
+      </div>
       <footer>
         <p>
           <a href={discussLink} rel="noopener noreferrer" target="_blank">
@@ -253,6 +267,11 @@ export const query = graphql`
         draft
       }
       timeToRead
+    }
+    site {
+      siteMetadata {
+        siteUrl
+      }
     }
     allWebMentionEntry(filter: { wmTarget: { eq: $permaLink } }) {
       edges {
