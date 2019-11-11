@@ -99,6 +99,9 @@ const modeButton = css`
 
   svg {
     background: green;
+    width: 24px;
+    height: 24px;
+    display: block;
   }
 
   .dark-mode & {
