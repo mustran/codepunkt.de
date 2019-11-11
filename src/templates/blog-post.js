@@ -229,15 +229,19 @@ const BlogPost = (props) => {
           updated={updated}
           timeToRead={timeToRead}
         />
-        <a
-          className={`u-url ${css`
+        {/* webmentions stuff */}
+        <div
+          className={css`
             display: none;
-          `}`}
-          aria-hidden="true"
-          href={`${siteUrl}${path}`}
+          `}
         >
-          <time class="dt-published" datetime={created}></time>
-        </a>
+          <a className="u-url" href={`${siteUrl}${path}`}>
+            <time class="dt-published" datetime={created}></time>
+          </a>
+          <a rel="author" class="p-author h-card" href={siteUrl}>
+            Christoph Werner
+          </a>
+        </div>
       </header>
       <div className="e-content">
         <MDXRenderer>{body}</MDXRenderer>
