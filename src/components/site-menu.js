@@ -297,6 +297,7 @@ const Menu = ({ path }) => {
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid meet"
         className={`menuBackground ${menuBackground}`}
+        shapeRendering="crispEdges"
       >
         <mask id="m">
           <circle cx="50" cy="50" r="6" fill="white" />

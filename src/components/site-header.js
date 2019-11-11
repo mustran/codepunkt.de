@@ -76,9 +76,15 @@ const rightSide = css`
 
 const sunIcon = css`
   stroke-width: 1.3;
+  width: 24px;
+  height: 24px;
+  display: block;
 `
 const moonIcon = css`
   stroke-width: 0.8;
+  width: 24px;
+  height: 24px;
+  display: block;
 `
 
 const modeButton = css`
@@ -136,6 +142,11 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
         <SiteLogo />
         <div className={rightSide}>
           <Menu path={path} />
+          {isDarkMode ? (
+            <SunIcon className={sunIcon} />
+          ) : (
+            <MoonIcon className={moonIcon} />
+          )}
           <button
             className={`modeButton ${modeButton}`}
             onClick={toggleDarkMode}
