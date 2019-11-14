@@ -88,7 +88,6 @@ const article = css`
 
     .vscode-highlight-line-highlighted {
       background-color: #f7f7f7;
-      border-right: 5px solid #e6e6e6;
     }
   }
   .dark-mode & .vscode-highlight {
@@ -97,7 +96,6 @@ const article = css`
   }
   .dark-mode & .vscode-highlight-line-highlighted {
     background-color: #0c1a27;
-    border-right: 5px solid #263848;
   }
 
   /* horizontally center twitter widget */
