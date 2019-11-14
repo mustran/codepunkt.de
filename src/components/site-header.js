@@ -143,11 +143,21 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
           <button
             className={`modeButton ${modeButton}`}
             onClick={toggleDarkMode}
+            aria-label="Dark mode"
+            aria-pressed={isDarkMode}
           >
             {isDarkMode ? (
-              <SunIcon className={sunIcon} />
+              <SunIcon
+                className={sunIcon}
+                role="presentation"
+                focusable="false"
+              />
             ) : (
-              <MoonIcon className={moonIcon} />
+              <MoonIcon
+                className={moonIcon}
+                role="presentation"
+                focusable="false"
+              />
             )}
           </button>
         </div>

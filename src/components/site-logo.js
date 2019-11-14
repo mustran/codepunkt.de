@@ -27,8 +27,8 @@ const logo = css`
 
 const SiteLogo = () => {
   return (
-    <Link to="/" className={link}>
-      <LogoSvg role="img" className={logo} />
+    <Link to="/" tabindex="-1" className={link}>
+      <LogoSvg className={logo} role="presentation" focusable="false" />
     </Link>
   )
 }
