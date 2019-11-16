@@ -89,12 +89,12 @@ const moonIcon = css`
 
 const modeButton = css`
   border: 0;
-  background: red;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 36px;
   width: 36px;
+  padding: 0;
   margin: 0 4px 0 0;
   order: -1;
 
@@ -105,6 +105,10 @@ const modeButton = css`
 
   .dark-mode & {
     color: #fff;
+  }
+
+  svg {
+    width: 24px;
   }
 `
 
@@ -135,11 +139,6 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
         <SiteLogo />
         <div className={rightSide}>
           <Menu path={path} />
-          {isDarkMode ? (
-            <SunIcon className={sunIcon} />
-          ) : (
-            <MoonIcon className={moonIcon} />
-          )}
           <button
             className={`modeButton ${modeButton}`}
             onClick={toggleDarkMode}
