@@ -15,6 +15,7 @@ const global = css`
     *::before,
     *::after {
       box-sizing: border-box;
+      touch-action: none;
     }
 
     /* Remove list styles on ul, ol elements with a class attribute */
