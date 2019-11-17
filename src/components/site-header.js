@@ -94,6 +94,7 @@ const modeButton = css`
   align-items: center;
   height: 36px;
   width: 36px;
+  background: transparent;
   padding: 0;
   margin: 0 4px 0 0;
   order: -1;

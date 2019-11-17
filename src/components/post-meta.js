@@ -2,15 +2,18 @@ import { css, cx } from 'linaria'
 import React from 'react'
 import CalendarIcon from '../images/calendar.svg'
 import CoffeeIcon from '../images/coffee.svg'
-import WarningIcon from '../images/warning.svg'
 import { formatPostDate } from '../utils'
 
 const meta = css`
   display: flex;
   flex-wrap: wrap;
   margin: 0;
-  font-size: 18px;
-  color: #8899a6;
+  font-size: 1rem;
+  color: #757575;
+
+  .dark-mode & {
+    color: #7f8ea3;
+  }
 
   li {
     margin: 0;
@@ -25,8 +28,12 @@ const meta = css`
   svg {
     margin-right: 6px;
     width: 20px;
-    stroke: #576773;
+    stroke: #000;
     stroke-width: 1;
+
+    .dark-mode & {
+      stroke: #fff;
+    }
   }
 `
 
@@ -35,20 +42,17 @@ const isProduction = process.env.NODE_ENV === 'production'
 const PostMeta = ({ className, draft, created, updated, timeToRead }) => {
   return (
     <ul className={cx(meta, className)}>
-      {!isProduction && draft && (
-        <li>
-          <WarningIcon style={{ marginTop: 2 }} />
-          DRAFT
-        </li>
-      )}
+      {/* {!isProduction && draft && <li>draft</li>} */}
       <li>
         <CalendarIcon />
         {formatPostDate(created)}
       </li>
-      <li>
-        <CoffeeIcon />
-        {timeToRead} min read
-      </li>
+      {
+        <li>
+          <CoffeeIcon />
+          {timeToRead} min read
+        </li>
+      }
     </ul>
   )
 }

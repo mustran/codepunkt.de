@@ -8,7 +8,7 @@ import Meta from '../components/meta'
  * TODOS
  *
  * - adjust color of headline links in dark mode to color of text links
- * - find a way to toggle gatsby-remark-vscode themes w/o mediaquery
+ * - https://brettstevenson.io/
  * - remove IE from browserslist
  * - write gatsby plugin that adds browserslist regex
  * - actually make webmentions work
@@ -34,22 +34,38 @@ const title = css`
   }
 
   .dark-mode & span {
-    background: #6f488e;
+    background: #1c3744;
+    /* 445e57 */
+    /* 2c3e99 */
+    /* 2f1d3e */
   }
 `
 
 const greeting = css`
   order: -1;
   margin-bottom: 0.86rem;
-  font-size: 5.3vmin;
-  font-weight: 300;
+  font-size: 4.2vmin;
+  font-weight: 400;
+  color: #757575;
+
+  @media only screen and (min-width: 500px) {
+    font-weight: 300;
+  }
+
+  .dark-mode & {
+    color: #7f8ea3;
+    span {
+      color: #c8d5e0;
+    }
+  }
 
   span {
     font-weight: 400;
+    color: #000;
   }
 
   @media only screen and (min-width: 668px) {
-    font-size: 35.351px;
+    font-size: 27.94px;
   }
 `
 
@@ -69,6 +85,7 @@ const body = css`
   a {
     position: relative;
     box-shadow: none;
+    display: inline-block;
     &::before,
     &::after {
       content: '';
@@ -81,7 +98,13 @@ const body = css`
     }
     &::before {
       width: 100%;
-      background-image: linear-gradient(transparent calc(65%), #e4e4e4 35%);
+      background-image: linear-gradient(
+        transparent 60%,
+        #f0f0f0 60%,
+        #f0f0f0 90%,
+        transparent 90%,
+        transparent 100%
+      );
     }
     &::after {
       transform-origin: 0 50%;
@@ -89,32 +112,71 @@ const body = css`
       transition: transform 0.3s cubic-bezier(0.86, 0, 0.07, 1);
     }
     &:nth-of-type(1)::after {
-      background-image: linear-gradient(transparent calc(65%), #ffd2d2 35%);
+      background-image: linear-gradient(
+        transparent 60%,
+        #ffd2d2 60%,
+        #ffd2d2 90%,
+        transparent 90%,
+        transparent 100%
+      );
     }
     &:nth-of-type(2)::after {
-      background-image: linear-gradient(transparent calc(65%), #b4fccd 35%);
+      background-image: linear-gradient(
+        transparent 60%,
+        #b4fccd 60%,
+        #b4fccd 90%,
+        transparent 90%,
+        transparent 100%
+      );
     }
     &:nth-of-type(3)::after {
-      background-image: linear-gradient(transparent calc(65%), #a6ddff 35%);
+      background-image: linear-gradient(
+        transparent 60%,
+        #a6ddff 60%,
+        #a6ddff 90%,
+        transparent 90%,
+        transparent 100%
+      );
+    }
+    &:nth-of-type(4)::after {
+      background-image: linear-gradient(
+        transparent 60%,
+        #a6ddff 60%,
+        #a6ddff 90%,
+        transparent 90%,
+        transparent 100%
+      );
     }
     &:hover::after,
     &:focus::after {
       transform: scaleX(1);
     }
+    &:hover {
+      box-shadow: none !important;
+    }
   }
 
+  .dark-mode & {
+    color: #cbd5e0;
+  }
   .dark-mode & a {
     &::before {
-      background-image: linear-gradient(transparent calc(65%), #2d3946 35%);
+      background-image: linear-gradient(
+        transparent 60%,
+        #212d3a 60%,
+        #212d3a 90%,
+        transparent 90%,
+        transparent 100%
+      );
     }
     &:nth-of-type(1)::after {
-      background-image: linear-gradient(transparent calc(65%), #582c2c 35%);
+      background-image: linear-gradient(transparent 65%, #582c2c 35%);
     }
     &:nth-of-type(2)::after {
-      background-image: linear-gradient(transparent calc(65%), #316537 35%);
+      background-image: linear-gradient(transparent 65%, #316537 35%);
     }
     &:nth-of-type(3)::after {
-      background-image: linear-gradient(transparent calc(65%), #154a6b 35%);
+      background-image: linear-gradient(transparent 65%, #154a6b 35%);
     }
   }
 `
@@ -148,10 +210,17 @@ const HomePage = ({ className }) => {
             rel="noopener noreferrer"
           >
             dSPACE
+          </a>{' '}
+          and the founder of{' '}
+          <a
+            href="https://paderbornjs.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Paderborn.js
           </a>
-          , where i coach and mentor teams that build web applications. I also
-          write about web development on my <Link to="/articles">Blog</Link> and
-          on{' '}
+          . I also write about software development, cloud technology and the
+          open web on my <Link to="/articles">Blog</Link> and on{' '}
           <a
             href="https://twitter.com/code_punkt"
             target="_blank"
@@ -160,6 +229,25 @@ const HomePage = ({ className }) => {
             Twitter
           </a>
           .
+          {/* I'm a software architect at{' '}
+          <a
+            href="https://dspace.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            dSPACE
+          </a>
+          , where i coach and empower teams that build web and cloud-native
+          applications. I also write about development on my{' '}
+          <Link to="/articles">Blog</Link> and on{' '}
+          <a
+            href="https://twitter.com/code_punkt"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Twitter
+          </a>
+          . */}
         </p>
       </div>
     </article>

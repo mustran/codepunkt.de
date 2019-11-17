@@ -9,13 +9,15 @@ const footer = css`
 
   a {
     color: #999 !important;
-    box-shadow: none !important;
 
     &:hover {
       color: #4b4237 !important;
     }
+    .dark-mode & {
+      color: #7f8ea3 !important;
+    }
     .dark-mode &:hover {
-      color: #bbb !important;
+      color: #aaa !important;
     }
   }
 `
@@ -39,14 +41,9 @@ const social = css`
   align-items: center;
 `
 
-const iconText = css`
-  margin-left: 4px;
-`
-
 const socialLink = css`
   display: flex;
   align-items: center;
-  box-shadow: none;
 
   svg {
     margin-right: 8px;

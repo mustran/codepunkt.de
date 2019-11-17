@@ -16,7 +16,7 @@ const logo = css`
   height: 45px;
 
   path {
-    fill: #4b4237;
+    fill: #000;
     stroke: none;
   }
 

@@ -171,7 +171,7 @@ const headline = css`
   span {
     background: #d8efd0;
     .dark-mode & {
-      background: #39612c;
+      background: #243e1c;
     }
   }
 `
@@ -201,10 +201,6 @@ const BlogPost = (props) => {
   } = props
 
   console.log(webmentions)
-
-  const discussLink = `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    permaLink
-  )}`
 
   return (
     <article className={cx('h-entry', className, article)}>
@@ -244,13 +240,6 @@ const BlogPost = (props) => {
       <div className="e-content">
         <MDXRenderer>{body}</MDXRenderer>
       </div>
-      <footer>
-        <p>
-          <a href={discussLink} rel="noopener noreferrer" target="_blank">
-            Discuss on Twitter
-          </a>
-        </p>
-      </footer>
     </article>
   )
 }

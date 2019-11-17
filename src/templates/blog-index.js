@@ -2,7 +2,9 @@ import { graphql, Link } from 'gatsby'
 import { css } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
-import PostMeta from '../components/post-meta'
+import CoffeeIcon from '../images/coffee.svg'
+import FeatherIcon from '../images/feather.svg'
+import { formatPostDate } from '../utils'
 
 const pagination = css`
   list-style-type: none;
@@ -15,45 +17,82 @@ const paginationItem = css`
   padding: 0;
 `
 
-const article = css`
-  &:not(:last-child) {
-    margin: 3.44rem 0;
-  }
-  a {
-    display: inline-block;
-  }
-  p {
-    margin: 0.86rem 0;
-  }
-  h3 {
-    font-family: 'Open Sans', '-apple-system', BlinkMacSystemFont, 'Segoe UI',
-      Roboto, 'Oxygen-Sans', Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-    margin-bottom: 0;
-    .dark-mode & {
-      color: #90baff;
+const styles = {
+  headline: css`
+    transform: rotate(-1deg);
+    span {
+      background: #d8efd0;
+      .dark-mode & {
+        background: #243e1c;
+      }
     }
-  }
-`
-
-const headline = css`
-  transform: rotate(-1deg);
-
-  span {
-    background: #d8efd0;
-    .dark-mode & {
-      background: #39612c;
+  `,
+  readMore: css``,
+  post: css`
+    margin: 4.3rem 0;
+  `,
+  postTitle: css`
+    color: currentColor;
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 0.43rem;
+    h2 {
+      margin: 0;
     }
-  }
-`
-
-const introduction = css`
-  color: #666;
-  font-size: 1.2rem;
-
-  .dark-mode & {
-    color: #9aa2ab;
-  }
-`
+    &:hover,
+    &:focus {
+      box-shadow: none;
+      h2 {
+        color: #1669f3;
+      }
+    }
+    .dark-mode &:hover,
+    .dark-mode &:focus {
+      box-shadow: none;
+      h2 {
+        color: #9f7aea;
+      }
+    }
+  `,
+  postMeta: css`
+    color: #757575;
+    margin: 0 0 0.86rem;
+    .dark-mode & {
+      color: #7f8ea3;
+    }
+  `,
+  postMetaItem: css`
+    display: inline-flex;
+    align-items: center;
+    margin: 0 1.72rem 0 0;
+  `,
+  postMetaIcon: css`
+    margin-right: 0.43rem;
+    stroke: #aaa;
+    stroke-width: 1;
+    .dark-mode & {
+      stroke: #3f576f;
+    }
+  `,
+  postMetaLink: css`
+    color: currentColor;
+    box-shadow: none;
+    .dark-mode & {
+      color: currentColor;
+      box-shadow: none;
+    }
+  `,
+  postSummary: css`
+    margin-bottom: 0.86rem;
+    span {
+      color: #757575;
+      font-size: 1rem;
+      .dark-mode & {
+        color: #7f8ea3;
+      }
+    }
+  `,
+}
 
 const BlogIndex = (props) => {
   const {
@@ -69,19 +108,9 @@ const BlogIndex = (props) => {
   return (
     <div className={className}>
       <Meta title="Articles — Codepunkt" />
-      <h1 className={headline}>
+      <h1 className={styles.headline}>
         <span>Articles</span>
       </h1>
-      <article className={introduction}>
-        <p>
-          Welcome to my Blog! I'm excited to share insights about software
-          development, cloud technology and the open web.
-        </p>
-        <p>
-          You can keep track of new articles by subscribing to my blog's{' '}
-          <a href="rss.xml">RSS feed</a>.
-        </p>
-      </article>
       {articles.map(
         ({
           frontmatter: { draft, created, updated, title },
@@ -90,20 +119,33 @@ const BlogIndex = (props) => {
           timeToRead,
           fields: { path },
         }) => {
+          const commentCount = 2
+
           return (
-            <article className={article} key={id}>
-              <Link to={path}>
-                <h3>
-                  <span>{title}</span>
-                </h3>
+            <article className={styles.post} key={id}>
+              <Link to={path} className={styles.postTitle}>
+                <h2>{title}</h2>
               </Link>
-              <p>{excerpt}</p>
-              <PostMeta
-                draft={draft}
-                created={created}
-                updated={updated}
-                timeToRead={timeToRead}
-              />
+              <ul className={styles.postMeta}>
+                <li className={styles.postMetaItem}>
+                  <CoffeeIcon className={styles.postMetaIcon} />
+                  {timeToRead} min read
+                </li>
+                <li className={styles.postMetaItem}>
+                  <FeatherIcon className={styles.postMetaIcon} />
+                  <Link to="#" className={styles.postMetaLink}>
+                    {commentCount > 0
+                      ? `${commentCount} comments`
+                      : 'Leave a comment'}
+                  </Link>
+                </li>
+              </ul>
+              <p className={styles.postSummary}>
+                <span>{formatPostDate(created).toUpperCase()}</span> — {excerpt}
+              </p>
+              <Link to={path} className={styles.readMore}>
+                Read More...
+              </Link>
             </article>
           )
         }
@@ -114,7 +156,9 @@ const BlogIndex = (props) => {
             <li className={paginationItem}>
               <Link
                 to={
-                  currentPage === 2 ? '/article' : `/article/${currentPage - 1}`
+                  currentPage === 2
+                    ? '/articles'
+                    : `/articles/${currentPage - 1}`
                 }
               >
                 Newer Posts
@@ -123,7 +167,7 @@ const BlogIndex = (props) => {
           )}
           {hasNextPage && (
             <li className={paginationItem}>
-              <Link to={`/article/${currentPage + 1}`}>Older Posts</Link>
+              <Link to={`/articles/${currentPage + 1}`}>Older Posts</Link>
             </li>
           )}
         </ol>
@@ -138,7 +182,7 @@ export const query = graphql`
   query mdxPostList($ids: [String]) {
     allMdx(filter: { id: { in: $ids } }) {
       nodes {
-        excerpt(pruneLength: 144)
+        excerpt(pruneLength: 288)
         fields {
           path
         }

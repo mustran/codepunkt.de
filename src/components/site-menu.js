@@ -106,15 +106,17 @@ const menuItems = css`
 `
 
 const link = css`
-  box-shadow: none;
-  color: #666;
+  color: #757575;
   position: relative;
   padding: 6px 12px;
-  box-shadow: 0 none;
+  box-shadow: none !important;
+
+  &:hover {
+    box-shadow: none !important;
+  }
 
   .dark-mode & {
-    color: #ccc;
-    box-shadow: none;
+    color: #7f8ea3;
   }
   .dark-mode &.active {
     color: #fff;
@@ -123,7 +125,7 @@ const link = css`
   @media only screen and (min-width: 668px) {
     &.active {
       font-weight: 500;
-      color: #4b4237;
+      color: #000;
     }
   }
 
@@ -134,9 +136,6 @@ const link = css`
     padding: 1rem 20%;
     font-size: 2rem;
     font-weight: 300;
-    font-family: Merriweather, 'Lucida Bright', Lucidabright, 'Lucida Serif',
-      Lucida, 'DejaVu Serif', 'Bitstream Vera Serif', 'Liberation Serif',
-      Georgia, serif;
 
     &::before {
       content: '';

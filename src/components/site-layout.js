@@ -15,7 +15,6 @@ const global = css`
     *::before,
     *::after {
       box-sizing: border-box;
-      touch-action: none;
     }
 
     /* Remove list styles on ul, ol elements with a class attribute */
@@ -76,22 +75,24 @@ const global = css`
 
       &.dark-mode {
         background: #15202b;
-        color: #e3e7ea;
+        color: #cbd5e0;
       }
     }
 
     a {
       color: #1669f3;
       text-decoration: none;
-      box-shadow: 0 1px 0 0 #e4e4e4;
 
       &:hover {
-        box-shadow: 0 1px 0 0 transparent !important;
+        box-shadow: 0 1px 0 0 #aacaff;
       }
 
       .dark-mode & {
-        color: #90baff;
-        box-shadow: 0 1px 0 0 #2d3946;
+        color: #9f7aea;
+
+        &:hover {
+          box-shadow: 0 1px 0 0 #594386;
+        }
       }
     }
 
@@ -106,6 +107,9 @@ const global = css`
 
     h1 {
       font-size: 9vmin;
+      font-family: Merriweather, 'Lucida Bright', 'Lucidabright', 'Lucida Serif',
+        Lucida, 'DejaVu Serif', 'Bitstream Vera Serif', 'Liberation Serif',
+        Georgia, serif;
       @media only screen and (min-width: 668px) {
         font-size: 60.03px;
       }
