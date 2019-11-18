@@ -38,13 +38,13 @@ const headerFixed = css`
 
   position: fixed;
   background: #fff;
-  border-bottom-color: #d6dce3;
+  border-bottom-color: #f2f2f2;
   animation: headerIn 0.4s ease-out forwards;
   margin-top: 0;
 
   .dark-mode & {
     background: #15202b;
-    border-bottom-color: #3e5165;
+    border-bottom-color: #1e2e3e;
   }
 `
 

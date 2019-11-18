@@ -29,7 +29,10 @@ const styles = {
   `,
   readMore: css``,
   post: css`
-    margin: 4.3rem 0;
+    margin: 3.44rem 0;
+    &:first-of-type {
+      margin-top: 1.72rem;
+    }
   `,
   postTitle: css`
     color: currentColor;
@@ -56,7 +59,7 @@ const styles = {
   `,
   postMeta: css`
     color: #757575;
-    margin: 0 0 0.86rem;
+    margin: 0 0 0.43rem;
     .dark-mode & {
       color: #7f8ea3;
     }
@@ -91,6 +94,14 @@ const styles = {
         color: #7f8ea3;
       }
     }
+  `,
+  date: css`
+    font-family: Merriweather, 'Lucida Bright', 'Lucidabright', 'Lucida Serif',
+      Lucida, 'DejaVu Serif', 'Bitstream Vera Serif', 'Liberation Serif',
+      Georgia, serif;
+  `,
+  month: css`
+    font-size: 75% !important;
   `,
 }
 
@@ -141,11 +152,26 @@ const BlogIndex = (props) => {
                 </li>
               </ul>
               <p className={styles.postSummary}>
-                <span>{formatPostDate(created).toUpperCase()}</span> — {excerpt}
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: formatPostDate(created)
+                      .split(' ')
+                      .map((part, i) => {
+                        return i === 0
+                          ? `<span class="${
+                              styles.month
+                            }">${part.toUpperCase()}</span>`
+                          : part
+                      })
+                      .join(' '),
+                  }}
+                  className={styles.date}
+                ></span>{' '}
+                — {excerpt}
               </p>
-              <Link to={path} className={styles.readMore}>
+              {/* <Link to={path} className={styles.readMore}>
                 Read More...
-              </Link>
+              </Link> */}
             </article>
           )
         }

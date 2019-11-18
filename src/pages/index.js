@@ -7,7 +7,8 @@ import Meta from '../components/meta'
 /**
  * TODOS
  *
- * - adjust color of headline links in dark mode to color of text links
+ * - fix animations when scrolled down
+ * - work with article tags
  * - https://brettstevenson.io/
  * - remove IE from browserslist
  * - write gatsby plugin that adds browserslist regex
@@ -34,10 +35,7 @@ const title = css`
   }
 
   .dark-mode & span {
-    background: #1c3744;
-    /* 445e57 */
-    /* 2c3e99 */
-    /* 2f1d3e */
+    background: #1c4e68;
   }
 `
 

@@ -110,8 +110,8 @@ const global = css`
       font-family: Merriweather, 'Lucida Bright', 'Lucidabright', 'Lucida Serif',
         Lucida, 'DejaVu Serif', 'Bitstream Vera Serif', 'Liberation Serif',
         Georgia, serif;
-      @media only screen and (min-width: 668px) {
-        font-size: 60.03px;
+      @media only screen and (min-width: 555px) {
+        font-size: 50px;
       }
     }
 

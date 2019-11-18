@@ -1,4 +1,12 @@
 const path = require('path')
+const vfile = require('to-vfile')
+const parse5 = require('parse5')
+const fromParse5 = require('hast-util-from-parse5')
+
+const doc = vfile.readSync('./src/images/link.svg')
+const ast = parse5.parse(String(doc), { sourceCodeLocationInfo: true })
+const hast = fromParse5(ast, doc)
+const linkSvg = hast.children[0].children[1].children[0]
 
 module.exports = {
   siteMetadata: {
@@ -76,7 +84,7 @@ module.exports = {
             {
               behavior: 'append',
               properties: { ariaHidden: true, title: 'Link to this section' },
-              content: [],
+              content: linkSvg,
             },
           ],
         ],
