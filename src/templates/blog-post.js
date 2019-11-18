@@ -47,12 +47,19 @@ const article = css`
 
   .vscode-highlight {
     border-radius: 4px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #ebebeb;
     counter-reset: line;
     background: #fdfdfd;
+    margin: 0 -6.1vw 1.72rem;
+    padding: 18px calc(6.1vw - 1.5em);
+
+    @media only screen and (min-width: 880px) {
+      margin: 0 0 1.72rem;
+      padding: 18px 0;
+    }
 
     .vscode-highlight-code {
-      /* font-size: 16px; */
+      font-size: 16px;
       font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
         monospace;
       line-height: 1.65;
@@ -64,15 +71,19 @@ const article = css`
         content: counter(line);
         margin: 0 12px 0 -8px;
         user-select: none;
-        color: #bbb;
+        color: #e4e4e4;
         text-align: right;
         width: 20px;
         display: inline-block;
       }
 
+      .dark-mode &::before {
+        color: #4d617b;
+      }
+
       @media only screen and (min-width: 668px) {
-        padding-left: 1em;
-        padding-right: 1em;
+        padding-left: 1.5rem;
+        padding-right: 1rem;
         &::before {
           margin: 0 16px 0 -8px;
         }
@@ -84,8 +95,8 @@ const article = css`
     }
   }
   .dark-mode & .vscode-highlight {
-    background: #0a1723;
-    border: 1px solid transparent;
+    background: #1f2833;
+    border: 1px solid #303c4b;
   }
   .dark-mode & .vscode-highlight-line-highlighted {
     background-color: #0c1a27;
@@ -180,7 +191,7 @@ const upperMeta = css`
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-bottom: 0.86rem;
+  margin-bottom: 0.43rem;
   font-size: 0.9rem;
   color: #757575;
   .dark-mode & {
@@ -203,7 +214,7 @@ const lowerMeta = css`
   list-style: none;
   padding: 0;
   margin: 0;
-  margin-bottom: 1.29rem;
+  margin-bottom: 1.72rem;
   color: #757575;
   .dark-mode & {
     color: #7f8ea3;

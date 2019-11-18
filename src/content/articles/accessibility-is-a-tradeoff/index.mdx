@@ -12,22 +12,15 @@ This article is a work in progress. Until it's finished, the main takeaway messa
 
 Also, if you're not entirely sure, develop your websites and applications with basic accessibility in mind. Using semantic HTML elements and managing both tab index and focus properly are not a lot of work most of the times, yet help a lot!
 
-```jsx{6-16}
+```jsx
 import { Link } from 'gatsby'
 import { css } from 'linaria'
 import React from 'react'
 import LogoSvg from './site-logo.svg'
 
 const logo = css`
-  font-size: 18px;
-  margin-top: 4px;
   width: 140px;
   height: 45px;
-
-  path {
-    fill: #4b4237;
-    stroke: none;
-  }
 `
 
 const SiteLogo = () => {
@@ -40,3 +33,5 @@ const SiteLogo = () => {
 
 export default SiteLogo
 ```
+
+Also, there's more text here to see what it's like if there's more content below a paragraph of syntax highlighted code.
