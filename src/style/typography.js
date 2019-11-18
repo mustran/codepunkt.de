@@ -26,6 +26,12 @@ const typography = new Typography({
   boldWeight: 500,
   includeNormalize: false,
   overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
+    '@media only screen and (min-width: 667px)': {
+      html: {
+        font: `125%/1.72 'Open Sans',-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Oxygen-Sans','Ubuntu','Cantarell','Helvetica Neue',sans-serif;`,
+      },
+      code: { fontSize: '16px' },
+    },
     code: {
       fontSize: '18px',
     },
