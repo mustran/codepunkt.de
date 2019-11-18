@@ -41,8 +41,8 @@ const article = css`
       monospace;
   }
   .dark-mode & code:not(.vscode-highlight-code) {
-    background: #0a1723;
-    color: #bbb;
+    background: #1f2833;
+    color: #8493a7;
   }
 
   .vscode-highlight {
