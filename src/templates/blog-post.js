@@ -147,7 +147,7 @@ const article = css`
         stroke: #1669f3;
         stroke-width: 2;
         .dark-mode & {
-          stroke: #9f7aea;
+          stroke: #77a2e9;
         }
       }
     }

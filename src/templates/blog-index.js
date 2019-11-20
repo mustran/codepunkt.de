@@ -20,6 +20,7 @@ const paginationItem = css`
 const styles = {
   headline: css`
     transform: rotate(-1deg);
+    margin-bottom: 2.58rem;
     span {
       background: #d8efd0;
       .dark-mode & {
@@ -36,26 +37,26 @@ const styles = {
     }
   `,
   postTitle: css`
-    color: currentColor;
+    color: #7285a3;
     display: block;
     font-size: 1.5rem;
     margin-bottom: 0.43rem;
     h2 {
       margin: 0;
     }
+    .dark-mode & h2 {
+      color: #a3c0f0;
+    }
     &:hover,
     &:focus {
       box-shadow: none;
       h2 {
-        color: #1669f3;
+        color: #77a2e9;
       }
     }
     .dark-mode &:hover,
     .dark-mode &:focus {
       box-shadow: none;
-      h2 {
-        color: #77a2e9;
-      }
     }
   `,
   postMeta: css`

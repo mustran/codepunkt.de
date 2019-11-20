@@ -8,7 +8,6 @@ import Meta from '../components/meta'
  * TODOS
  *
  * - fix animations when scrolled down
- * - work with article tags
  * - https://brettstevenson.io/
  * - remove IE from browserslist
  * - write gatsby plugin that adds browserslist regex
@@ -35,7 +34,7 @@ const title = css`
   }
 
   .dark-mode & span {
-    background: #f8caff;
+    background: #e7ceff;
     color: #15202b;
   }
 `
@@ -85,8 +84,7 @@ const body = css`
     position: relative;
     box-shadow: none;
     display: inline-block;
-    &::before,
-    &::after {
+    &::before {
       content: '';
       position: absolute;
       top: 0;
@@ -94,60 +92,22 @@ const body = css`
       right: 0;
       height: 100%;
       z-index: -1;
-    }
-    &::before {
-      width: 100%;
       background-image: linear-gradient(
+        transparent 0%,
         transparent 55%,
         #f0f0f0 55%,
         #f0f0f0 85%,
-        transparent 85%
+        transparent 85%,
+        transparent 100%
       );
-    }
-    &::after {
-      transform-origin: 0 50%;
-      transform: scaleX(0);
+      transform-origin: center right;
+      transform: scaleX(1);
       transition: transform 0.3s cubic-bezier(0.86, 0, 0.07, 1);
     }
-    &:nth-of-type(1)::after {
-      background-image: linear-gradient(
-        transparent 55%,
-        #ffd2d2 55%,
-        #ffd2d2 85%,
-        transparent 85%,
-        transparent 100%
-      );
-    }
-    &:nth-of-type(2)::after {
-      background-image: linear-gradient(
-        transparent 55%,
-        #b4fccd 55%,
-        #b4fccd 85%,
-        transparent 85%,
-        transparent 100%
-      );
-    }
-    &:nth-of-type(3)::after {
-      background-image: linear-gradient(
-        transparent 55%,
-        #a6ddff 55%,
-        #a6ddff 85%,
-        transparent 85%,
-        transparent 100%
-      );
-    }
-    &:nth-of-type(4)::after {
-      background-image: linear-gradient(
-        transparent 55%,
-        #a6ddff 55%,
-        #a6ddff 85%,
-        transparent 85%,
-        transparent 100%
-      );
-    }
-    &:hover::after,
-    &:focus::after {
-      transform: scaleX(1);
+
+    &:hover::before,
+    &:focus::before {
+      transform: scaleX(0);
     }
     &:hover {
       box-shadow: none !important;
@@ -160,36 +120,10 @@ const body = css`
   .dark-mode & a {
     &::before {
       background-image: linear-gradient(
+        transparent 0%,
         transparent 55%,
         #2f3f50 55%,
         #2f3f50 85%,
-        transparent 85%,
-        transparent 100%
-      );
-    }
-    &:nth-of-type(1)::after {
-      background-image: linear-gradient(
-        transparent 55%,
-        #582c2c 55%,
-        #582c2c 85%,
-        transparent 85%,
-        transparent 100%
-      );
-    }
-    &:nth-of-type(2)::after {
-      background-image: linear-gradient(
-        transparent 55%,
-        #316537 55%,
-        #316537 85%,
-        transparent 85%,
-        transparent 100%
-      );
-    }
-    &:nth-of-type(3)::after {
-      background-image: linear-gradient(
-        transparent 55%,
-        #154a6b 55%,
-        #154a6b 85%,
         transparent 85%,
         transparent 100%
       );

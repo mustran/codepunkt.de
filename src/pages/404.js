@@ -5,7 +5,7 @@ import NotFoundIllustration from '../images/notfound.svg'
 
 const headline = css`
   transform: rotate(-1deg);
-
+  margin-bottom: 2.58rem;
   span {
     background: #ffb2b2;
     .dark-mode & {

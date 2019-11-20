@@ -4,7 +4,7 @@ import Meta from '../components/meta'
 
 const headline = css`
   transform: rotate(-1deg);
-
+  margin-bottom: 2.58rem;
   span {
     background: #b0eae8;
     .dark-mode & {
