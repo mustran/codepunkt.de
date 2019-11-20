@@ -23,7 +23,8 @@ const styles = {
     span {
       background: #d8efd0;
       .dark-mode & {
-        background: #243e1c;
+        background: #b9d78e;
+        color: #15202b;
       }
     }
   `,
@@ -53,7 +54,7 @@ const styles = {
     .dark-mode &:focus {
       box-shadow: none;
       h2 {
-        color: #9f7aea;
+        color: #77a2e9;
       }
     }
   `,

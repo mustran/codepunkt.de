@@ -35,7 +35,8 @@ const title = css`
   }
 
   .dark-mode & span {
-    background: #1c4e68;
+    background: #f8caff;
+    color: #15202b;
   }
 `
 
@@ -97,11 +98,10 @@ const body = css`
     &::before {
       width: 100%;
       background-image: linear-gradient(
-        transparent 60%,
-        #f0f0f0 60%,
-        #f0f0f0 90%,
-        transparent 90%,
-        transparent 100%
+        transparent 55%,
+        #f0f0f0 55%,
+        #f0f0f0 85%,
+        transparent 85%
       );
     }
     &::after {
@@ -111,37 +111,37 @@ const body = css`
     }
     &:nth-of-type(1)::after {
       background-image: linear-gradient(
-        transparent 60%,
-        #ffd2d2 60%,
-        #ffd2d2 90%,
-        transparent 90%,
+        transparent 55%,
+        #ffd2d2 55%,
+        #ffd2d2 85%,
+        transparent 85%,
         transparent 100%
       );
     }
     &:nth-of-type(2)::after {
       background-image: linear-gradient(
-        transparent 60%,
-        #b4fccd 60%,
-        #b4fccd 90%,
-        transparent 90%,
+        transparent 55%,
+        #b4fccd 55%,
+        #b4fccd 85%,
+        transparent 85%,
         transparent 100%
       );
     }
     &:nth-of-type(3)::after {
       background-image: linear-gradient(
-        transparent 60%,
-        #a6ddff 60%,
-        #a6ddff 90%,
-        transparent 90%,
+        transparent 55%,
+        #a6ddff 55%,
+        #a6ddff 85%,
+        transparent 85%,
         transparent 100%
       );
     }
     &:nth-of-type(4)::after {
       background-image: linear-gradient(
-        transparent 60%,
-        #a6ddff 60%,
-        #a6ddff 90%,
-        transparent 90%,
+        transparent 55%,
+        #a6ddff 55%,
+        #a6ddff 85%,
+        transparent 85%,
         transparent 100%
       );
     }
@@ -160,21 +160,39 @@ const body = css`
   .dark-mode & a {
     &::before {
       background-image: linear-gradient(
-        transparent 60%,
-        #212d3a 60%,
-        #212d3a 90%,
-        transparent 90%,
+        transparent 55%,
+        #2f3f50 55%,
+        #2f3f50 85%,
+        transparent 85%,
         transparent 100%
       );
     }
     &:nth-of-type(1)::after {
-      background-image: linear-gradient(transparent 65%, #582c2c 35%);
+      background-image: linear-gradient(
+        transparent 55%,
+        #582c2c 55%,
+        #582c2c 85%,
+        transparent 85%,
+        transparent 100%
+      );
     }
     &:nth-of-type(2)::after {
-      background-image: linear-gradient(transparent 65%, #316537 35%);
+      background-image: linear-gradient(
+        transparent 55%,
+        #316537 55%,
+        #316537 85%,
+        transparent 85%,
+        transparent 100%
+      );
     }
     &:nth-of-type(3)::after {
-      background-image: linear-gradient(transparent 65%, #154a6b 35%);
+      background-image: linear-gradient(
+        transparent 55%,
+        #154a6b 55%,
+        #154a6b 85%,
+        transparent 85%,
+        transparent 100%
+      );
     }
   }
 `

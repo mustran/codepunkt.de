@@ -88,10 +88,10 @@ const global = css`
       }
 
       .dark-mode & {
-        color: #9f7aea;
+        color: #77a2e9;
 
         &:hover {
-          box-shadow: 0 1px 0 0 #594386;
+          box-shadow: 0 1px 0 0 #2a6398;
         }
       }
     }

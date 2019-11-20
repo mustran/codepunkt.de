@@ -39,9 +39,14 @@ const article = css`
     color: #5c5e7b;
     font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
       monospace;
+    font-size: 16px;
+
+    @media only screen and (min-width: 668px) {
+      font-size: 18px;
+    }
   }
   .dark-mode & code:not(.vscode-highlight-code) {
-    background: #1f2833;
+    background: #293038;
     color: #8493a7;
   }
 
@@ -59,10 +64,14 @@ const article = css`
     }
 
     .vscode-highlight-code {
-      font-size: 16px;
+      font-size: 13px;
       font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
         monospace;
       line-height: 1.65;
+
+      @media only screen and (min-width: 500px) {
+        font-size: 16px;
+      }
     }
 
     .vscode-highlight-line {
@@ -246,7 +255,8 @@ const headline = css`
   span {
     background: #d8efd0;
     .dark-mode & {
-      background: #243e1c;
+      background: #b9d78e;
+      color: #15202b;
     }
   }
 `

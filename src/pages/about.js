@@ -8,7 +8,8 @@ const headline = css`
   span {
     background: #ffe8b1;
     .dark-mode & {
-      background: #5b3211;
+      background: #f8d177;
+      color: #15202b;
     }
   }
 `
