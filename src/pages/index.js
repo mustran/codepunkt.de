@@ -8,6 +8,7 @@ import Meta from '../components/meta'
  * TODOS
  *
  * - fix animations when scrolled down
+ * - use tags
  * - https://brettstevenson.io/
  * - remove IE from browserslist
  * - write gatsby plugin that adds browserslist regex

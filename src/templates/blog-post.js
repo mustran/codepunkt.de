@@ -3,9 +3,7 @@ import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
 import { css, cx } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
-import CoffeeIcon from '../images/coffee.svg'
 import PullrequestIcon from '../images/pullrequest.svg'
-import TagIcon from '../images/tag.svg'
 import { formatPostDate } from '../utils'
 
 const article = css`
@@ -215,36 +213,43 @@ const upperMeta = css`
       color: #333;
       content: '•';
       margin: 0 1ex;
+
+      .dark-mode & {
+        color: #cbd5e0;
+      }
     }
   }
 `
 
-const lowerMeta = css`
+const tags = css`
   list-style: none;
   padding: 0;
   margin: 0;
   margin-bottom: 1.72rem;
-  color: #757575;
+  color: #495c6e;
+  font-size: 15px;
+
+  @media only screen and (min-width: 668px) {
+    font-size: 17px;
+  }
+
   .dark-mode & {
-    color: #7f8ea3;
+    color: #cbd5e0;
   }
 
   li {
     display: inline-flex;
+    background: #eff5fa;
+    padding: 2px 8px;
     align-items: center;
     margin: 0;
-    &:not(:last-child) {
-      margin-right: 1.72rem;
-    }
-  }
 
-  svg {
-    stroke-width: 1;
-    margin-right: 0.43rem;
-    width: 24px;
-    stroke: #aaa;
+    &:not(:last-child) {
+      margin-right: 0.43rem;
+    }
+
     .dark-mode & {
-      stroke: #3f576f;
+      background: #293849;
     }
   }
 `
@@ -332,14 +337,10 @@ const BlogPost = (props) => {
             <PullrequestIcon />
           </a>
         </h1>
-        <ul className={lowerMeta}>
-          <li>
-            <CoffeeIcon />
-            {timeToRead} min read
-          </li>
-          <li>
-            <TagIcon /> Accessibility
-          </li>
+        <ul className={tags}>
+          <li>OSS</li>
+          <li>JavaScript</li>
+          <li>Package Management</li>
         </ul>
         {/* webmentions */}
         <div
