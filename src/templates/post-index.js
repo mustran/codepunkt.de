@@ -4,6 +4,7 @@ import React from 'react'
 import Meta from '../components/meta'
 import CoffeeIcon from '../images/coffee.svg'
 import FeatherIcon from '../images/feather.svg'
+import colors from '../style/colors'
 import { formatPostDate } from '../utils'
 
 const pagination = css`
@@ -18,17 +19,6 @@ const paginationItem = css`
 `
 
 const styles = {
-  headline: css`
-    transform: rotate(-1deg);
-    margin-bottom: 2.58rem;
-    span {
-      background: #d8efd0;
-      .dark-mode & {
-        background: #b9d78e;
-        color: #15202b;
-      }
-    }
-  `,
   readMore: css``,
   post: css`
     margin: 3.44rem 0;
@@ -37,21 +27,21 @@ const styles = {
     }
   `,
   postTitle: css`
-    color: #7285a3;
     display: block;
     font-size: 1.5rem;
     margin-bottom: 0.43rem;
     h2 {
       margin: 0;
-    }
-    .dark-mode & h2 {
-      color: #a3c0f0;
+      color: ${colors.light.linkDark};
+      .dark-mode & {
+        color: ${colors.dark.linkDark};
+      }
     }
     &:hover,
     &:focus {
       box-shadow: none;
       h2 {
-        color: #77a2e9;
+        color: ${colors.dark.link};
       }
     }
     .dark-mode &:hover,
@@ -60,7 +50,7 @@ const styles = {
     }
   `,
   postMeta: css`
-    color: #757575;
+    color: #595959;
     margin: 0 0 0.43rem;
     .dark-mode & {
       color: #7f8ea3;
@@ -80,17 +70,15 @@ const styles = {
     }
   `,
   postMetaLink: css`
-    color: currentColor;
     box-shadow: none;
     .dark-mode & {
-      color: currentColor;
       box-shadow: none;
     }
   `,
   postSummary: css`
     margin-bottom: 0.86rem;
     span {
-      color: #757575;
+      color: #595959;
       font-size: 1rem;
       .dark-mode & {
         color: #7f8ea3;
@@ -103,7 +91,7 @@ const styles = {
       Georgia, serif;
   `,
   month: css`
-    font-size: 75% !important;
+    font-size: 85% !important;
   `,
 }
 
@@ -121,9 +109,6 @@ const BlogIndex = (props) => {
   return (
     <div className={className}>
       <Meta title="Articles — Codepunkt" />
-      <h1 className={styles.headline}>
-        <span>Articles</span>
-      </h1>
       {articles.map(
         ({
           frontmatter: { draft, created, updated, title },
@@ -171,9 +156,6 @@ const BlogIndex = (props) => {
                 ></span>{' '}
                 — {excerpt}
               </p>
-              {/* <Link to={path} className={styles.readMore}>
-                Read More...
-              </Link> */}
             </article>
           )
         }
@@ -210,10 +192,10 @@ export const query = graphql`
   query mdxPostList($ids: [String]) {
     allMdx(filter: { id: { in: $ids } }) {
       nodes {
-        excerpt(pruneLength: 288)
         fields {
           path
         }
+        excerpt(pruneLength: 200)
         frontmatter {
           author
           created

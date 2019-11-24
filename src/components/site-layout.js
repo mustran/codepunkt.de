@@ -5,6 +5,7 @@ import {
   Transition as ReactTransition,
   TransitionGroup,
 } from 'react-transition-group'
+import colors from '../style/colors'
 import SiteFooter from './site-footer'
 import SiteHeader from './site-header'
 
@@ -68,7 +69,7 @@ const global = css`
       -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       background: #fff;
-      color: #333;
+      color: #000;
       min-height: 100%;
       scroll-behavior: smooth;
       text-rendering: optimizeSpeed;
@@ -80,7 +81,7 @@ const global = css`
     }
 
     a {
-      color: #1669f3;
+      color: ${colors.light.link};
       text-decoration: none;
 
       &:hover {
@@ -88,7 +89,7 @@ const global = css`
       }
 
       .dark-mode & {
-        color: #77a2e9;
+        color: ${colors.dark.link};
 
         &:hover {
           box-shadow: 0 1px 0 0 #2a6398;
@@ -140,6 +141,7 @@ const main = css`
   /* ie9-11 hack, see https://stackoverflow.com/a/20095764 */
   display: block;
   margin: 120px auto 0;
+  min-height: calc(100vh - 6rem - 160px);
 
   @media only screen and (min-width: 668px) {
     margin: 160px auto 0;

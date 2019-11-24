@@ -106,7 +106,7 @@ const menuItems = css`
 `
 
 const link = css`
-  color: #757575;
+  color: #595959;
   position: relative;
   padding: 6px 12px;
   box-shadow: none !important;

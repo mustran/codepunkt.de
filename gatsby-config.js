@@ -62,7 +62,7 @@ module.exports = {
       options: {
         extensions: ['.mdx'],
         defaultLayouts: {
-          default: require.resolve('./src/templates/blog-post.js'),
+          default: require.resolve('./src/templates/post.js'),
         },
         remarkPlugins: [
           // adds target _blank to external links and defines an appropriate

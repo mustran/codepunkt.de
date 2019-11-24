@@ -4,6 +4,7 @@ import { useWindowScroll } from 'react-use'
 import useDarkMode from 'use-dark-mode'
 import MoonIcon from '../images/moon.svg'
 import SunIcon from '../images/sun.svg'
+import colors from '../style/colors'
 import SiteLogo from './site-logo'
 import Menu from './site-menu'
 
@@ -37,24 +38,24 @@ const headerFixed = css`
   }
 
   position: fixed;
-  background: #fff;
-  border-bottom-color: #f2f2f2;
+  background: ${colors.light.background};
+  border-bottom-color: ${colors.light.backgroundAccentSecondary};
   animation: headerIn 0.4s ease-out forwards;
   margin-top: 0;
 
   .dark-mode & {
-    background: #15202b;
-    border-bottom-color: #1e2e3e;
+    background: ${colors.dark.background};
+    border-bottom-color: ${colors.dark.backgroundAccentSecondary};
   }
 `
 
 const headerStatic = css`
   @keyframes headerOut {
     from {
-      margin-top: 25px;
+      margin-top: 45px;
     }
     to {
-      margin-top: 0;
+      margin-top: 16px;
     }
   }
 
@@ -105,7 +106,7 @@ const modeButton = css`
   }
 
   .dark-mode & {
-    color: #fff;
+    color: ${colors.dark.text};
   }
 
   svg {

@@ -3,7 +3,10 @@ import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer'
 import { css, cx } from 'linaria'
 import React from 'react'
 import Meta from '../components/meta'
+import CoffeeIcon from '../images/coffee.svg'
 import PullrequestIcon from '../images/pullrequest.svg'
+import TagIcon from '../images/tag.svg'
+import colors from '../style/colors'
 import { formatPostDate } from '../utils'
 
 const article = css`
@@ -31,7 +34,7 @@ const article = css`
 
   /* syntax highlighted code */
   code:not(.vscode-highlight-code) {
-    background: #f8f8f8;
+    background: ${colors.light.codeBackgroundAccent};
     padding: 3px 5px;
     border-radius: 3px;
     color: #5c5e7b;
@@ -44,15 +47,15 @@ const article = css`
     }
   }
   .dark-mode & code:not(.vscode-highlight-code) {
-    background: #293038;
+    background: ${colors.dark.codeBackgroundAccent};
     color: #8493a7;
   }
 
   .vscode-highlight {
     border-radius: 4px;
-    border: 1px solid #ebebeb;
     counter-reset: line;
-    background: #fdfdfd;
+    background: ${colors.light.codeBackground};
+    border: 1px solid ${colors.light.codeBackgroundAccent};
     margin: 0 -6.1vw 1.72rem;
     padding: 18px calc(6.1vw - 1.5em);
 
@@ -62,13 +65,13 @@ const article = css`
     }
 
     .vscode-highlight-code {
-      font-size: 13px;
+      font-size: 14px;
       font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
         monospace;
       line-height: 1.65;
 
       @media only screen and (min-width: 500px) {
-        font-size: 16px;
+        font-size: 18px;
       }
     }
 
@@ -102,8 +105,8 @@ const article = css`
     }
   }
   .dark-mode & .vscode-highlight {
-    background: #1f2833;
-    border: 1px solid #303c4b;
+    background: ${colors.dark.codeBackground};
+    border: 1px solid ${colors.dark.codeBackgroundAccent};
   }
   .dark-mode & .vscode-highlight-line-highlighted {
     background-color: #0c1a27;
@@ -142,10 +145,10 @@ const article = css`
       svg {
         width: 1.1rem;
         fill: none;
-        stroke: #1669f3;
         stroke-width: 2;
+        stroke: ${colors.light.link};
         .dark-mode & {
-          stroke: #77a2e9;
+          stroke: ${colors.dark.link};
         }
       }
     }
@@ -186,9 +189,6 @@ const article = css`
   }
 `
 
-// fill="none" stroke="#1669f3" stroke-width="2"
-// stroke-linecap="round" stroke-linejoin="round"
-
 const header = css`
   display: flex;
   flex-direction: column;
@@ -200,9 +200,9 @@ const upperMeta = css`
   margin: 0;
   margin-bottom: 0.43rem;
   font-size: 0.9rem;
-  color: #757575;
+  color: ${colors.light.textSecondary};
   .dark-mode & {
-    color: #7f8ea3;
+    color: ${colors.dark.textSecondary};
   }
 
   li {
@@ -210,58 +210,89 @@ const upperMeta = css`
     align-items: baseline;
     margin: 0;
     &:not(:last-child)::after {
-      color: #333;
       content: '•';
       margin: 0 1ex;
 
+      color: ${colors.light.text};
       .dark-mode & {
-        color: #cbd5e0;
+        color: ${colors.dark.text};
       }
     }
   }
 `
 
-const tags = css`
+const tagList = css`
   list-style: none;
+  display: inline-flex;
+  flex-wrap: wrap;
   padding: 0;
   margin: 0;
+  li {
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    &:not(:last-of-type) {
+      margin-right: 0.3rem;
+      &::after {
+        content: ',';
+      }
+    }
+  }
+`
+
+const lowerMeta = css`
+  list-style: none;
+  padding: 0.43rem 0.86rem;
+  border-radius: 0.43rem;
+  margin: 0;
   margin-bottom: 1.72rem;
-  color: #495c6e;
   font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  background: ${colors.light.backgroundAccent};
+  border: 1px solid ${colors.light.backgroundAccentSecondary};
+  .dark-mode & {
+    background: ${colors.dark.backgroundAccent};
+    border: 1px solid ${colors.dark.backgroundAccentSecondary};
+  }
 
   @media only screen and (min-width: 668px) {
     font-size: 17px;
   }
 
-  .dark-mode & {
-    color: #cbd5e0;
+  svg {
+    margin: 2px 0.43rem 0 0;
+    stroke-width: 2;
+    flex-shrink: 0;
+    stroke: #aaa;
+    .dark-mode & {
+      stroke: #3f576f;
+    }
   }
 
-  li {
+  > li {
     display: inline-flex;
-    background: #eff5fa;
-    padding: 2px 8px;
-    align-items: center;
+    align-items: flex-start;
+    padding: 0.215rem 0;
     margin: 0;
 
-    &:not(:last-child) {
-      margin-right: 0.43rem;
+    span {
+      display: inline-flex;
+      flex-wrap: wrap;
     }
+  }
 
-    .dark-mode & {
-      background: #293849;
-    }
+  a:not(:last-of-type) {
+    margin-right: 0.43rem;
   }
 `
 
 const headline = css`
   margin-bottom: 0.86rem;
-
   span {
-    background: #d8efd0;
+    color: ${colors.light.headlineGreen};
     .dark-mode & {
-      background: #b9d78e;
-      color: #15202b;
+      color: ${colors.dark.headlineGreen};
     }
   }
 `
@@ -272,7 +303,7 @@ const date = css`
 `
 
 const month = css`
-  font-size: 75%;
+  font-size: 85%;
   margin-right: 0.3rem;
 `
 
@@ -286,6 +317,7 @@ const BlogPost = (props) => {
     data: {
       mdx: {
         body,
+        fields: { tags },
         frontmatter: { draft, created, updated, title },
         timeToRead,
       },
@@ -318,7 +350,7 @@ const BlogPost = (props) => {
             className={date}
           ></li>
           <li>
-            <Link to="#">
+            <Link to="#" title="Jump to the comments section">
               {commentCount > 0
                 ? `${commentCount} comments`
                 : 'Leave a comment'}
@@ -337,11 +369,28 @@ const BlogPost = (props) => {
             <PullrequestIcon />
           </a>
         </h1>
-        <ul className={tags}>
-          <li>OSS</li>
-          <li>JavaScript</li>
-          <li>Package Management</li>
-        </ul>
+        {(tags || timeToRead) && (
+          <ul className={lowerMeta}>
+            {timeToRead && (
+              <li>
+                <CoffeeIcon />
+                {timeToRead} min read
+              </li>
+            )}
+            {tags && (
+              <li>
+                <TagIcon />
+                <ul className={tagList}>
+                  {tags.map(([slug, tag], i) => (
+                    <li>
+                      <Link to={`/articles/category/${slug}`}>{tag}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            )}
+          </ul>
+        )}
         {/* webmentions */}
         <div
           className={css`
@@ -369,6 +418,9 @@ export const query = graphql`
   query mdxPostDetails($permaLink: String, $id: String) {
     mdx(id: { eq: $id }) {
       body
+      fields {
+        tags
+      }
       frontmatter {
         title
         author

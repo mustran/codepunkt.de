@@ -3,7 +3,8 @@ title: Techniques for patching npm packages
 author: Christoph Werner
 created: 2019-11-17
 draft: true
-tags: OSS, package management, Wat
+tags:
+  ['Open Source', 'JavaScript', 'Dependencies']
 ---
 
 When working on a JavaScript projects with lots of npm packages, you will encounter packages that don't do exactly what you want them to do or have bugs when used in a specific way.
@@ -18,6 +19,28 @@ The most obvious thing to do is to contribute back to the community by at least 
 - In case of a missing feature or different behavior: What features or different behavior you would like to have and why
 
 However, not all packages are maintained regularly and quite often, maintainers don't have the time and motivation to fix minor bugs or add very specific features that don't seem to benefit everyone else aswell.
+
+```jsx
+import { Link } from 'gatsby'
+import { css } from 'linaria'
+import React from 'react'
+import LogoSvg from './site-logo.svg'
+
+const logo = css`
+  width: 140px;
+  height: 45px;
+`
+
+const SiteLogo = () => {
+  return (
+    <Link to="/">
+      <LogoSvg role="img" className={logo} />
+    </Link>
+  )
+}
+
+export default SiteLogo
+```
 
 @todo: check if someone else has the same idea or already reported the bug
 

@@ -3,13 +3,11 @@ import React from 'react'
 import Meta from '../components/meta'
 
 const headline = css`
-  transform: rotate(1deg);
   margin-bottom: 2.58rem;
   span {
-    background: #ffe8b1;
+    color: #ffe8b1;
     .dark-mode & {
-      background: #f8d177;
-      color: #15202b;
+      color: #f8d177;
     }
   }
 `

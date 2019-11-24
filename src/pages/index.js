@@ -45,7 +45,7 @@ const greeting = css`
   margin-bottom: 0.86rem;
   font-size: 4.2vmin;
   font-weight: 400;
-  color: #757575;
+  color: #595959;
 
   @media only screen and (min-width: 500px) {
     font-weight: 300;
