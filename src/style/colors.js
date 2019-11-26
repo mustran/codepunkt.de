@@ -6,10 +6,10 @@ const colors = {
     backgroundAccentSecondary: '#f2f2f2',
     codeBackground: '#fdfdfd',
     codeBackgroundAccent: '#ebebeb',
-    headlineGreen: '#447931', // AAA for large/bold fonts, AA for others
+    headlineGreen: '#318513', // AAA for large/bold fonts, AA for others
     headlineTurquoise: '#1d8471', // AAA for large/bold fonts, AA for others
     link: '#014bc7', // AAA for any font-size
-    linkDark: '#5e749c', // AAA for large/bold fonts, AA for others
+    linkSecondary: '#5e749c', // AAA for large/bold fonts, AA for others
     text: '#000000', // AAA for any font-size
     textSecondary: '#595959', // AAA for any font-size
     textTertiary: '#757575', // AAA for large/bold fonts, AA for others
@@ -23,10 +23,11 @@ const colors = {
     headlineGreen: '#b9d78e', // AAA for large/bold fonts, AA for others
     headlineTurquoise: '#8ed7b9', // AAA for large/bold fonts, AA for others
     link: '#86b2fd', // AAA for any font-size
-    linkDark: '#7886b9', // AAA for large/bold fonts, AA for others
-    text: '#cbd5e0', // AAA for any font-size
-    textSecondary: '#99abbf', // AAA for any font-size
+    linkSecondary: '#9dc9fb', // AAA for large/bold fonts, AA for others
+    text: '#fff', // AAA for any font-size
+    textSecondary: '#cbd5e0', // AAA for any font-size
     textTertiary: '#728da7', // AAA for large/bold fonts, AA for others
+    // 728da7 99abbf
   },
 }
 

@@ -145,7 +145,7 @@ const article = css`
       svg {
         width: 1.1rem;
         fill: none;
-        stroke-width: 2;
+        stroke-width: 1;
         stroke: ${colors.light.link};
         .dark-mode & {
           stroke: ${colors.dark.link};

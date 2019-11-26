@@ -68,29 +68,25 @@ const global = css`
       -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
       font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-      background: #fff;
-      color: #000;
       min-height: 100%;
       scroll-behavior: smooth;
       text-rendering: optimizeSpeed;
-
+      background: ${colors.light.background};
+      color: ${colors.light.text};
       &.dark-mode {
-        background: #15202b;
-        color: #cbd5e0;
+        background: ${colors.dark.background};
+        color: ${colors.dark.text};
       }
     }
 
     a {
-      color: ${colors.light.link};
       text-decoration: none;
-
+      color: ${colors.light.link};
       &:hover {
         box-shadow: 0 1px 0 0 #aacaff;
       }
-
       .dark-mode & {
         color: ${colors.dark.link};
-
         &:hover {
           box-shadow: 0 1px 0 0 #2a6398;
         }
