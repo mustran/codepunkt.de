@@ -16,12 +16,12 @@ const logo = css`
   height: 45px;
 
   path {
-    fill: #000;
+    fill: #009a79;
     stroke: none;
   }
 
   .dark-mode & path {
-    fill: #fff;
+    fill: #9a3cb5;
   }
 `
 

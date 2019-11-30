@@ -1,10 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { css, cx } from 'linaria'
 import React from 'react'
-import {
-  Transition as ReactTransition,
-  TransitionGroup,
-} from 'react-transition-group'
+import { Transition as ReactTransition, TransitionGroup } from 'react-transition-group'
 import colors from '../style/colors'
 import SiteFooter from './site-footer'
 import SiteHeader from './site-header'
@@ -221,7 +218,7 @@ const SiteLayout = ({ children, location }) => {
         <main id="main" className={main}>
           <Transition location={location}>{children}</Transition>
         </main>
-        <SiteFooter />
+        <SiteFooter path={location.pathname} />
       </div>
     </MDXProvider>
   )

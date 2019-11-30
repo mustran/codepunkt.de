@@ -27,6 +27,20 @@ const header = css`
   }
 `
 
+const headerAnimate = css`
+  @keyframes animateHeader {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  opacity: 0;
+  animation: animateHeader 0.4s ease-out forwards;
+  animation-delay: 1.8s;
+`
+
 const headerFixed = css`
   @keyframes headerIn {
     from {
@@ -115,6 +129,7 @@ const modeButton = css`
 `
 
 const SiteHeader = ({ sneakPeakColor, path }) => {
+  const isHomePage = path === '/animate'
   const { value: isDarkMode, toggle: toggleDarkMode } = useDarkMode(false)
 
   const { y } = useWindowScroll()
@@ -133,6 +148,7 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
     <header
       className={cx(
         header,
+        isHomePage && headerAnimate,
         headerState === 'fixed' && headerFixed,
         headerState === 'static' && headerStatic
       )}
@@ -154,12 +170,12 @@ const SiteHeader = ({ sneakPeakColor, path }) => {
                 focusable="false"
               />
             ) : (
-              <MoonIcon
-                className={moonIcon}
-                role="presentation"
-                focusable="false"
-              />
-            )}
+                <MoonIcon
+                  className={moonIcon}
+                  role="presentation"
+                  focusable="false"
+                />
+              )}
           </button>
         </div>
       </div>

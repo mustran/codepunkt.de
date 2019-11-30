@@ -1,5 +1,5 @@
 import { Link } from 'gatsby'
-import { css } from 'linaria'
+import { css, cx } from 'linaria'
 import React from 'react'
 import TwitterIcon from '../images/twitter.svg'
 
@@ -20,6 +20,20 @@ const footer = css`
       color: #aaa !important;
     }
   }
+`
+
+const footerAnimate = css`
+  @keyframes animateHeader {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  opacity: 0;
+  animation: animateHeader 0.4s ease-out forwards;
+  animation-delay: 1.8s;
 `
 
 const container = css`
@@ -60,9 +74,11 @@ const icon = css`
   stroke-width: 1;
 `
 
-const SiteFooter = () => {
+const SiteFooter = ({ path }) => {
+  const isHomePage = path === '/animate'
+
   return (
-    <footer className={footer}>
+    <footer className={cx(footer, isHomePage && footerAnimate)}>
       <div className={container}>
         <div className={copyright}>
           <Link to="/legal">Legal Notice</Link>
