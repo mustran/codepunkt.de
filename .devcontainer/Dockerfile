@@ -41,7 +41,7 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh
     && echo 'fpath+=("$HOME/.zsh/pure")\n\
 export ZSH="/home/node/.oh-my-zsh"\n\
 ZSH_THEME=""\n\
-plugins=(git)\n\
+plugins=(git ssh-agent)\n\
 source $ZSH/oh-my-zsh.sh\n\
 autoload -U promptinit; promptinit \n\
 prompt pure' > "$HOME/.zshrc"
