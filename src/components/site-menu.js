@@ -7,9 +7,10 @@ import { useOrientation } from 'react-use'
 import useDarkMode from 'use-dark-mode'
 
 const menu = css`
-  font-size: 18px;
   display: flex;
   align-items: center;
+  font-family: 'Josefin Sans';
+  font-size: 20px;
 
   &.open {
     .menuBackground {
