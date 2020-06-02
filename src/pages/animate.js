@@ -105,16 +105,16 @@ const greeting = css`
   opacity: 0;
   animation: animateGreeting 0.4s linear forwards;
   animation-delay: 1.4s;
-  
+
   @media only screen and (min-width: 668px) {
     font-size: 33.35px;
   }
-  
+
   color: ${colors.light.textSecondary};
   .dark-mode & {
     color: ${colors.dark.textSecondary};
   }
-  `
+`
 
 const name = css`
   @keyframes animateName {
@@ -133,7 +133,7 @@ const name = css`
       font-size: 46.76px;
     }
   }
-  
+
   font-size: 10vw;
   font-family: 'Josefin Sans';
   font-weight: 700;
@@ -141,14 +141,14 @@ const name = css`
   display: inline;
   margin-bottom: 0.86rem;
   transform-origin: left center;
-  
+
   animation: animateName 0.4s ease-out forwards;
   animation-delay: 1.2s;
   @media only screen and (min-width: 668px) {
     font-size: 60.12px;
     animation-name: animateNameDesktop;
   }
-  
+
   @keyframes even {
     0% {
       opacity: 0;
@@ -172,12 +172,12 @@ const name = css`
       transform: translateY(0);
     }
   }
-  
+
   > span {
     display: inline-block;
     opacity: 0;
     animation: even 300ms ease-out forwards;
-    
+
     &:nth-child(even) {
       animation-name: even;
     }
@@ -248,26 +248,98 @@ const HomePage = ({ className }) => {
     <article className={cx(className, hero)}>
       <Meta title="Codepunkt" />
       <div className={content}>
-        <p className={greeting}>
-          Hey, my name is
-        </p>
+        <p className={greeting}>Hey, my name is</p>
         <h2 aria-label="Christoph Werner" className={name}>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(150, 350)}px` }}>C</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(-300, 300)}px` }}>h</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(150, 350)}px` }}>r</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(-300, 300)}px` }}>i</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(150, 350)}px` }}>s</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(-300, 300)}px` }}>t</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(150, 350)}px` }}>o</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(-300, 300)}px` }}>p</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(150, 350)}px` }}>h</span>
-          {' '}
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(-300, 300)}px` }}>W</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(150, 350)}px` }}>e</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(-300, 300)}px` }}>r</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(150, 350)}px` }}>n</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(-300, 300)}px` }}>e</span>
-          <span aria-hidden="true" style={{ '--animation-start-y': `${random(150, 350)}px` }}>r</span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(150, 350)}px` }}
+          >
+            C
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(-300, 300)}px` }}
+          >
+            h
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(150, 350)}px` }}
+          >
+            r
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(-300, 300)}px` }}
+          >
+            i
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(150, 350)}px` }}
+          >
+            s
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(-300, 300)}px` }}
+          >
+            t
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(150, 350)}px` }}
+          >
+            o
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(-300, 300)}px` }}
+          >
+            p
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(150, 350)}px` }}
+          >
+            h
+          </span>{' '}
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(-300, 300)}px` }}
+          >
+            W
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(150, 350)}px` }}
+          >
+            e
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(-300, 300)}px` }}
+          >
+            r
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(150, 350)}px` }}
+          >
+            n
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(-300, 300)}px` }}
+          >
+            e
+          </span>
+          <span
+            aria-hidden="true"
+            style={{ '--animation-start-y': `${random(150, 350)}px` }}
+          >
+            r
+          </span>
         </h2>
         <p className={body}>
           I'm a software architect at{' '}

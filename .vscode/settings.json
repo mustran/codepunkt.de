@@ -1,8 +1,9 @@
 {
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
-  },
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll.eslint"
+  ],
   "editor.snippetSuggestions": "top",
   "eslint.options": {
     "configFile": ".eslintrc.js"
