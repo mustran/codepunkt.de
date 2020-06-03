@@ -1,10 +1,13 @@
 import { MDXProvider } from '@mdx-js/react'
 import { css, cx } from 'linaria'
 import React from 'react'
-import { Transition as ReactTransition, TransitionGroup } from 'react-transition-group'
-import colors from '../style/colors'
-import SiteFooter from './site-footer'
-import SiteHeader from './site-header'
+import {
+  Transition as ReactTransition,
+  TransitionGroup,
+} from 'react-transition-group'
+import colors from '../../style/colors'
+import SiteFooter from '../site-footer'
+import { Header } from './header'
 
 const global = css`
   :global() {
@@ -15,10 +18,12 @@ const global = css`
       box-sizing: border-box;
     }
 
-    /* Remove list styles on ul, ol elements with a class attribute */
+    /* Remove list styles and margin/padding on ul, ol elements with a class attribute */
     ul[class],
     ol[class] {
       list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
     /* A elements that don't have a class get default styles */
@@ -53,12 +58,22 @@ const global = css`
     html {
       -ms-text-size-adjust: 100%;
       -webkit-text-size-adjust: 100%;
+      scroll-behavior: auto;
+      overscroll-behavior-y: none;
     }
 
     body {
+      position: relative;
+      min-height: 100%;
+      min-height: stretch;
       margin: 0;
       overflow-x: hidden;
       font-kerning: normal;
+      font-size: min(max(18px, 2.5vmin), 24px);
+      font-family: 'Open Sans', -apple-system, 'BlinkMacSystemFont', 'Segoe UI',
+        'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', 'Helvetica Neue',
+        sans-serif;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
@@ -68,14 +83,88 @@ const global = css`
       min-height: 100%;
       scroll-behavior: smooth;
       text-rendering: optimizeSpeed;
-      background: ${colors.light.background};
-      color: ${colors.light.text};
+
+      color: #28342b;
+      background: #f0f7f2;
+      transition: all 0.2s ease-out;
+      will-change: color, background;
       &.dark-mode {
-        background: ${colors.dark.background};
-        color: ${colors.dark.text};
+        color: #e8e8f0;
+        background: #15202b;
+      }
+
+      padding: 18px 10px 10px;
+      @media screen and (min-width: 521px) {
+        padding: 28px 20px 20px;
       }
     }
 
+    html[data-state='init'],
+    html[data-state='animating'],
+    html[data-state='menu'] {
+      overflow: hidden;
+      body {
+        overflow: hidden;
+      }
+    }
+
+    html::after,
+    html::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      height: 100%;
+      width: 10px;
+      z-index: 20000;
+      background: #fff;
+      transition: all 0.2s ease-out;
+      @media screen and (min-width: 521px) {
+        width: 20px;
+      }
+    }
+    html.dark-mode::after,
+    html.dark-mode::before {
+      background: #3e4156;
+    }
+    html::before {
+      left: 0;
+    }
+    html::after {
+      right: 0;
+    }
+    body::after,
+    body::before {
+      content: '';
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: #fff;
+      transition: all 0.2s ease-out;
+      z-index: 21000;
+      @media screen and (min-width: 521px) {
+        height: 20px;
+      }
+      .dark-mode & {
+        background: #3e4156;
+      }
+    }
+    body::before {
+      top: 0;
+      height: 18px;
+      border-top: 8px solid #9cc989;
+      @media screen and (min-width: 521px) {
+        height: 28px;
+      }
+      .dark-mode & {
+        border-top-color: #e68fff;
+      }
+    }
+    body::after {
+      bottom: 0;
+    }
+
+    /* starting from here, i'm not so sure... */
     a {
       text-decoration: none;
       color: ${colors.light.link};
@@ -99,25 +188,14 @@ const global = css`
       outline: none;
     }
 
-    h1 {
-      font-size: 9vmin;
-      font-family: Merriweather, 'Lucida Bright', 'Lucidabright', 'Lucida Serif',
-        Lucida, 'DejaVu Serif', 'Bitstream Vera Serif', 'Liberation Serif',
-        Georgia, serif;
-      @media only screen and (min-width: 555px) {
-        font-size: 50px;
-      }
-    }
-
     h1,
     h2,
     h3,
     h4,
     h5,
     h6 {
-      .dark-mode & {
-        color: #fff;
-      }
+      font-family: montserrat, Verdana, Arial, sans-serif;
+      font-weight: 500;
     }
   }
 `
@@ -214,7 +292,7 @@ const SiteLayout = ({ children, location }) => {
     // without importing them
     <MDXProvider components={{ Foo }}>
       <div className={cx(global, container)}>
-        <SiteHeader path={location.pathname} />
+        <Header path={location.pathname} />
         <main id="main" className={main}>
           <Transition location={location}>{children}</Transition>
         </main>

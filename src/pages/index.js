@@ -1,4 +1,3 @@
-import loadable from '@loadable/component'
 import { Link } from 'gatsby'
 import { css, cx } from 'linaria'
 import React from 'react'
@@ -7,9 +6,7 @@ import Meta from '../components/meta'
 /**
  * TODOS
  *
- * - fix animations when scrolled down
  * - use tags
- * - https://brettstevenson.io/
  * - remove IE from browserslist
  * - write gatsby plugin that adds browserslist regex
  * - actually make webmentions work
@@ -137,15 +134,10 @@ const content = css`
   flex-direction: column;
 `
 
-const BackgroundAnimation = loadable(() =>
-  import('../components/background-animation')
-)
-
 const HomePage = ({ className }) => {
   return (
     <article className={cx(className, hero)}>
       <Meta title="Codepunkt" />
-      <BackgroundAnimation />
       <div className={content}>
         <h1 className={title}>
           <span>I build & teach web technology.</span>

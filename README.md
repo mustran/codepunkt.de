@@ -1,6 +1,6 @@
 Personal site and blog, heavily inspired by:
 
+- https://robbowen.digital/
 - https://divyanshu013.dev/
 - https://mxb.dev/
-- https://kentcdodds.com/
-- https://overreacted.io/
+- https://brettstevenson.io/

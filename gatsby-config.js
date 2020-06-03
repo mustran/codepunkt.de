@@ -7,10 +7,6 @@ const ast = parse5.parse(String(doc), { sourceCodeLocationInfo: true })
 const hast = fromParse5(ast, doc)
 const linkSvg = hast.children[0].children[1].children[0]
 
-console.log('>>>>>>>>>>>>>>>>>>>>>>>')
-console.log(process.env.NODE_ENV)
-console.log('>>>>>>>>>>>>>>>>>>>>>>>')
-
 module.exports = {
   siteMetadata: {
     title: 'Codepunkt',
@@ -46,7 +42,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-layout',
       options: {
-        component: require.resolve(`./src/components/site-layout`),
+        component: require.resolve(`./src/components/site/layout`),
       },
     },
     { resolve: 'gatsby-plugin-react-svg' },
