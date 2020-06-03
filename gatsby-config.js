@@ -114,23 +114,13 @@ module.exports = {
           {
             resolve: 'gatsby-remark-vscode',
             options: {
-              colorTheme: {
-                defaultTheme: 'Slack Theme Ochin',
-                prefersDarkTheme: 'Ayu Mirage',
+              theme: {
+                default: 'Slack Theme Ochin',
+                dark: 'Ayu Mirage',
               },
               injectStyles: true,
-              extensionDataDirectory: path.resolve(
-                'vendor/gatsby-remark-vscode-extensions'
-              ),
               selectorDark: '.dark-mode',
-              extensions: [
-                { identifier: 'teabyii.ayu', version: '0.18.0' },
-                { identifier: 'felipe-mendes.slack-theme', version: '1.9.10' },
-                {
-                  identifier: 'jpoissonnier.vscode-styled-components',
-                  version: '0.0.26',
-                },
-              ],
+              extensions: ['vscode-styled-components', 'ayu', 'slack-theme'],
             },
           },
           // embed third party content from twitter and youtube

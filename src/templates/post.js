@@ -33,7 +33,7 @@ const article = css`
   }
 
   /* syntax highlighted code */
-  code:not(.vscode-highlight-code) {
+  code:not(.grvsc-code) {
     background: ${colors.light.codeBackgroundAccent};
     padding: 3px 5px;
     border-radius: 3px;
@@ -46,12 +46,12 @@ const article = css`
       font-size: 18px;
     }
   }
-  .dark-mode & code:not(.vscode-highlight-code) {
+  .dark-mode & code:not(.grvsc-code) {
     background: ${colors.dark.codeBackgroundAccent};
     color: #8493a7;
   }
 
-  .vscode-highlight {
+  .grvsc-container {
     border-radius: 4px;
     counter-reset: line;
     background: ${colors.light.codeBackground};
@@ -64,7 +64,7 @@ const article = css`
       padding: 18px 0;
     }
 
-    .vscode-highlight-code {
+    .grvsc-code {
       font-size: 14px;
       font-family: 'Fira Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
         monospace;
@@ -75,7 +75,7 @@ const article = css`
       }
     }
 
-    .vscode-highlight-line {
+    .grvsc-line {
       &::before {
         counter-increment: line;
         content: counter(line);
@@ -100,15 +100,15 @@ const article = css`
       }
     }
 
-    .vscode-highlight-line-highlighted {
+    .grvsc-line-highlighted {
       background-color: #f7f7f7;
     }
   }
-  .dark-mode & .vscode-highlight {
+  .dark-mode & .grvsc-container {
     background: ${colors.dark.codeBackground};
     border: 1px solid ${colors.dark.codeBackgroundAccent};
   }
-  .dark-mode & .vscode-highlight-line-highlighted {
+  .dark-mode & .grvsc-line-highlighted {
     background-color: #0c1a27;
   }
 
@@ -398,9 +398,9 @@ const BlogPost = (props) => {
           `}
         >
           <a className="u-url" href={`${siteUrl}${path}`}>
-            <time class="dt-published" datetime={created}></time>
+            <time className="dt-published" datetime={created}></time>
           </a>
-          <a rel="author" class="p-author h-card" href={siteUrl}>
+          <a rel="author" className="p-author h-card" href={siteUrl}>
             Christoph Werner
           </a>
         </div>

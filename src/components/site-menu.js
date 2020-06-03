@@ -1,7 +1,7 @@
 import { Link } from 'gatsby'
 import { css, cx } from 'linaria'
 import React, { useEffect, useState } from 'react'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet'
 import Media from 'react-media'
 import { useOrientation } from 'react-use'
 import useDarkMode from 'use-dark-mode'
