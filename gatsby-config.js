@@ -1,4 +1,3 @@
-const path = require('path')
 const vfile = require('to-vfile')
 const parse5 = require('parse5')
 const fromParse5 = require('hast-util-from-parse5')
@@ -7,6 +6,10 @@ const doc = vfile.readSync('./src/images/link.svg')
 const ast = parse5.parse(String(doc), { sourceCodeLocationInfo: true })
 const hast = fromParse5(ast, doc)
 const linkSvg = hast.children[0].children[1].children[0]
+
+console.log('>>>>>>>>>>>>>>>>>>>>>>>')
+console.log(process.env.NODE_ENV)
+console.log('>>>>>>>>>>>>>>>>>>>>>>>')
 
 module.exports = {
   siteMetadata: {
@@ -22,7 +25,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'posts',
-        path: `${__dirname}/src/content/articles`,
+        path: `${__dirname}/src/content/writing`,
       },
     },
     {
@@ -34,7 +37,11 @@ module.exports = {
     },
     {
       resolve: 'gatsby-plugin-webpack-bundle-analyzer',
-      options: { production: true, analyzerMode: 'static' },
+      options: {
+        production: true,
+        analyzerMode: 'static',
+        disable: process.env.NODE_ENV === 'development',
+      },
     },
     {
       resolve: 'gatsby-plugin-layout',
@@ -203,13 +210,13 @@ module.exports = {
               }
             }
           `,
-            output: '/articles/rss.xml',
+            output: '/writing/rss.xml',
             title: 'Codepunkt Blog RSS Feed',
             // optional configuration to insert feed reference in pages:
             // if `string` is used, it will be used to create RegExp and then test if pathname of
             // current page satisfied this regular expression;
             // if not provided or `undefined`, all pages will have feed reference inserted
-            match: '^/articles/',
+            match: '^/writing/',
           },
         ],
       },

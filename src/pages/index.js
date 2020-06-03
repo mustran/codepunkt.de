@@ -171,7 +171,7 @@ const HomePage = ({ className }) => {
             Paderborn.js
           </a>
           . I also write about software development, cloud technology and the
-          open web on my <Link to="/articles">Blog</Link> and on{' '}
+          open web on my <Link to="/writing">Blog</Link> and on{' '}
           <a
             href="https://twitter.com/code_punkt"
             target="_blank"
@@ -190,7 +190,7 @@ const HomePage = ({ className }) => {
           </a>
           , where i coach and empower teams that build web and cloud-native
           applications. I also write about development on my{' '}
-          <Link to="/articles">Blog</Link> and on{' '}
+          <Link to="/writing">Blog</Link> and on{' '}
           <a
             href="https://twitter.com/code_punkt"
             target="_blank"

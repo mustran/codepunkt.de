@@ -359,7 +359,7 @@ const HomePage = ({ className }) => {
             Paderborn.js
           </a>
           . I also write about software development, cloud technology and the
-          open web on my <Link to="/articles">Blog</Link> and on{' '}
+          open web on my <Link to="/writing">Blog</Link> and on{' '}
           <a
             href="https://twitter.com/code_punkt"
             target="_blank"

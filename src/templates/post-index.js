@@ -82,9 +82,7 @@ const BlogIndex = (props) => {
             <li className={paginationItem}>
               <Link
                 to={
-                  currentPage === 2
-                    ? '/articles'
-                    : `/articles/${currentPage - 1}`
+                  currentPage === 2 ? '/writing' : `/writing/${currentPage - 1}`
                 }
               >
                 Newer Posts
@@ -93,7 +91,7 @@ const BlogIndex = (props) => {
           )}
           {hasNextPage && (
             <li className={paginationItem}>
-              <Link to={`/articles/${currentPage + 1}`}>Older Posts</Link>
+              <Link to={`/writing/${currentPage + 1}`}>Older Posts</Link>
             </li>
           )}
         </ol>

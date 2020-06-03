@@ -339,13 +339,13 @@ const Menu = ({ path }) => {
         </li>
         <li className={`menuItem ${menuItem}`}>
           <Link
-            to="/articles"
+            to="/writing"
             activeClassName="active"
             partiallyActive={true}
             onClick={handleMenuItemClick}
             className={cx(link, isMenuOpen && linkOpen)}
           >
-            <span>Articles</span>
+            <span>Writing</span>
           </Link>
         </li>
         <li className={`menuItem ${menuItem}`}>

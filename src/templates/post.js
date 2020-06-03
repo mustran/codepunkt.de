@@ -383,7 +383,7 @@ const BlogPost = (props) => {
                 <ul className={tagList}>
                   {tags.map(([slug, tag], i) => (
                     <li>
-                      <Link to={`/articles/category/${slug}`}>{tag}</Link>
+                      <Link to={`/writing/category/${slug}`}>{tag}</Link>
                     </li>
                   ))}
                 </ul>

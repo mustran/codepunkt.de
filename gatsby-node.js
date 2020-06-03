@@ -8,7 +8,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === 'Mdx') {
     const value = createFilePath({ node, getNode })
-    createNodeField({ node, name: 'path', value: `/articles${value}` })
+    createNodeField({ node, name: 'path', value: `/writing${value}` })
     if (node.frontmatter && node.frontmatter.tags) {
       createNodeField({
         node,
@@ -71,7 +71,7 @@ exports.createPages = ({ graphql, actions }) => {
       const currentPage = i + 1
 
       createPage({
-        path: currentPage === 1 ? `/articles/` : `/articles/${currentPage}/`,
+        path: currentPage === 1 ? `/writing/` : `/writing/${currentPage}/`,
         component: path.resolve('./src/templates/post-index.js'),
         context: {
           pageInfo: {
@@ -110,7 +110,7 @@ exports.createPages = ({ graphql, actions }) => {
     // create category pages
     tagMap.forEach((tag, slug) => {
       createPage({
-        path: `/articles/category/${slug}`,
+        path: `/writing/category/${slug}`,
         component: path.resolve('./src/templates/category-index.js'),
         context: {
           tag,
