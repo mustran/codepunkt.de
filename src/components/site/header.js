@@ -11,7 +11,7 @@ const header = css`
   padding: max(min(2vh, 24px), 16px) max(min(5vw, 40px), 20px);
 `
 
-export const Header = ({ sneakPeakColor, path }) => {
+export const Header = ({ appState, setAppState }) => {
   // const { y } = useWindowScroll()
   // const [headerState, setHeaderState] = useState('initial')
 
@@ -27,7 +27,7 @@ export const Header = ({ sneakPeakColor, path }) => {
   return (
     <header className={header}>
       <Logo />
-      <Menu />
+      <Menu appState={appState} setAppState={setAppState} />
     </header>
   )
 }

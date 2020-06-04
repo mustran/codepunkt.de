@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function HTML(props) {
   return (
-    <html {...props.htmlAttributes} className="no-js anim">
+    <html {...props.htmlAttributes} className="no-js anim" data-state="init">
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />

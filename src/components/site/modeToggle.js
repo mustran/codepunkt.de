@@ -12,7 +12,7 @@ const button = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 1;
   cursor: pointer;
   margin-right: 8px;
 

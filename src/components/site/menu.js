@@ -1,8 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link } from 'gatsby'
 import { css } from 'linaria'
-import React, { useState } from 'react'
-import { Helmet } from 'react-helmet'
+import React from 'react'
 import { MenuToggle } from './MenuToggle'
 import { ModeToggle } from './ModeToggle'
 
@@ -190,18 +189,13 @@ const socialIcon = css`
   }
 `
 
-export const Menu = () => {
-  const [appState, setAppState] = useState('init')
-
+export const Menu = ({ appState, setAppState }) => {
   const closeMenu = () => {
-    setAppState('settled')
+    setAppState('default')
   }
 
   return (
     <div className={layout}>
-      <Helmet>
-        <html data-state={appState} />
-      </Helmet>
       <ModeToggle />
       <MenuToggle appState={appState} setAppState={setAppState} />
       <AnimatePresence>

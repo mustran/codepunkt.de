@@ -10,7 +10,7 @@ const button = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 1;
   cursor: pointer;
 
   @media screen and (min-width: 521px) {
@@ -72,7 +72,7 @@ const burger = css`
 
 export const MenuToggle = ({ appState, setAppState }) => {
   const menuOn = () => setAppState('menu')
-  const menuOff = () => setAppState('settled')
+  const menuOff = () => setAppState('default')
 
   return (
     <button

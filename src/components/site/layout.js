@@ -1,6 +1,7 @@
 import { MDXProvider } from '@mdx-js/react'
 import { css, cx } from 'linaria'
-import React from 'react'
+import React, { useState } from 'react'
+import { Helmet } from 'react-helmet'
 import {
   Transition as ReactTransition,
   TransitionGroup,
@@ -8,6 +9,7 @@ import {
 import colors from '../../style/colors'
 import SiteFooter from '../site-footer'
 import { Header } from './header'
+import { InitialAnimation } from './initialAnimation'
 
 const global = css`
   :global() {
@@ -88,7 +90,7 @@ const global = css`
       background: #f0f7f2;
       transition: all 0.2s ease-out;
       will-change: color, background;
-      &.dark-mode {
+      .dark-mode & {
         color: #e8e8f0;
         background: #15202b;
       }
@@ -100,7 +102,6 @@ const global = css`
     }
 
     html[data-state='init'],
-    html[data-state='animating'],
     html[data-state='menu'] {
       overflow: hidden;
       body {
@@ -287,13 +288,23 @@ const Transition = ({ children, location }) => {
 }
 
 const SiteLayout = ({ children, location }) => {
+  const [appState, setAppState] = useState('init')
+
+  const runInitialAnimation =
+    window.sessionStorage.getItem('initial-animation') !== 'done'
+  console.log({ runInitialAnimation })
+
   return (
     // MDXProvider provides components that are usable in mdx files
     // without importing them
     <MDXProvider components={{ Foo }}>
+      <Helmet>
+        <html data-state={appState} />
+      </Helmet>
       <div className={cx(global, container)}>
-        <Header path={location.pathname} />
-        <main id="main" className={main}>
+        {runInitialAnimation && <InitialAnimation setAppState={setAppState} />}
+        <Header appState={appState} setAppState={setAppState} />
+        <main className={main}>
           <Transition location={location}>{children}</Transition>
         </main>
         <SiteFooter path={location.pathname} />
