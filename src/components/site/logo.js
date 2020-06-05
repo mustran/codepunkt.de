@@ -2,9 +2,8 @@ import { css, cx } from 'linaria'
 import React from 'react'
 
 const logo = css`
-  text-transform: uppercase;
   height: max(min(9.6vmin, 50px), 36px);
-  z-index: 1;
+  z-index: 2;
 
   /* colors */
   color: #318513;

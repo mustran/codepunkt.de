@@ -1,6 +1,6 @@
 import { MDXProvider } from '@mdx-js/react'
 import { css, cx } from 'linaria'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import {
   Transition as ReactTransition,
@@ -88,7 +88,6 @@ const global = css`
 
       color: #28342b;
       background: #f0f7f2;
-      transition: all 0.2s ease-out;
       will-change: color, background;
       .dark-mode & {
         color: #e8e8f0;
@@ -118,7 +117,6 @@ const global = css`
       width: 10px;
       z-index: 20000;
       background: #fff;
-      transition: all 0.2s ease-out;
       @media screen and (min-width: 521px) {
         width: 20px;
       }
@@ -141,7 +139,6 @@ const global = css`
       width: 100%;
       height: 10px;
       background: #fff;
-      transition: all 0.2s ease-out;
       z-index: 21000;
       @media screen and (min-width: 521px) {
         height: 20px;
@@ -289,10 +286,13 @@ const Transition = ({ children, location }) => {
 
 const SiteLayout = ({ children, location }) => {
   const [appState, setAppState] = useState('init')
+  const [runInitialAnimation, setRunInitialAnimation] = useState(true)
 
-  const runInitialAnimation =
-    window.sessionStorage.getItem('initial-animation') !== 'done'
-  console.log({ runInitialAnimation })
+  useEffect(() => {
+    setRunInitialAnimation(
+      window.sessionStorage.getItem('initial-animation') !== 'done'
+    )
+  }, [])
 
   return (
     // MDXProvider provides components that are usable in mdx files

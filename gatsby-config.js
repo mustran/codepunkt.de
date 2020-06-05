@@ -135,7 +135,6 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sharp',
-    'gatsby-plugin-use-dark-mode',
     'gatsby-transformer-sharp',
     'gatsby-plugin-linaria',
     // replaces react with preact in production builds

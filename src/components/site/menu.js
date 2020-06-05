@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Link } from 'gatsby'
 import { css } from 'linaria'
 import React from 'react'
-import { MenuToggle } from './MenuToggle'
-import { ModeToggle } from './ModeToggle'
+import { MenuToggle } from './menuToggle'
+import { ModeToggle } from './modeToggle'
 
 const menuEntries = [
   { title: 'Home', path: '/' },

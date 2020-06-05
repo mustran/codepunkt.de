@@ -10,10 +10,10 @@ const wrapper = css`
   bottom: 0;
   overflow: hidden;
 
-  z-index: 2;
+  z-index: 3;
   @keyframes changeIndex {
     0% {
-      z-index: 2;
+      z-index: 3;
     }
     100% {
       z-index: -1;
@@ -133,8 +133,8 @@ const logo = css`
 
 export const InitialAnimation = ({ setAppState }) => {
   const handleAnimationEnd = () => {
-    /* window.sessionStorage.setItem('initial-animation', 'done') */
-    /* setAppState('default') */
+    window.sessionStorage.setItem('initial-animation', 'done')
+    setAppState('default')
   }
 
   return (

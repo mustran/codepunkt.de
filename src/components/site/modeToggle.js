@@ -12,7 +12,7 @@ const button = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
   cursor: pointer;
   margin-right: 8px;
 
@@ -39,9 +39,10 @@ const svg = css`
 `
 
 export const ModeToggle = () => {
-  const { value: darkMode, toggle: toggleDarkMode } = useDarkMode(false, {
-    element: document.documentElement,
-  })
+  const { value: darkMode, toggle: toggleDarkMode } = useDarkMode(
+    false,
+    typeof document === `undefined` ? {} : { element: document.documentElement }
+  )
 
   return (
     <button
